@@ -4,7 +4,7 @@ import {ELASTIC_SEARCH_API_URL, ELASTIC_SEARCH_API_KEY} from '@env';
 const searchApi = axios.create({
   baseURL: ELASTIC_SEARCH_API_URL,
   headers: {
-    Authorization: 'Bearer ' + ELASTIC_SEARCH_API_KEY,
+    Authorization: 'ApiKey ' + ELASTIC_SEARCH_API_KEY,
     'Content-Type': 'application/json',
   },
 });
@@ -15,14 +15,17 @@ const getQueryString = query => {
 };
 
 export const searchProductsByQueryString = async query => {
-  const query = getQueryString(query);
+  const queryString = getQueryString(query);
 
-  await searchApi
-    .get(query)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  const response = await searchApi.get(queryString).catch(error => {
+    console.log(error);
+  });
+
+  const hitsList = response.data.hits.hits;
+
+  if (hitsList.length > 0) {
+    return hitsList.map(hit => hit._source);
+  } else {
+    return [];
+  }
 };

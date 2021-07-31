@@ -6,6 +6,8 @@ import styles from './styles';
 import {toDecimal} from '../../helpers';
 
 const ProductCard = ({product, selectPressedProduct}) => {
+  console.log(product.name - 'rendered');
+
   return (
     <TouchableOpacity activeOpacity={1}>
       <Card style={styles.productCard}>

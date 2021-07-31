@@ -46,14 +46,17 @@ export const searchResetState = () => {
 
 export const searchProducts = query => {
   return async dispatch => {
+    dispatch(clearSearchResultProducts());
     dispatch(changeSearchResultProductsLoading(true));
 
     const products = await searchProductsByQueryString(query);
 
+    //  Use foreach to add the products one by one
     products.forEach(product => {
       dispatch(addSearchResultProduct(product));
     });
 
+    dispatch(changeSearchQuery(''));
     dispatch(changeSearchResultProductsLoading(false));
   };
 };
