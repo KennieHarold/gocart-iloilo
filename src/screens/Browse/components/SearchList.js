@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {FlatList} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -28,10 +29,12 @@ const SearchList = ({products}) => {
       }}
       renderItem={({item}) => {
         return (
-          <ProductCard
-            product={item}
-            selectPressedProduct={() => dispatch(selectPressedProduct(item))}
-          />
+          <View style={{marginBottom: RFValue(15)}}>
+            <ProductCard
+              product={item}
+              selectPressedProduct={() => dispatch(selectPressedProduct(item))}
+            />
+          </View>
         );
       }}
     />
