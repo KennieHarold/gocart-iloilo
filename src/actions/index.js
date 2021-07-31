@@ -25,6 +25,9 @@ import * as SharedAction from './SharedAction';
 //  View, Delete My Orders
 import * as OrderAction from './OrderAction';
 
+//  Search
+import * as SearchAction from './SearchAction';
+
 export {
   AuthAction,
   ModalAlertAction,
@@ -35,4 +38,5 @@ export {
   AppAction,
   SharedAction,
   OrderAction,
+  SearchAction,
 };

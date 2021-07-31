@@ -11,7 +11,8 @@ import FastImage from 'react-native-fast-image';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {CartAction} from '../../actions';
 import Snackbar from 'react-native-snackbar';
-import {toDecimal, stateComputers} from '../../helpers';
+import {toDecimal} from '../../helpers';
+import {subTotalComputer, categorizedCartComputer} from '../../computers';
 
 class CartScreen extends React.Component {
   componentDidMount() {
@@ -106,8 +107,6 @@ class CartScreen extends React.Component {
     );
   }
 }
-
-const {subTotalComputer, categorizedCartComputer} = stateComputers;
 
 const {selectStoreIdInCart, navigateCheckout} = CartAction;
 

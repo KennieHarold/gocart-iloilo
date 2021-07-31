@@ -105,3 +105,11 @@ export const CLEAR_DELIVERED_ORDERS = 'clear_delivered_orders';
 export const SELECT_ORDER = 'select_order';
 export const CLEAR_ORDER = 'clear_order';
 export const ORDER_RESET_STATE = 'order_reset_state';
+
+//  Search
+export const ADD_SEARCH_RESULT_PRODUCT = 'add_search_result_product';
+export const CHANGE_SEARCH_QUERY = 'change_search_query';
+export const CHANGE_SEARCH_RESULT_PRODUCTS_LOADING =
+  'change_search_result_products_loading';
+export const CLEAR_SEARCH_RESULT_PRODUCTS = 'clear_search_result_products';
+export const SEARCH_RESET_STATE = 'search_reset_state';

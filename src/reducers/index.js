@@ -8,6 +8,7 @@ import CartReducer from './CartReducer';
 import AppReducer from './AppReducer';
 import SharedReducer from './SharedReducer';
 import OrderReducer from './OrderReducer';
+import SearchReducer from './SearchReducer';
 
 export default combineReducers({
   auth: AuthReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   app: AppReducer,
   shared: SharedReducer,
   order: OrderReducer,
+  search: SearchReducer,
 });
