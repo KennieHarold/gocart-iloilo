@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "489368801542",
+    "project_id": "gocartiloilo",
+    "storage_bucket": "gocartiloilo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489368801542:android:806f1e09077f9b1acbce87",
+        "android_client_info": {
+          "package_name": "com.gocartiloilo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489368801542-f5tg3ocs3uuf5tmv3n18t2jflaq00na1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEmvPQwGLZ2LIvf0NgguOySW2aTheyo3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489368801542-f5tg3ocs3uuf5tmv3n18t2jflaq00na1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
