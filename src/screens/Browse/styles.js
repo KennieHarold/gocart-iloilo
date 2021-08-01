@@ -34,11 +34,6 @@ const styles = StyleSheet.create({
     marginVertical: Layout.defaultPaddingNum,
     backgroundColor: 'white',
   },
-  noResultsIcon: {
-    fontSize: RFValue(50),
-    color: Colors.readableText,
-    marginBottom: RFValue(10),
-  },
 });
 
 export default styles;

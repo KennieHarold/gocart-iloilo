@@ -13,7 +13,7 @@ import styles from './styles';
 import {Colors, Fonts, Layout} from '../../styles';
 import {SearchAction} from '../../actions';
 import {groupProductsByStoreComputer} from '../../computers';
-import {SearchList} from './components';
+import {SearchList, NoResults} from './components';
 
 class BrowseScreen extends React.PureComponent {
   state = {
@@ -110,20 +110,7 @@ class BrowseScreen extends React.PureComponent {
             {Object.keys(groupedProducts).length > 0 ? (
               <SearchList products={this.renderData()} />
             ) : (
-              <View style={{...Layout.fullWidthCenterContainer}}>
-                <Icon
-                  type="Ionicons"
-                  name="search-outline"
-                  style={styles.noResultsIcon}
-                />
-                <Text
-                  style={{
-                    fontSize: Fonts.size.mini,
-                    color: Colors.readableText,
-                  }}>
-                  No results found
-                </Text>
-              </View>
+              <NoResults />
             )}
           </>
         )}
