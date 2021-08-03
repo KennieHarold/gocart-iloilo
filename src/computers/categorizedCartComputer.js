@@ -1,4 +1,4 @@
-//  Categorized the products by its corresponding stores in the cart
+//  Categorized the products in the cart by its corresponding stores
 const categorizedCartComputer = (cart, availableStores) => {
   let categorizedCart = {};
 
