@@ -25,10 +25,10 @@ class OrderDetailsScreen extends React.Component {
     this.getRequiredData();
   }
 
-  // componentWillUnmount() {
-  //   const {clearOrder} = this.props;
-  //   clearOrder();
-  // }
+  componentWillUnmount() {
+    const {clearOrder} = this.props;
+    clearOrder();
+  }
 
   getTransaction = async () => {
     const {selectedOrder} = this.props;

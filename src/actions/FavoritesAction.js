@@ -3,6 +3,7 @@ import 'react-native-get-random-values';
 import {errorHandler} from '../helpers';
 import {v4 as uuidv4} from 'uuid';
 import {favoritesCollection, productCollection} from '../firebase/collections';
+import Snackbar from 'react-native-snackbar';
 import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
@@ -74,7 +75,6 @@ export const toggleFavorites = (product, isFavorite) => {
         .then(snapshots => {
           if (snapshots.size > 0) {
             let data = snapshots.docs[0].data();
-
             favoritesCollection
               .doc(data.id)
               .delete()
@@ -82,6 +82,12 @@ export const toggleFavorites = (product, isFavorite) => {
                 console.log(error);
                 dispatch(addFavorite(product));
                 errorHandler(dispatch, "favorites/can't-remove");
+              })
+              .then(() => {
+                Snackbar.show({
+                  text: 'Removed a favorite',
+                  duration: Snackbar.LENGTH_LONG,
+                });
               });
           }
         });
@@ -97,6 +103,12 @@ export const toggleFavorites = (product, isFavorite) => {
           userId,
           productId: product.id,
           dateCreated: new Date(),
+        })
+        .then(() => {
+          Snackbar.show({
+            text: 'Added a favorite',
+            duration: Snackbar.LENGTH_LONG,
+          });
         })
         .catch(error => {
           console.log(error);

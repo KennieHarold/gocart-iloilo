@@ -56,7 +56,7 @@ const OrderItem = ({order}) => {
         </Text>
       </Body>
       <Right style={[{flex: 2.75}, styles.orderItemRight]}>
-        <Badge style={{height: RFValue(33)}} warning>
+        <Badge warning>
           <Text style={styles.orderItemStatusLabel}>{order.status}</Text>
         </Badge>
         <Icon
