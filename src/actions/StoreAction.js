@@ -4,6 +4,7 @@ import {
   categoryCollection,
   productCollection,
 } from '../firebase/collections';
+import {errorHandler} from '../helpers';
 import {
   ADD_AVAILABLE_STORE,
   ADD_SELECTED_STORE_CATEGORIES,
@@ -138,31 +139,35 @@ export const getProductsByCategoryList = (categories, selectedStore) => {
   return async dispatch => {
     dispatch(changeCategorizedProductsLoading(true));
 
-    await Promise.all(
-      categories.map(async category => {
-        await productCollection
-          .where('storeId', '==', selectedStore.id)
-          .where('categoryId', '==', category.id)
-          .limit(10)
-          .get()
-          .then(snapshots => {
-            if (snapshots.size > 0) {
-              let products = [];
-              snapshots.docs.forEach(doc => {
-                let data = doc.data();
-                products.push(data);
-              });
-              dispatch(
-                addSelectedStoreCategorizedProducts({
-                  id: `categorizedProducts-${category.id}`,
-                  category,
-                  products,
-                }),
-              );
-            }
-          });
-      }),
-    );
+    try {
+      await Promise.all(
+        categories.map(async category => {
+          const snapshots = await productCollection
+            .where('storeId', '==', selectedStore.id)
+            .where('categoryId', '==', category.id)
+            .limit(10)
+            .get();
+
+          if (snapshots.size > 0) {
+            let products = [];
+            snapshots.docs.forEach(doc => {
+              let data = doc.data();
+              products.push(data);
+            });
+            dispatch(
+              addSelectedStoreCategorizedProducts({
+                id: `categorizedProducts-${category.id}`,
+                category,
+                products,
+              }),
+            );
+          }
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+      errorHandler(dispatch, 'gen/default');
+    }
 
     dispatch(changeCategorizedProductsLoading(false));
   };
@@ -223,49 +228,52 @@ export const getSingleCategoryProducts = category => {
     if (singleCategoryProducts.length > 0) {
       dispatch(changeMoreProductsLoading(true));
 
-      const lastProductData =
-        singleCategoryProducts[singleCategoryProducts.length - 1];
-
       //  Trigger load more
-      await productCollection
-        .where('categoryId', '==', category.id)
-        .orderBy('id')
-        .startAfter(lastProductData.id)
-        .limit(10)
-        .get()
-        .then(snapshots => {
-          if (snapshots.size > 0) {
-            snapshots.docs.forEach(doc => {
-              let data = doc.data();
-              dispatch(addSingleCategoryProduct(data));
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      try {
+        const lastIndex = singleCategoryProducts.length - 1;
+        const lastProductData = singleCategoryProducts[lastIndex];
+
+        const snapshots = await productCollection
+          .where('categoryId', '==', category.id)
+          .orderBy('id')
+          .startAfter(lastProductData.id)
+          .limit(10)
+          .get();
+
+        if (snapshots.size > 0) {
+          snapshots.docs.forEach(doc => {
+            let data = doc.data();
+            dispatch(addSingleCategoryProduct(data));
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        errorHandler(dispatch, 'gen/default');
+      }
 
       dispatch(changeMoreProductsLoading(false));
     } else {
       dispatch(changeSingleCategoryProductsLoading(true));
 
       //  Initial products fetch
-      await productCollection
-        .where('categoryId', '==', category.id)
-        .orderBy('id')
-        .limit(10)
-        .get()
-        .then(snapshots => {
-          if (snapshots.size > 0) {
-            snapshots.docs.forEach(doc => {
-              let data = doc.data();
-              dispatch(addSingleCategoryProduct(data));
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      try {
+        const snapshots = await productCollection
+          .where('categoryId', '==', category.id)
+          .orderBy('id')
+          .limit(10)
+          .get();
+
+        if (snapshots.size > 0) {
+          snapshots.docs.forEach(doc => {
+            let data = doc.data();
+            dispatch(addSingleCategoryProduct(data));
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        errorHandler(dispatch, 'gen/default');
+      }
+
       dispatch(changeSingleCategoryProductsLoading(false));
     }
   };

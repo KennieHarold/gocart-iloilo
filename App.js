@@ -9,7 +9,6 @@ import {
   LoadingModal,
   AlertModal,
   SimpleLoadingModal,
-  AddToCartModal,
 } from './src/components/Modals';
 
 class App extends React.Component {
@@ -25,7 +24,6 @@ class App extends React.Component {
         <LoadingModal />
         <AlertModal />
         <SimpleLoadingModal />
-        <AddToCartModal />
       </Provider>
     );
   }

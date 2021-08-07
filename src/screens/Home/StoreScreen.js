@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {Layout, Colors} from '../../styles';
 import FastImage from 'react-native-fast-image';
 import {ScreenHeader} from '../../components/Headers';
+import {AddToCartModal} from '../../components/Modals';
 import {CartButton, SearchWideButton} from '../../components/Buttons';
 import {CategoriesSection, ProductsContent} from './components';
 import {StoreAction} from '../../actions';
@@ -73,6 +74,7 @@ class StoreScreen extends React.Component {
             )}
           </Content>
         </Container>
+        <AddToCartModal />
       </>
     );
   }

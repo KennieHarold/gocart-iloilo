@@ -6,7 +6,7 @@ import {Fonts, Colors, Layout} from '../../../styles';
 
 const NoResults = () => {
   return (
-    <View style={{...Layout.fullWidthCenterContainer}}>
+    <View style={{...Layout.fullWidthCenterContainer, marginTop: RFValue(25)}}>
       <Icon
         type="Ionicons"
         name="search-outline"
