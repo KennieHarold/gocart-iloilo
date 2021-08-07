@@ -10,19 +10,9 @@ const NoResults = () => {
       <Icon
         type="Ionicons"
         name="search-outline"
-        style={{
-          fontSize: RFValue(50),
-          color: Colors.readableText,
-          marginBottom: RFValue(10),
-        }}
+        style={styles.noResultsIcon}
       />
-      <Text
-        style={{
-          fontSize: Fonts.size.mini,
-          color: Colors.readableText,
-        }}>
-        No results found
-      </Text>
+      <Text style={styles.noResultsText}>No results found</Text>
     </View>
   );
 };

@@ -3,6 +3,15 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {Layout, Colors, Fonts} from '../../../styles';
 
 const styles = StyleSheet.create({
+  noResultsIcon: {
+    fontSize: RFValue(50),
+    color: Colors.readableText,
+    marginBottom: RFValue(10),
+  },
+  noResultsText: {
+    fontSize: Fonts.size.mini,
+    color: Colors.readableText,
+  },
   segmentButtons: {
     justifyContent: 'center',
     alignItems: 'center',

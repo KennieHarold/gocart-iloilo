@@ -56,9 +56,7 @@ class SearchSegment extends React.PureComponent {
 const mapStateToProps = state => {
   const {availableStores} = state.store;
 
-  return {
-    availableStores,
-  };
+  return {availableStores};
 };
 
 export default connect(mapStateToProps, null)(SearchSegment);
