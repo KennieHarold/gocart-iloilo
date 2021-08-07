@@ -21,6 +21,8 @@ import {storeResetState} from './StoreAction';
 import {cartResetState} from './CartAction';
 import {sharedResetState} from './SharedAction';
 import {orderResetState} from './OrderAction';
+import {searchResetState} from './SearchAction';
+import {favoritesResetState} from './FavoritesAction';
 
 /************************ Private or helper functions **********************************/
 
@@ -325,6 +327,8 @@ export const signOut = () => {
         dispatch(cartResetState());
         dispatch(sharedResetState());
         dispatch(orderResetState());
+        dispatch(searchResetState());
+        dispatch(favoritesResetState());
       })
       .catch(error => {
         console.log(error);

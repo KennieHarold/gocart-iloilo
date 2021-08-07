@@ -113,3 +113,9 @@ export const CHANGE_SEARCH_RESULT_PRODUCTS_LOADING =
   'change_search_result_products_loading';
 export const CLEAR_SEARCH_RESULT_PRODUCTS = 'clear_search_result_products';
 export const SEARCH_RESET_STATE = 'search_reset_state';
+
+//  Favorites
+export const ADD_FAVORITE = 'add_favorites';
+export const REMOVE_FAVORITE = 'remove_favorite';
+export const CLEAR_FAVORITES = 'clear_favorites';
+export const FAVORITES_RESET_STATE = 'favorites_reset_state';

@@ -9,6 +9,7 @@ import AppReducer from './AppReducer';
 import SharedReducer from './SharedReducer';
 import OrderReducer from './OrderReducer';
 import SearchReducer from './SearchReducer';
+import FavoritesReducer from './FavoritesReducer';
 
 export default combineReducers({
   auth: AuthReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   shared: SharedReducer,
   order: OrderReducer,
   search: SearchReducer,
+  favorites: FavoritesReducer,
 });

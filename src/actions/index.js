@@ -28,6 +28,9 @@ import * as OrderAction from './OrderAction';
 //  Search
 import * as SearchAction from './SearchAction';
 
+//  Favorites
+import * as FavoritesAction from './FavoritesAction';
+
 export {
   AuthAction,
   ModalAlertAction,
@@ -39,4 +42,5 @@ export {
   SharedAction,
   OrderAction,
   SearchAction,
+  FavoritesAction,
 };
