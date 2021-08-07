@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.medium,
     width: 22,
     color: Colors.gold,
+    marginRight: RFValue(5),
   },
   productCardFavLabel: {
     fontSize: Fonts.size.min - 1,

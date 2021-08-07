@@ -189,6 +189,21 @@ const errorHandler = (dispatch, errorCode) => {
       );
       return;
 
+    /****************** Favorites Error *******************/
+    case "favorites/can't-add":
+      Snackbar.show({
+        text: 'Failed to add favorite',
+        duration: Snackbar.LENGTH_LONG,
+      });
+      return;
+
+    case "favorites/can't-remove":
+      Snackbar.show({
+        text: 'Failed to remove favorite',
+        duration: Snackbar.LENGTH_LONG,
+      });
+      return;
+
     /****************** Default Error *******************/
     case 'gen/network-error':
       dispatch(

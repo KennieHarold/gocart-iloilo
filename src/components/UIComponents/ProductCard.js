@@ -1,16 +1,24 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {TouchableOpacity} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {Text, Card, CardItem, Icon} from 'native-base';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {toDecimal} from '../../helpers';
-import {CartAction} from '../../actions';
+import {CartAction, FavoritesAction} from '../../actions';
 
 const {selectPressedProduct} = CartAction;
+const {toggleFavorites} = FavoritesAction;
 
 const ProductCard = ({product}) => {
   const dispatch = useDispatch();
+
+  const isFavorite = useSelector(state => {
+    const favorites = state.favorites.favorites;
+    const index = favorites.findIndex(fav => fav.id === product.id);
+
+    return index !== -1;
+  });
 
   return (
     <TouchableOpacity activeOpacity={1}>
@@ -33,23 +41,31 @@ const ProductCard = ({product}) => {
           </Text>
         </CardItem>
         <CardItem style={styles.productCardFavContainer}>
-          <View
+          <TouchableOpacity
+            onPress={() => dispatch(toggleFavorites(product, isFavorite))}
+            activeOpacity={0.4}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
               width: '100%',
             }}>
-            <TouchableOpacity activeOpacity={0.6} style={{marginRight: 3}}>
+            {isFavorite ? (
+              <Icon
+                type="MaterialCommunityIcons"
+                name="star"
+                style={styles.productCardFavIcon}
+              />
+            ) : (
               <Icon
                 type="MaterialCommunityIcons"
                 name="star-outline"
                 style={styles.productCardFavIcon}
               />
-            </TouchableOpacity>
+            )}
             <Text numberOfLines={1} style={styles.productCardFavLabel}>
-              Add a Favorite
+              {isFavorite ? 'Favorite' : 'Add a Favorite'}
             </Text>
-          </View>
+          </TouchableOpacity>
         </CardItem>
         <CardItem style={styles.productCardFooter}>
           <TouchableOpacity

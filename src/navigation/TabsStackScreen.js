@@ -14,6 +14,7 @@ import {
   StoreAction,
   CartAction,
   AppAction,
+  FavoritesAction,
 } from '../actions';
 import {LoadingScreen} from '../components/UIComponents';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -22,6 +23,7 @@ const {getCurrentUserData} = CurrentUserAction;
 const {getAvailableStoresData} = StoreAction;
 const {getUserCartProducts} = CartAction;
 const {loadBanners} = AppAction;
+const {getFavorites} = FavoritesAction;
 
 const Tabs = createBottomTabNavigator();
 
@@ -79,6 +81,7 @@ const TabsStackScreen = () => {
         dispatch(getCurrentUserData()),
         dispatch(getAvailableStoresData()),
         dispatch(getUserCartProducts()),
+        dispatch(getFavorites()),
         dispatch(loadBanners()),
       ]).catch(error => {
         console.log(error);

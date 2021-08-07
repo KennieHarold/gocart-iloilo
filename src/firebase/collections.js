@@ -41,4 +41,9 @@ export const transactionCollection =
     ? firestore().collection('transactions')
     : firestore().collection('devTransactions');
 
+export const favoritesCollection =
+  APP_ENV === 'production'
+    ? firestore().collection('favorites')
+    : firestore().collection('devFavorites');
+
 export const appConstants = firestore().collection('appConstants');
