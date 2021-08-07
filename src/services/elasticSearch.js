@@ -9,17 +9,52 @@ const searchApi = axios.create({
   },
 });
 
-const getQueryString = query => {
-  const newQuery = query.replace(' ', '+');
-  return `?q=${newQuery}`;
+const getRequestBody = (name, storeId) => {
+  const queryWithName = {
+    query: {
+      bool: {
+        must: [{match: {name}}],
+      },
+    },
+  };
+
+  const queryWithNameAndStore = {
+    query: {
+      bool: {
+        must: [{match: {name}}, {match: {storeId}}],
+      },
+    },
+  };
+
+  return storeId ? queryWithNameAndStore : queryWithName;
 };
 
-export const searchProductsByQueryString = async query => {
-  const queryString = getQueryString(query);
+export const searchProductsByProductName = async query => {
+  const requestBody = getRequestBody(query, null);
 
-  const response = await searchApi.get(queryString).catch(error => {
-    console.log(error);
-  });
+  const response = await searchApi
+    .get(queryString, requestBody)
+    .catch(error => {
+      console.log(error);
+    });
+
+  const hitsList = response.data.hits.hits;
+
+  if (hitsList.length > 0) {
+    return hitsList.map(hit => hit._source);
+  } else {
+    return [];
+  }
+};
+
+export const searchStoreProductsByProductName = async (query, storeId) => {
+  const requestBody = getRequestBody(query, storeId);
+
+  const response = await searchApi
+    .get(queryString, requestBody)
+    .catch(error => {
+      console.log(error);
+    });
 
   const hitsList = response.data.hits.hits;
 

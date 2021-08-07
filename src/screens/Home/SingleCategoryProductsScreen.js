@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {ScreenHeader} from '../../components/Headers';
 import {CartButton} from '../../components/Buttons';
 import {ProductCard} from '../../components/UIComponents';
-import {StoreAction, CartAction} from '../../actions';
+import {StoreAction} from '../../actions';
 import {Colors, Layout} from '../../styles';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -48,7 +48,6 @@ class SingleCategoryProductsScreen extends React.PureComponent {
     const {
       selectedCategory,
       singleCategoryProducts,
-      selectPressedProduct,
       isSingleCategoryProductsLoading,
       isMoreProductsLoading,
     } = this.props;
@@ -91,10 +90,7 @@ class SingleCategoryProductsScreen extends React.PureComponent {
             }
             renderItem={({item}) => (
               <View style={{marginBottom: RFValue(10)}}>
-                <ProductCard
-                  product={item}
-                  selectPressedProduct={() => selectPressedProduct(item)}
-                />
+                <ProductCard product={item} />
               </View>
             )}
           />
@@ -105,8 +101,6 @@ class SingleCategoryProductsScreen extends React.PureComponent {
 }
 
 const {getSingleCategoryProducts, clearSingleCategoryProducts} = StoreAction;
-
-const {selectPressedProduct} = CartAction;
 
 const mapStateToProps = state => {
   const {
@@ -126,6 +120,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getSingleCategoryProducts,
-  selectPressedProduct,
   clearSingleCategoryProducts,
 })(SingleCategoryProductsScreen);

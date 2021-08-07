@@ -113,6 +113,13 @@ export const CHANGE_SEARCH_RESULT_PRODUCTS_LOADING =
   'change_search_result_products_loading';
 export const CLEAR_SEARCH_RESULT_PRODUCTS = 'clear_search_result_products';
 export const SEARCH_RESET_STATE = 'search_reset_state';
+export const CHANGE_SEARCH_RESULT_STORE_PRODUCTS_LOADING =
+  'change_search_result_store_products_loading';
+export const ADD_SEARCH_RESULT_STORE_PRODUCT =
+  'add_search_result_store_product';
+export const CLEAR_SEARCH_RESULT_STORE_PRODUCTS =
+  'clear_search_result_store_products';
+export const CHANGE_SEARCH_STORE_QUERY = 'change_search_store_query';
 
 //  Favorites
 export const ADD_FAVORITE = 'add_favorites';

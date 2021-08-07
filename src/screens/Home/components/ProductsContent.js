@@ -9,13 +9,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Text} from 'native-base';
 import {ProductCard} from '../../../components/UIComponents';
 import {Colors, Layout} from '../../../styles';
-import {StoreAction, CartAction} from '../../../actions';
+import {StoreAction} from '../../../actions';
 import styles from './styles';
 
 const {getProductsByCategoryList, navigateSingleCategoryProductsScreen} =
   StoreAction;
-
-const {selectPressedProduct} = CartAction;
 
 const MemoizedSection = React.memo(({categorizedProduct}) => {
   const dispatch = useDispatch();
@@ -57,10 +55,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
         initialNumToRender={3}
         renderItem={({item}) => (
           <View style={{marginHorizontal: 10}}>
-            <ProductCard
-              product={item}
-              selectPressedProduct={() => dispatch(selectPressedProduct(item))}
-            />
+            <ProductCard product={item} />
           </View>
         )}
       />

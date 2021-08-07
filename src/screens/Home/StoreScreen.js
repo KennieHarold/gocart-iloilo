@@ -32,6 +32,7 @@ class StoreScreen extends React.Component {
       selectedStore: {name, photoUri},
       selectedStoreCategories,
       isSelectedStoreCategoriesLoading,
+      navigation,
     } = this.props;
 
     return (
@@ -47,7 +48,7 @@ class StoreScreen extends React.Component {
               />
             </View>
             <View style={{...Layout.defaultPadding}}>
-              <SearchWideButton />
+              <SearchWideButton action={() => navigation.navigate('Search')} />
             </View>
             {isSelectedStoreCategoriesLoading ? (
               <ActivityIndicator

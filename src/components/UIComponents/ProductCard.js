@@ -1,11 +1,17 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {Text, Card, CardItem, Icon} from 'native-base';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {toDecimal} from '../../helpers';
+import {CartAction} from '../../actions';
 
-const ProductCard = ({product, selectPressedProduct}) => {
+const {selectPressedProduct} = CartAction;
+
+const ProductCard = ({product}) => {
+  const dispatch = useDispatch();
+
   return (
     <TouchableOpacity activeOpacity={1}>
       <Card style={styles.productCard}>
@@ -47,7 +53,7 @@ const ProductCard = ({product, selectPressedProduct}) => {
         </CardItem>
         <CardItem style={styles.productCardFooter}>
           <TouchableOpacity
-            onPress={selectPressedProduct}
+            onPress={() => dispatch(selectPressedProduct(product))}
             activeOpacity={0.8}
             style={styles.addCartButton}>
             <Icon

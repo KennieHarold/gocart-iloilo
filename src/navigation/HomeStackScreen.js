@@ -5,6 +5,7 @@ import {
   HomeScreen,
   StoreScreen,
   SingleCategoryProductsScreen,
+  SearchScreen,
 } from '../screens/Home';
 
 const screenOptions = {
@@ -26,6 +27,7 @@ const HomeStackScreen = () => {
         name="SingleCategoryProducts"
         component={SingleCategoryProductsScreen}
       />
+      <HomeStack.Screen name="Search" component={SearchScreen} />
     </HomeStack.Navigator>
   );
 };

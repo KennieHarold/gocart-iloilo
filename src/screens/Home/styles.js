@@ -21,6 +21,21 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.mini,
     color: Colors.readableText,
   },
+  searchHeader: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: RFValue(10),
+  },
+  searchItem: {
+    flex: 1,
+    backgroundColor: Colors.lightBackground,
+    height: 40,
+    marginLeft: 0,
+    borderRadius: RFValue(5),
+    paddingHorizontal: RFValue(10),
+    borderColor: 'transparent',
+  },
 });
 
 export default styles;
