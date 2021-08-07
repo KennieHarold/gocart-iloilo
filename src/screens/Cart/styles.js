@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   cartScreenPriceLabel: {
     fontSize: Fonts.size.small,
-    color: Colors.price,
+    //color: Colors.price,
     fontWeight: '700',
   },
   cartScreenCheckoutButton: {

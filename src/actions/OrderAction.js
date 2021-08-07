@@ -21,6 +21,8 @@ import {
   CLEAR_DELIVERED_ORDERS,
 } from './types';
 import * as RootNavigation from '../navigation/RootNavigation';
+import {errorHandler} from '../helpers';
+import {showSimpleLoadingModal} from './ModalAlertAction';
 
 /************************ Dispatchers **********************************/
 
@@ -329,9 +331,37 @@ export const refreshProcessingOrders = () => {
   };
 };
 
+export const refreshCancelledOrders = () => {
+  return dispatch => {
+    dispatch(clearCancelledOrders());
+    dispatch(getCancelledOrders());
+  };
+};
+
 export const navigateOrderDetails = order => {
   return dispatch => {
     dispatch(selectOrder(order));
     RootNavigation.navigate('OrderDetails');
+  };
+};
+
+export const cancelOrder = order => {
+  return async dispatch => {
+    dispatch(showSimpleLoadingModal(true));
+
+    await orderCollection
+      .doc(order.id)
+      .update({status: 'cancelled'})
+      .then(() => {
+        dispatch(refreshProcessingOrders());
+        dispatch(refreshCancelledOrders());
+        RootNavigation.navigate('Orders');
+      })
+      .catch(error => {
+        console.log(error);
+        errorHandler(dispatch, 'gen/default');
+      });
+
+    dispatch(showSimpleLoadingModal(false));
   };
 };

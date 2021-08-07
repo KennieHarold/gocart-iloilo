@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   cartProductPriceLabel: {
     marginLeft: 1,
     fontSize: Fonts.size.mini,
-    color: Colors.price,
+    //color: Colors.price,
     fontWeight: '700',
   },
   termsBoxLayout: {

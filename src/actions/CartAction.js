@@ -332,6 +332,7 @@ export const checkout = (
   checkoutDetails,
   selectedStoreProducts,
   shoppingFee,
+  deliveryFee,
   totalPayment,
 ) => {
   return async dispatch => {
@@ -366,6 +367,7 @@ export const checkout = (
         ...TRANSACTION.paymentDetails,
         method: checkoutDetails.paymentMethod,
         shoppingFee,
+        deliveryFee,
         subTotal: checkoutDetails.subTotal,
         totalPayment,
       },

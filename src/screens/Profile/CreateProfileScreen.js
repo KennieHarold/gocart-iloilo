@@ -111,21 +111,21 @@ class CreateProfileScreen extends React.Component {
                 <Text style={styles.subText}>Edit your profile name</Text>
                 <PrimaryTextBox
                   value={tempUsername}
-                  placeholder="Username"
+                  placeholder="Enter username"
                   title="Username"
                   customItemStyles={{marginBottom: RFValue(15)}}
                   onChangeText={e => tempUsernameChange(e)}
                 />
                 <PrimaryTextBox
                   value={tempFirstName}
-                  placeholder="First Name"
+                  placeholder="Enter first name"
                   title="First Name"
                   customItemStyles={{marginBottom: RFValue(15)}}
                   onChangeText={e => tempFirstNameChange(e)}
                 />
                 <PrimaryTextBox
                   value={tempLastName}
-                  placeholder="Last Name"
+                  placeholder="Enter last name"
                   title="Last Name"
                   customItemStyles={{marginBottom: RFValue(15)}}
                   onChangeText={e => tempLastNameChange(e)}

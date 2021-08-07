@@ -20,9 +20,9 @@ const StoreItem = ({store, navigateStore}) => {
       <Text style={styles.storeTitleLabel}>
         {store.name ? store.name : 'Unknown Store'}
       </Text>
-      <Text style={styles.storeDescLabel}>
+      {/* <Text style={styles.storeDescLabel}>
         {store.description ? store.description : 'No description'}
-      </Text>
+      </Text> */}
     </View>
   );
 };

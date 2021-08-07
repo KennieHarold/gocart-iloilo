@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {Container, Text, Tabs, Tab, TabHeading} from 'native-base';
 import {TitleHeader} from '../../components/Headers';
-import {ProcessingTab} from './components';
+import {ProcessingTab, CancelledTab} from './components';
 import {Colors, Fonts} from '../../styles';
 
 const orderItems = [
@@ -19,7 +19,7 @@ const orderItems = [
   {
     key: 'order-item-cancelled',
     title: 'Cancelled',
-    component: <></>,
+    component: <CancelledTab />,
   },
 ];
 

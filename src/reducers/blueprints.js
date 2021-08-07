@@ -71,6 +71,7 @@ export const TRANSACTION = {
     method: '',
     cardDetails: null,
     shoppingFee: 0,
+    deliveryFee: 0,
     subTotal: 0,
     totalPayment: 0,
     discount: 0,

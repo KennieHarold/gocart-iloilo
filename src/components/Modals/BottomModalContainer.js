@@ -5,7 +5,7 @@ import {Icon} from 'native-base';
 import {Colors, Fonts} from '../../styles';
 import styles from './styles';
 
-const BottomModalContainer = ({children, isVisible, onClose}) => {
+const BottomModalContainer = ({children, isVisible, onClose, height}) => {
   return (
     <Modal style={{margin: 0}} animationType="slide" visible={isVisible}>
       {/* <StatusBar barStyle="dark-content" backgroundColor="rgba(0, 0, 0, 0.3)" /> */}
@@ -15,7 +15,8 @@ const BottomModalContainer = ({children, isVisible, onClose}) => {
           justifyContent: 'flex-end',
           //backgroundColor: 'rgba(0, 0, 0, 0.3)',
         }}>
-        <View style={styles.bottomContainer}>
+        <View
+          style={[styles.bottomContainer, height ? {minHeight: height} : null]}>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={onClose}

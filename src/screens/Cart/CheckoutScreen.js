@@ -29,13 +29,17 @@ import {CartAction, SharedAction} from '../../actions';
 class CheckoutScreen extends React.PureComponent {
   state = {
     shoppingFee: null,
+    deliveryFee: null,
     isShoppingFeeLoading: false,
+    isDeliveryFeeLoading: false,
     isShoppingFeeError: false,
+    isDeliveryFeeError: false,
   };
 
   componentDidMount() {
     this.getInitialCheckoutDetails();
     this.getShoppingFee();
+    this.getDeliveryFee();
   }
 
   getInitialCheckoutDetails = () => {
@@ -72,6 +76,24 @@ class CheckoutScreen extends React.PureComponent {
     this.setState({isShoppingFeeLoading: false});
   };
 
+  getDeliveryFee = async () => {
+    this.setState({isDeliveryFeeLoading: true});
+
+    await appConstants
+      .doc('deliveryFee')
+      .get()
+      .then(snapshot => {
+        let deliveryFee = snapshot.data().value;
+        this.setState({deliveryFee});
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({isDeliveryFeeError: true});
+      });
+
+    this.setState({isDeliveryFeeLoading: false});
+  };
+
   handleNavigatePhoneForm = () => {
     const {changePhoneVerifyNextAction, changePhoneFromShared, navigation} =
       this.props;
@@ -85,7 +107,14 @@ class CheckoutScreen extends React.PureComponent {
     const {checkoutDetails, selectedStoreProducts, checkout, navigation} =
       this.props;
 
-    const {shoppingFee, isShoppingFeeLoading, isShoppingFeeError} = this.state;
+    const {
+      shoppingFee,
+      deliveryFee,
+      isShoppingFeeLoading,
+      isDeliveryFeeLoading,
+      isShoppingFeeError,
+      isDeliveryFeeError,
+    } = this.state;
 
     const {deliveryAddress} = checkoutDetails;
 
@@ -128,7 +157,7 @@ class CheckoutScreen extends React.PureComponent {
       },
     ];
 
-    const totalPayment = checkoutDetails.subTotal + shoppingFee;
+    const totalPayment = checkoutDetails.subTotal + shoppingFee + deliveryFee;
 
     return (
       <Container>
@@ -177,10 +206,7 @@ class CheckoutScreen extends React.PureComponent {
               </Text>
             </View>
             <View
-              style={[
-                styles.checkoutRowLayout,
-                {marginBottom: Layout.defaultPaddingNum},
-              ]}>
+              style={[styles.checkoutRowLayout, {marginBottom: RFValue(10)}]}>
               <Text style={styles.checkoutSubLabel}>Shopping Fee</Text>
               {isShoppingFeeLoading ? (
                 <ActivityIndicator size="small" color={Colors.primary} />
@@ -191,6 +217,24 @@ class CheckoutScreen extends React.PureComponent {
               ) : (
                 <Text style={styles.checkoutSubLabel}>
                   &#8369;{toDecimal(shoppingFee)}
+                </Text>
+              )}
+            </View>
+            <View
+              style={[
+                styles.checkoutRowLayout,
+                {marginBottom: Layout.defaultPaddingNum},
+              ]}>
+              <Text style={styles.checkoutSubLabel}>Delivery Fee</Text>
+              {isDeliveryFeeLoading ? (
+                <ActivityIndicator size="small" color={Colors.primary} />
+              ) : isDeliveryFeeError ? (
+                <Text style={{...styles.checkoutSubLabel, color: Colors.error}}>
+                  Error loading delivery fee
+                </Text>
+              ) : (
+                <Text style={styles.checkoutSubLabel}>
+                  &#8369;{toDecimal(deliveryFee)}
                 </Text>
               )}
             </View>
@@ -215,12 +259,18 @@ class CheckoutScreen extends React.PureComponent {
         </Content>
         <View style={{padding: RFValue(20)}}>
           <PrimaryBigButton
-            disabled={isShoppingFeeError || isShoppingFeeLoading}
+            disabled={
+              isShoppingFeeError ||
+              isShoppingFeeLoading ||
+              isDeliveryFeeError ||
+              isDeliveryFeeLoading
+            }
             action={() =>
               checkout(
                 checkoutDetails,
                 selectedStoreProducts,
                 shoppingFee,
+                deliveryFee,
                 totalPayment,
               )
             }

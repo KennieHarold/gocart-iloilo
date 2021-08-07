@@ -8,7 +8,6 @@ import {Text, Card, CardItem, Body, Icon} from 'native-base';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import {PrimaryBigButton} from '../../components/Buttons';
 import {BottomModalContainer} from '../../components/Modals';
-import Snackbar from 'react-native-snackbar';
 import {Colors} from '../../styles';
 import styles from './styles';
 import {LocatorButton} from './components';
@@ -55,13 +54,6 @@ class MapScreen extends React.Component {
           }}
           style={styles.mapView}>
           <Marker
-            onPress={() => {
-              Snackbar.show({
-                text: 'Long press the pin to drag',
-                duration: Snackbar.LENGTH_SHORT,
-              });
-            }}
-            draggable
             coordinate={{
               latitude: address.latitude,
               longitude: address.longitude,
@@ -104,15 +96,15 @@ class MapScreen extends React.Component {
           </Card>
           <PrimaryTextBox
             value={address.floorUnitRoomNumber}
-            title="Floor/Unit/Room #"
-            placeholder="Floor/Unit/Room #"
+            title="Delivery Address"
+            placeholder="Delivery Address"
             customItemStyles={{marginBottom: 10}}
             onChangeText={e => floorUnitRoomNumberChange(e)}
           />
           <PrimaryTextBox
             value={address.noteToRider}
-            title="Note to rider"
-            placeholder="Note to rider - e.g. landmark or building"
+            title="Landmarks"
+            placeholder="Landmarks"
             onChangeText={e => noteToRiderChange(e)}
           />
         </View>

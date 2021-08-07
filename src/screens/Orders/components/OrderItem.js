@@ -6,6 +6,7 @@ import moment from 'moment';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styles from './styles';
 import {OrderAction} from '../../../actions';
+import {Colors} from '../../../styles';
 
 const {navigateOrderDetails} = OrderAction;
 
@@ -56,7 +57,12 @@ const OrderItem = ({order}) => {
         </Text>
       </Body>
       <Right style={[{flex: 2.75}, styles.orderItemRight]}>
-        <Badge warning>
+        <Badge
+          style={{
+            minWidth: RFValue(75),
+            backgroundColor:
+              order.status === 'processing' ? 'orange' : Colors.error,
+          }}>
           <Text style={styles.orderItemStatusLabel}>{order.status}</Text>
         </Badge>
         <Icon
