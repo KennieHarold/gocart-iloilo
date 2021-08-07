@@ -1,20 +1,28 @@
 import React from 'react';
-import {View, StatusBar, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StatusBar,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import {connect} from 'react-redux';
-import {Container, Input, Icon, Item} from 'native-base';
+import {Container, Content, Input, Icon, Item} from 'native-base';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {Layout, Fonts} from '../../styles';
+import {Layout, Fonts, Colors} from '../../styles';
 import {SearchAction} from '../../actions';
-import {AddProductModal} from '../../components/Modals';
 import {ProductCard} from '../../components/UIComponents';
+import styles from './styles';
+import NoResults from '../Browse/components/NoResults';
 
 class SearchScreen extends React.PureComponent {
-  componentDidMount() {
+  componentWillUnmount() {
     this.clearPreviousSearchResults();
   }
 
   clearPreviousSearchResults = () => {
     this.props.clearSearchResultStoreProducts();
+    this.props.changeSearchStoreQuery('');
   };
 
   render() {
@@ -23,6 +31,9 @@ class SearchScreen extends React.PureComponent {
       searchStoreQuery,
       changeSearchStoreQuery,
       searchStoreProducts,
+      searchResultStoreProducts,
+      isSearchResultStoreProductsLoading,
+      selectedStore,
     } = this.props;
     return (
       <>
@@ -47,36 +58,47 @@ class SearchScreen extends React.PureComponent {
                 style={{fontSize: Fonts.size.mini, color: 'gray'}}
                 returnKeyType="search"
                 onChangeText={e => changeSearchStoreQuery(e)}
-                onSubmitEditing={() => searchStoreProducts(searchStoreQuery)}
+                onSubmitEditing={() =>
+                  searchStoreProducts(searchStoreQuery, selectedStore.id)
+                }
               />
             </Item>
           </View>
           <Content>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              scrollEnabled
-              data={products}
-              keyExtractor={item => `search-result-store-product-${item.id}`}
-              numColumns={2}
-              columnWrapperStyle={{
-                justifyContent: 'space-between',
-              }}
-              contentContainerStyle={{
-                paddingHorizontal: RFValue(Layout.defaultPaddingNum),
-                paddingTop: Layout.defaultPaddingNum,
-                paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
-              }}
-              renderItem={({item}) => {
-                return (
-                  <View style={{marginBottom: RFValue(15)}}>
-                    <ProductCard product={item} />
-                  </View>
-                );
-              }}
-            />
+            {isSearchResultStoreProductsLoading ? (
+              <ActivityIndicator
+                color={Colors.primary}
+                size="large"
+                style={{marginTop: Layout.defaultPaddingNum}}
+              />
+            ) : searchResultStoreProducts.length > 0 ? (
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                scrollEnabled
+                data={searchResultStoreProducts}
+                keyExtractor={item => `search-result-store-product-${item.id}`}
+                numColumns={2}
+                columnWrapperStyle={{
+                  justifyContent: 'space-between',
+                }}
+                contentContainerStyle={{
+                  paddingHorizontal: RFValue(Layout.defaultPaddingNum),
+                  paddingTop: RFValue(15),
+                  paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
+                }}
+                renderItem={({item}) => {
+                  return (
+                    <View style={{marginBottom: RFValue(15)}}>
+                      <ProductCard product={item} />
+                    </View>
+                  );
+                }}
+              />
+            ) : (
+              <NoResults />
+            )}
           </Content>
         </Container>
-        <AddProductModal />
       </>
     );
   }

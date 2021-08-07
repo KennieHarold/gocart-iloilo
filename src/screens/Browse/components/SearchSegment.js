@@ -22,7 +22,6 @@ class SearchSegment extends React.PureComponent {
         style={{
           borderBottomWidth: 0.5,
           borderBottomColor: 'lightgray',
-          //marginBottom: 25,
         }}>
         <ScrollView
           showsHorizontalScrollIndicator={false}
@@ -32,7 +31,7 @@ class SearchSegment extends React.PureComponent {
             <TouchableOpacity
               key={`segment-buttons-${key}`}
               activeOpacity={0.9}
-              onPress={index => this.props.action(index)}
+              onPress={() => this.props.action(index)}
               style={{
                 ...styles.segmentButtons,
                 backgroundColor:

@@ -2,7 +2,6 @@ import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {TitleHeader} from '../../components/Headers';
-import {AddToCartModal} from '../../components/Modals';
 import {CartButton} from '../../components/Buttons';
 import {Container, Item, Input, Icon} from 'native-base';
 import styles from './styles';
@@ -38,49 +37,49 @@ class BrowseScreen extends React.PureComponent {
     const {selectedStoreIndex} = this.state;
 
     return (
-      <>
-        <Container>
-          <TitleHeader title="Browse" rightKey={<CartButton />} />
-          <View style={{paddingHorizontal: Layout.defaultPaddingNum}}>
-            <Item style={styles.searchItem}>
-              <Icon name="ios-search" style={styles.searchIcon} />
-              <Input
-                value={searchQuery}
-                placeholder="Search"
-                style={styles.searchInput}
-                placeholderTextColor="gray"
-                returnKeyType="search"
-                onChangeText={e => changeSearchQuery(e)}
-                onSubmitEditing={() => {
-                  this.setState({selectedStoreIndex: 0});
-                  searchProducts(searchQuery);
-                }}
-              />
-            </Item>
-          </View>
-          {isSearchResultProductsLoading ? (
-            <ActivityIndicator
-              color={Colors.primary}
-              size="large"
-              style={{marginTop: Layout.defaultPaddingNum}}
+      <Container>
+        <TitleHeader title="Browse" rightKey={<CartButton />} />
+        <View style={{paddingHorizontal: Layout.defaultPaddingNum}}>
+          <Item style={styles.searchItem}>
+            <Icon name="ios-search" style={styles.searchIcon} />
+            <Input
+              value={searchQuery}
+              placeholder="Search"
+              style={styles.searchInput}
+              placeholderTextColor="gray"
+              returnKeyType="search"
+              onChangeText={e => changearchQuery(e)}
+              onSubmitEditing={() => {
+                this.setState({selectedStoreIndex: 0});
+                searchProducts(searchQuery);
+              }}
             />
-          ) : (
-            <>
-              <SearchSegment
-                action={index => this.setState({selectedStoreIndex: index})}
-                index={selectedStoreIndex}
-                products={groupedProducts}
-              />
-              {Object.keys(groupedProducts).length > 0 ? (
-                <SearchList products={this.renderData()} />
-              ) : (
-                <NoResults />
-              )}
-            </>
-          )}
-        </Container>
-        <AddToCartModal />
-      </>
+          </Item>
+        </View>
+        {isSearchResultProductsLoading ? (
+          <ActivityIndicator
+            color={Colors.primary}
+            size="large"
+            style={{marginTop: Layout.defaultPaddingNum}}
+          />
+        ) : (
+          <>
+            <SearchSegment
+              action={index => {
+                console.log('Index: ', index);
+                this.setState({selectedStoreIndex: index});
+              }}
+              index={selectedStoreIndex}
+              products={groupedProducts}
+            />
+            {Object.keys(groupedProducts).length > 0 ? (
+              <SearchList products={this.renderData()} />
+            ) : (
+              <NoResults />
+            )}
+          </>
+        )}
+      </Container>
     );
   }
 }

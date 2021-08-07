@@ -1,4 +1,7 @@
-import {searchProductsByProductName} from '../services/elasticSearch';
+import {
+  searchProductsByProductName,
+  searchStoreProductsByProductName,
+} from '../services/elasticSearch';
 import {
   ADD_SEARCH_RESULT_PRODUCT,
   CHANGE_SEARCH_QUERY,
@@ -8,6 +11,7 @@ import {
   CHANGE_SEARCH_RESULT_STORE_PRODUCTS_LOADING,
   ADD_SEARCH_RESULT_STORE_PRODUCT,
   CLEAR_SEARCH_RESULT_STORE_PRODUCTS,
+  CHANGE_SEARCH_STORE_QUERY,
 } from './types';
 
 /*********************** Dispatchers *********************************/

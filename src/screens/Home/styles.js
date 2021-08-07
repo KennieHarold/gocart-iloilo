@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: RFValue(10),
+    backgroundColor: 'white',
+    elevation: 2,
   },
   searchItem: {
     flex: 1,

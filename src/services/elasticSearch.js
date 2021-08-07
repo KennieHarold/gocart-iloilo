@@ -32,11 +32,9 @@ const getRequestBody = (name, storeId) => {
 export const searchProductsByProductName = async query => {
   const requestBody = getRequestBody(query, null);
 
-  const response = await searchApi
-    .get(queryString, requestBody)
-    .catch(error => {
-      console.log(error);
-    });
+  const response = await searchApi.post('/', requestBody).catch(error => {
+    console.log(error);
+  });
 
   const hitsList = response.data.hits.hits;
 
@@ -50,11 +48,9 @@ export const searchProductsByProductName = async query => {
 export const searchStoreProductsByProductName = async (query, storeId) => {
   const requestBody = getRequestBody(query, storeId);
 
-  const response = await searchApi
-    .get(queryString, requestBody)
-    .catch(error => {
-      console.log(error);
-    });
+  const response = await searchApi.post('/', requestBody).catch(error => {
+    console.log(error);
+  });
 
   const hitsList = response.data.hits.hits;
 
