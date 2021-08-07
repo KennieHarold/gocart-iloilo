@@ -48,7 +48,7 @@ class BrowseScreen extends React.PureComponent {
               style={styles.searchInput}
               placeholderTextColor="gray"
               returnKeyType="search"
-              onChangeText={e => changearchQuery(e)}
+              onChangeText={e => changeSearchQuery(e)}
               onSubmitEditing={() => {
                 this.setState({selectedStoreIndex: 0});
                 searchProducts(searchQuery);
