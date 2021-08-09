@@ -1,18 +1,17 @@
 import React from 'react';
-import MapView, {Marker} from 'react-native-maps';
+import MapView from 'react-native-maps';
 import {connect} from 'react-redux';
 import {View, TouchableOpacity, SafeAreaView, Image} from 'react-native';
 import {Text, Card, CardItem, Body, Icon} from 'native-base';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import {PrimaryBigButton} from '../../components/Buttons';
-import {BottomModalContainer} from '../../components/Modals';
 import {Colors} from '../../styles';
 import styles from './styles';
 import {SharedAction} from '../../actions';
 import marker from '../../assets/marker.png';
-import {MapHeader} from './components';
+import {MapHeader, EditAddressModal} from './components';
 
-class MapScreen extends React.Component {
+class MapScreen extends React.PureComponent {
   state = {
     isVisible: false,
     isMapDragEnabled: true,
@@ -71,7 +70,7 @@ class MapScreen extends React.Component {
                     />
                   </View>
                   <View style={{flex: 6}}>
-                    <Text style={styles.addressText} numberOfLines={2}>
+                    <Text style={styles.addressText} numberOfLines={3}>
                       {address.formattedAddress}
                     </Text>
                   </View>
@@ -103,29 +102,20 @@ class MapScreen extends React.Component {
             customTextStyles={{color: 'white'}}
           />
         </View>
-        <BottomModalContainer
+        <EditAddressModal
           isVisible={this.state.isVisible}
           onClose={() =>
             this.setState(prevState => ({
               isVisible: !prevState.isVisible,
             }))
-          }>
-          <View style={{width: '100%', position: 'absolute', top: 25}}>
-            <Text style={styles.subText}>Edit Address</Text>
-          </View>
-        </BottomModalContainer>
+          }
+        />
       </SafeAreaView>
     );
   }
 }
 
-const {
-  detailedAddressChange,
-  noteToRiderChange,
-  addressChange,
-  addressResetState,
-  geocode,
-} = SharedAction;
+const {detailedAddressChange, noteToRiderChange, geocode} = SharedAction;
 
 const mapStateToProps = state => {
   const {address, mapNextAction} = state.shared;
@@ -137,7 +127,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   detailedAddressChange,
   noteToRiderChange,
-  addressChange,
-  addressResetState,
   geocode,
 })(MapScreen);

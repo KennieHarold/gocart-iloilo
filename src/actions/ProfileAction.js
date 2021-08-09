@@ -105,7 +105,7 @@ export const createUserProfile = createProfileParams => {
       firstName.trim() !== '' &&
       lastName.trim() !== ''
     ) {
-      if (isAddressSet) {
+      if (isAddressSet && address.formattedAddress !== '') {
         const {
           latitude,
           longitude,
