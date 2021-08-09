@@ -1,6 +1,6 @@
 import * as RootNavigation from '../navigation/RootNavigation';
 import {
-  FLOOR_UNIT_ROOM_NUMBER_CHANGE,
+  DETAILED_ADDRESS_CHANGE,
   NOTE_TO_RIDER_CHANGE,
   ADDRESS_CHANGE,
   CHANGE_FORMATTED_ADDRESS,
@@ -40,7 +40,7 @@ const initialState = {
 
 const SharedReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FLOOR_UNIT_ROOM_NUMBER_CHANGE:
+    case DETAILED_ADDRESS_CHANGE:
       return {
         ...state,
         address: {

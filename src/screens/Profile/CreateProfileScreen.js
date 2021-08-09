@@ -9,7 +9,7 @@ import {
 import {Container, Icon, Card, CardItem, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
 import * as RootNavigation from '../../navigation/RootNavigation';
-import {Layout} from '../../styles';
+import {Fonts, Layout} from '../../styles';
 import {PrimaryBigButton} from '../../components/Buttons';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import styles from './styles';
@@ -31,13 +31,34 @@ class CreateProfileScreen extends React.Component {
 
     return isAddressSet ? (
       <>
-        <Text numberOfLines={2} style={[styles.addressText, {marginBottom: 5}]}>
+        <Text
+          numberOfLines={2}
+          style={[styles.addressText, {marginBottom: 10}]}>
           {address.formattedAddress}
         </Text>
+        {address.detailedAddress !== '' ? (
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon
+              type="Entypo"
+              name="address"
+              style={{fontSize: Fonts.size.mini, color: 'gray', marginRight: 7}}
+            />
+            <Text numberOfLines={1} style={styles.addressSubLabel}>
+              {address.detailedAddress}
+            </Text>
+          </View>
+        ) : null}
         {address.noteToRider !== '' ? (
-          <Text numberOfLines={1} style={styles.addressSubLabel}>
-            {address.noteToRider}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon
+              type="Entypo"
+              name="map"
+              style={{fontSize: Fonts.size.mini, color: 'gray', marginRight: 7}}
+            />
+            <Text numberOfLines={1} style={styles.addressSubLabel}>
+              {address.noteToRider}
+            </Text>
+          </View>
         ) : null}
       </>
     ) : (
@@ -127,7 +148,7 @@ class CreateProfileScreen extends React.Component {
                   onChangeText={e => tempLastNameChange(e)}
                 />
               </View>
-              <View style={{marginTop: Layout.defaultPaddingNum}}>
+              <View style={{marginTop: RFValue(10)}}>
                 <Text style={styles.subText}>Edit your delivery address</Text>
                 <Card style={{borderRadius: RFValue(10)}}>
                   <CardItem style={{borderRadius: RFValue(10)}}>
