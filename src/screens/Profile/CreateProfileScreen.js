@@ -32,11 +32,7 @@ class CreateProfileScreen extends React.Component {
     return isAddressSet ? (
       <>
         <Text numberOfLines={2} style={[styles.addressText, {marginBottom: 5}]}>
-          {`${
-            address.floorUnitRoomNumber !== ''
-              ? address.floorUnitRoomNumber + ', '
-              : ''
-          }${address.formattedAddress}`}
+          {address.formattedAddress}
         </Text>
         {address.noteToRider !== '' ? (
           <Text numberOfLines={1} style={styles.addressSubLabel}>

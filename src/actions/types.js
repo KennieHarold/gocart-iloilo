@@ -66,9 +66,10 @@ export const ADD_BANNER = 'add_banner';
 export const APP_RESET_STATE = 'app_reset_state';
 
 // Shared
-export const FLOOR_UNIT_ROOM_NUMBER_CHANGE = 'floor_unit_room_number_change';
+export const DETAILED_ADDRESS_CHANGE = 'detailed_address_change';
 export const NOTE_TO_RIDER_CHANGE = 'note_to_rider_change';
 export const ADDRESS_CHANGE = 'address_change';
+export const CHANGE_FORMATTED_ADDRESS = 'change_formatted_address';
 export const CHANGE_PHONE_NUMBER = 'change_phone_number';
 export const CHANGE_PHONE_NUMBER_VERIFIED = 'change_phone_number_verified';
 export const CHANGE_PHONE_VERIFY_NEXT_ACTION =

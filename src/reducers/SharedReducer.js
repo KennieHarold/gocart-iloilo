@@ -3,6 +3,7 @@ import {
   FLOOR_UNIT_ROOM_NUMBER_CHANGE,
   NOTE_TO_RIDER_CHANGE,
   ADDRESS_CHANGE,
+  CHANGE_FORMATTED_ADDRESS,
   CHANGE_PHONE_NUMBER,
   CHANGE_PHONE_NUMBER_VERIFIED,
   CHANGE_PHONE_VERIFY_NEXT_ACTION,
@@ -45,7 +46,7 @@ const SharedReducer = (state = initialState, action) => {
         ...state,
         address: {
           ...state.address,
-          floorUnitRoomNumber: action.text,
+          detailedAddress: action.text,
         },
       };
 
@@ -65,6 +66,15 @@ const SharedReducer = (state = initialState, action) => {
         address: {
           ...state.address,
           ...action.payload.address,
+        },
+      };
+
+    case CHANGE_FORMATTED_ADDRESS:
+      return {
+        ...state,
+        address: {
+          ...state.address,
+          formattedAddress: action.text,
         },
       };
 

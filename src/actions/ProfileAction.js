@@ -110,7 +110,7 @@ export const createUserProfile = createProfileParams => {
           latitude,
           longitude,
           formattedAddress,
-          floorUnitRoomNumber,
+          detailedAddress,
           noteToRider,
         } = address;
 
@@ -134,7 +134,7 @@ export const createUserProfile = createProfileParams => {
               latitude,
               longitude,
               formattedAddress,
-              floorUnitRoomNumber: floorUnitRoomNumber.trim(),
+              detailedAddress: detailedAddress.trim(),
               noteToRider: noteToRider.trim(),
             },
           ],

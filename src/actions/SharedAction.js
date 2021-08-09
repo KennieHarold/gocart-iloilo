@@ -7,9 +7,10 @@ import {errorHandler} from '../helpers';
 import * as RootNavigation from '../navigation/RootNavigation';
 import {GOOGLE_CLOUD_API_KEY, CLOUD_FUNCTIONS_API_URL} from '@env';
 import {
-  FLOOR_UNIT_ROOM_NUMBER_CHANGE,
+  DETAILED_ADDRESS_CHANGE,
   NOTE_TO_RIDER_CHANGE,
   ADDRESS_CHANGE,
+  CHANGE_FORMATTED_ADDRESS,
   CHANGE_PHONE_NUMBER,
   CHANGE_PHONE_NUMBER_VERIFIED,
   ADDRESS_RESET_STATE,
@@ -93,9 +94,9 @@ const callVerifyApi = async (phone, code, callback) => {
 
 /*********************** Dispatchers *********************************/
 
-export const floorUnitRoomNumberChange = text => {
+export const detailedAddressChange = text => {
   return {
-    type: FLOOR_UNIT_ROOM_NUMBER_CHANGE,
+    type: DETAILED_ADDRESS_CHANGE,
     text,
   };
 };
@@ -120,6 +121,13 @@ export const addressChange = ({latitude, longitude, formattedAddress}) => {
   return {
     type: ADDRESS_CHANGE,
     payload,
+  };
+};
+
+export const changeFormattedAddress = text => {
+  return {
+    type: CHANGE_FORMATTED_ADDRESS,
+    text,
   };
 };
 

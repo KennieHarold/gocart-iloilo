@@ -21,7 +21,7 @@ export const ADDRESS = {
   latitude: 0,
   longitude: 0,
   formattedAddress: '',
-  floorUnitRoomNumber: '',
+  detailedAddress: '',
   noteToRider: '',
 };
 

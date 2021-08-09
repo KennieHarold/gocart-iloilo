@@ -1,17 +1,16 @@
 import React from 'react';
 import MapView, {Marker} from 'react-native-maps';
-import {GOOGLE_CLOUD_API_KEY} from '@env';
 import {connect} from 'react-redux';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {View, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, SafeAreaView, Image} from 'react-native';
 import {Text, Card, CardItem, Body, Icon} from 'native-base';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import {PrimaryBigButton} from '../../components/Buttons';
 import {BottomModalContainer} from '../../components/Modals';
 import {Colors} from '../../styles';
 import styles from './styles';
-import {LocatorButton} from './components';
 import {SharedAction} from '../../actions';
+import marker from '../../assets/marker.png';
+import {MapHeader} from './components';
 
 class MapScreen extends React.Component {
   state = {
@@ -20,31 +19,17 @@ class MapScreen extends React.Component {
 
   render() {
     const {
-      navigation,
       address,
       mapNextAction,
-      floorUnitRoomNumberChange,
+      detailedAddressChange,
       noteToRiderChange,
       addressChange,
       addressResetState,
     } = this.props;
 
-    const {container, textInputContainer, listView} = autoCompleteStyles;
-
     return (
       <SafeAreaView style={{flex: 1}}>
-        <TouchableOpacity
-          onPress={() => {
-            addressResetState();
-            navigation.goBack();
-          }}
-          activeOpacity={0.7}
-          style={styles.closeIconContainer}>
-          <Icon type="AntDesign" name="closecircle" style={styles.closeIcon} />
-        </TouchableOpacity>
-
-        <LocatorButton />
-
+        <MapHeader />
         <MapView
           region={{
             latitude: address.latitude,
@@ -52,14 +37,11 @@ class MapScreen extends React.Component {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
-          style={styles.mapView}>
-          <Marker
-            coordinate={{
-              latitude: address.latitude,
-              longitude: address.longitude,
-            }}
-          />
-        </MapView>
+          style={styles.mapView}
+        />
+        <View style={styles.markerView}>
+          <Image source={marker} style={{height: 45, width: 45}} />
+        </View>
         <View style={styles.mapFormContainer}>
           <Card style={{borderRadius: 10, marginBottom: 20}}>
             <CardItem style={{borderRadius: 10}}>
@@ -95,16 +77,16 @@ class MapScreen extends React.Component {
             </CardItem>
           </Card>
           <PrimaryTextBox
-            value={address.floorUnitRoomNumber}
-            title="Delivery Address"
-            placeholder="Delivery Address"
+            value={address.detailedAddress}
+            title="Detailed Address"
+            placeholder="Enter detailed address"
             customItemStyles={{marginBottom: 10}}
-            onChangeText={e => floorUnitRoomNumberChange(e)}
+            onChangeText={e => detailedAddressChange(e)}
           />
           <PrimaryTextBox
             value={address.noteToRider}
             title="Landmarks"
-            placeholder="Landmarks"
+            placeholder="Enter landmarks"
             onChangeText={e => noteToRiderChange(e)}
           />
         </View>
@@ -125,65 +107,17 @@ class MapScreen extends React.Component {
               isVisible: !prevState.isVisible,
             }))
           }>
-          <View style={{width: '100%'}}>
-            <Text style={styles.subText}>Choose your location</Text>
+          <View style={{width: '100%', position: 'absolute', top: 25}}>
+            <Text style={styles.subText}>Edit Address</Text>
           </View>
-          <GooglePlacesAutocomplete
-            styles={{
-              textInputContainer,
-              container,
-              listView,
-            }}
-            fetchDetails
-            enablePoweredByContainer={false}
-            placeholder="Search Location"
-            onPress={(data, details = null) => {
-              const address = {
-                latitude: details.geometry.location.lat,
-                longitude: details.geometry.location.lng,
-                formattedAddress: details.formatted_address,
-              };
-
-              addressChange(address);
-
-              this.setState(prevState => ({
-                isVisible: !prevState.isVisible,
-              }));
-            }}
-            query={{
-              key: GOOGLE_CLOUD_API_KEY,
-              language: 'en',
-              components: 'country:ph',
-            }}
-          />
         </BottomModalContainer>
       </SafeAreaView>
     );
   }
 }
 
-const autoCompleteStyles = StyleSheet.create({
-  textInputContainer: {
-    elevation: 3,
-    backgroundColor: 'white',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-  },
-  container: {
-    borderRadius: 10,
-    width: '100%',
-  },
-  listView: {
-    zIndex: 1,
-    marginTop: 10,
-    elevation: 3,
-    backgroundColor: 'white',
-  },
-});
-
 const {
-  floorUnitRoomNumberChange,
+  detailedAddressChange,
   noteToRiderChange,
   addressChange,
   addressResetState,
@@ -197,7 +131,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  floorUnitRoomNumberChange,
+  detailedAddressChange,
   noteToRiderChange,
   addressChange,
   addressResetState,
