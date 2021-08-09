@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Container, Content, Text, Icon} from 'native-base';
+import {Container, Content, Text, Icon, Badge} from 'native-base';
 import {ScreenHeader} from '../../components/Headers';
 import {OrderAction} from '../../actions';
 import {Colors, Fonts, Layout} from '../../styles';
@@ -77,6 +77,27 @@ class OrderDetailsScreen extends React.Component {
     return 'Error Loading Store';
   };
 
+  renderDeliveryTime = () => {
+    const {selectedOrder} = this.props;
+
+    return (
+      <View style={styles.orderDetailsSection}>
+        <Icon
+          type="SimpleLineIcons"
+          name="clock"
+          style={styles.orderDetailsIcon}
+        />
+        {selectedOrder.status === 'cancelled' ? (
+          <Badge style={{backgroundColor: Colors.error}}>
+            <Text style={{fontSize: Fonts.size.min}}>Cancelled</Text>
+          </Badge>
+        ) : (
+          <Text style={styles.orderDetailsLabel}>Tomorrow</Text>
+        )}
+      </View>
+    );
+  };
+
   render() {
     const {selectedOrder, cancelOrder} = this.props;
 
@@ -103,24 +124,9 @@ class OrderDetailsScreen extends React.Component {
                     {this.getStoreName(selectedOrder.storeId)}
                   </Text>
                 </View>
-                <View style={styles.orderDetailsSection}>
-                  <Icon
-                    type="SimpleLineIcons"
-                    name="clock"
-                    style={styles.orderDetailsIcon}
-                  />
-                  <Text
-                    style={[
-                      styles.orderDetailsLabel,
-                      selectedOrder.status === 'cancelled'
-                        ? {color: Colors.error}
-                        : null,
-                    ]}>
-                    {selectedOrder.status === 'processing'
-                      ? 'Tomorrow'
-                      : 'Cancelled'}
-                  </Text>
-                </View>
+
+                {this.renderDeliveryTime()}
+
                 <View style={[styles.orderDetailsSection, {flex: 1}]}>
                   <Icon
                     type="SimpleLineIcons"
