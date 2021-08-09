@@ -11,7 +11,7 @@ import * as RootNavigation from '../../../navigation/RootNavigation';
 
 const {addressChange, addressResetState} = SharedAction;
 
-const MapHeader = () => {
+const MapHeader = ({cb}) => {
   const dispatch = useDispatch();
 
   const {container, textInputContainer, listView} = autoCompleteStyles;
@@ -20,6 +20,7 @@ const MapHeader = () => {
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
       <TouchableOpacity
         onPress={() => {
+          cb(false);
           dispatch(addressResetState());
           RootNavigation.goBack();
         }}

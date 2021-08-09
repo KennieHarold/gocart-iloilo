@@ -23,6 +23,8 @@ import {
 } from './types';
 import {showSimpleLoadingModal, showAlert} from './ModalAlertAction';
 
+Geocoder.init(GOOGLE_CLOUD_API_KEY);
+
 /*********************** Private or helper functions *********************************/
 
 const askLocationPermission = async callback => {
@@ -193,6 +195,39 @@ export const changeResendSeconds = seconds => {
 
 /*********************** Public Methods *********************************/
 
+export const geocode = (latitude, longitude) => {
+  return async dispatch => {
+    dispatch(showSimpleLoadingModal(true));
+
+    await Geocoder.from(latitude, longitude)
+      .then(json => {
+        const addressObj = json.results[0].formatted_address;
+
+        const address = {
+          latitude,
+          longitude,
+          formattedAddress: addressObj,
+        };
+
+        dispatch(addressChange(address));
+      })
+      .catch(error => {
+        console.log(error);
+
+        //  Just to make sure
+        dispatch(showSimpleLoadingModal(false));
+
+        if (error.code === 2) {
+          errorHandler(dispatch, 'gen/network-error');
+        } else {
+          errorHandler(dispatch, 'gen/default');
+        }
+      });
+
+    dispatch(showSimpleLoadingModal(false));
+  };
+};
+
 export const getCurrentLocation = () => {
   return async dispatch => {
     try {
@@ -204,22 +239,23 @@ export const getCurrentLocation = () => {
               const {coords} = position;
               const {latitude, longitude} = coords;
 
-              Geocoder.init(GOOGLE_CLOUD_API_KEY);
-
               await Geocoder.from(latitude, longitude)
                 .then(json => {
-                  const addressObj = json.results[0].address_components[0];
+                  const addressObj = json.results[0].formatted_address;
 
                   const address = {
                     latitude,
                     longitude,
-                    formattedAddress: addressObj.long_name,
+                    formattedAddress: addressObj,
                   };
 
                   dispatch(addressChange(address));
                 })
                 .catch(error => {
                   console.log(error);
+
+                  //  Just to make sure
+                  dispatch(showSimpleLoadingModal(false));
 
                   if (error.code === 2) {
                     errorHandler(dispatch, 'gen/network-error');

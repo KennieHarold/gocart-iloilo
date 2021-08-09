@@ -15,22 +15,25 @@ import {MapHeader} from './components';
 class MapScreen extends React.Component {
   state = {
     isVisible: false,
+    isMapDragEnabled: true,
+  };
+
+  onRegionChange = region => {
+    if (this.state.isMapDragEnabled) {
+      const {geocode} = this.props;
+      geocode(region.latitude, region.longitude);
+    }
   };
 
   render() {
-    const {
-      address,
-      mapNextAction,
-      detailedAddressChange,
-      noteToRiderChange,
-      addressChange,
-      addressResetState,
-    } = this.props;
+    const {address, mapNextAction, detailedAddressChange, noteToRiderChange} =
+      this.props;
 
     return (
       <SafeAreaView style={{flex: 1}}>
-        <MapHeader />
+        <MapHeader cb={status => this.setState({isMapDragEnabled: status})} />
         <MapView
+          onRegionChangeComplete={this.onRegionChange}
           region={{
             latitude: address.latitude,
             longitude: address.longitude,
@@ -121,6 +124,7 @@ const {
   noteToRiderChange,
   addressChange,
   addressResetState,
+  geocode,
 } = SharedAction;
 
 const mapStateToProps = state => {
@@ -135,4 +139,5 @@ export default connect(mapStateToProps, {
   noteToRiderChange,
   addressChange,
   addressResetState,
+  geocode,
 })(MapScreen);

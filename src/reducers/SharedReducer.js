@@ -31,10 +31,9 @@ const initialState = {
   isAddressSet: false,
   address: {
     ...ADDRESS,
-    latitude: 10.7244439,
-    longitude: 122.5573453,
-    formattedAddress:
-      'Jaro Plaza, Plaza Rizal Street, Jaro, Iloilo City, Iloilo, Philippines',
+    latitude: 10.72402089984486,
+    longitude: 122.55733011290431,
+    formattedAddress: '',
   },
   mapNextAction: () => {},
 };
