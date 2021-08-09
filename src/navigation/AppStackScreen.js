@@ -57,7 +57,7 @@ const AppStackScreen = () => {
     //  Show this navigation if user don't have user profile
     <AppStack.Navigator
       headerMode="none"
-      initialRouteName="CreateProfile"
+      initialRouteName="NoDoc__PhoneForm"
       mode="card"
       screenOptions={screenOptions}>
       <AppStack.Screen name="NoDoc__PhoneForm" component={PhoneFormScreen} />

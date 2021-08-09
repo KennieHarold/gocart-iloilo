@@ -13,7 +13,7 @@ const initialState = {
   email: '',
   password: '',
   confirmPassword: '',
-  isAuthenticated: true,
+  isAuthenticated: false,
   hasUserDocument: false,
   provider: '',
   providerEmail: '',
