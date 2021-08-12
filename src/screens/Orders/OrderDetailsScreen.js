@@ -92,7 +92,7 @@ class OrderDetailsScreen extends React.Component {
             <Text style={{fontSize: Fonts.size.min}}>Cancelled</Text>
           </Badge>
         ) : (
-          <Text style={styles.orderDetailsLabel}>Tomorrow</Text>
+          <Text style={styles.orderDetailsLabel}>Today</Text>
         )}
       </View>
     );
@@ -120,9 +120,21 @@ class OrderDetailsScreen extends React.Component {
                     name="isv"
                     style={styles.orderDetailsIcon}
                   />
-                  <Text style={[styles.orderDetailsLabel, {fontWeight: '700'}]}>
-                    {this.getStoreName(selectedOrder.storeId)}
-                  </Text>
+                  <View>
+                    <Text
+                      style={[
+                        styles.orderDetailsLabel,
+                        {fontWeight: '700', marginBottom: 3},
+                      ]}>
+                      {this.getStoreName(selectedOrder.storeId)}
+                    </Text>
+                    <Text note style={{fontSize: Fonts.size.min}}>
+                      Order no:{' '}
+                      {selectedOrder.reference
+                        ? selectedOrder.reference
+                        : 'Error loading order no'}
+                    </Text>
+                  </View>
                 </View>
 
                 {this.renderDeliveryTime()}

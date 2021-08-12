@@ -46,6 +46,7 @@ export const CART = {
 
 export const ORDER = {
   id: '',
+  reference: '',
   transactionId: '',
   userId: '',
   storeId: '',
@@ -55,6 +56,7 @@ export const ORDER = {
   deliverySchedule: '',
   expectedDeliveryTime: null,
   deliveredAt: null,
+  cancelledAt: null,
   riderAlias: '',
   contact: {
     code: '+63',

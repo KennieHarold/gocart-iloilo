@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 import Snackbar from 'react-native-snackbar';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import {customAlphabet} from 'nanoid';
 import {errorHandler} from '../helpers';
 import {
   cartCollection,
@@ -337,6 +338,11 @@ export const checkout = (
 ) => {
   return async dispatch => {
     const orderId = uuidv4();
+
+    const nanoid = customAlphabet('1234567890', 10);
+    const randomLetters = nanoid();
+    const reference = 'GCI-' + randomLetters;
+
     const transactionId = uuidv4();
     const userId = auth().currentUser.uid;
 
@@ -346,6 +352,7 @@ export const checkout = (
     const orderData = {
       ...ORDER,
       id: orderId,
+      reference,
       transactionId: transactionId,
       userId,
       storeId: selectedStoreProducts.storeId,
