@@ -12,9 +12,7 @@ const styles = StyleSheet.create({
     width: 31,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    top: 20,
-    right: 12,
+    margin: 10,
   },
   locatorIcon: {
     fontSize: 21,

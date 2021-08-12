@@ -10,6 +10,7 @@ import styles from './styles';
 import {SharedAction} from '../../actions';
 import marker from '../../assets/marker.png';
 import {MapHeader, EditAddressModal} from './components';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 class MapScreen extends React.PureComponent {
   state = {
@@ -43,11 +44,14 @@ class MapScreen extends React.PureComponent {
           style={styles.mapView}
         />
         <View style={styles.markerView}>
-          <Image source={marker} style={{height: 45, width: 45}} />
+          <Image
+            source={marker}
+            style={{height: RFValue(45), width: RFValue(45)}}
+          />
         </View>
         <View style={styles.mapFormContainer}>
-          <Card style={{borderRadius: 10, marginBottom: 20}}>
-            <CardItem style={{borderRadius: 10}}>
+          <Card style={{borderRadius: RFValue(10), marginBottom: RFValue(20)}}>
+            <CardItem style={{borderRadius: RFValue(10)}}>
               <Body>
                 <TouchableOpacity
                   onPress={() => this.setState({isVisible: true})}
@@ -61,13 +65,13 @@ class MapScreen extends React.PureComponent {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '85%',
-                    minHeight: 50,
+                    minHeight: RFValue(50),
                   }}>
                   <View style={{flex: 1}}>
                     <Icon
                       type="Entypo"
                       name="location-pin"
-                      style={[styles.locationIcon, {marginLeft: -5}]}
+                      style={[styles.locationIcon, {marginLeft: RFValue(-5)}]}
                     />
                   </View>
                   <View style={{flex: 6}}>

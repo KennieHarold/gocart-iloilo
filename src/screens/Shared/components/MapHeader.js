@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {GOOGLE_CLOUD_API_KEY} from '@env';
 import {Icon} from 'native-base';
 import {useDispatch} from 'react-redux';
@@ -18,7 +18,12 @@ const MapHeader = ({cb}) => {
   const {container, textInputContainer, listView} = autoCompleteStyles;
 
   return (
-    <>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginTop: RFValue(10),
+      }}>
       <TouchableOpacity
         onPress={() => {
           cb(false);
@@ -26,10 +31,8 @@ const MapHeader = ({cb}) => {
         }}
         activeOpacity={0.6}
         style={{
-          position: 'absolute',
-          top: RFValue(20),
           zIndex: 99,
-          left: RFValue(10),
+          margin: 10,
         }}>
         <Icon
           type="AntDesign"
@@ -61,7 +64,7 @@ const MapHeader = ({cb}) => {
         }}
       />
       <LocatorButton />
-    </>
+    </View>
   );
 };
 
@@ -72,15 +75,11 @@ const autoCompleteStyles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'white',
-    height: RFValue(45),
+    height: 45,
   },
   container: {
     borderRadius: 10,
     zIndex: 99,
-    position: 'absolute',
-    left: RFValue(50),
-    top: RFValue(10),
-    width: RFValue(253),
   },
   listView: {
     zIndex: 1,
