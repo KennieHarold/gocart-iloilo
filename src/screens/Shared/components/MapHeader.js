@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {GOOGLE_CLOUD_API_KEY} from '@env';
 import {Icon} from 'native-base';
 import {useDispatch} from 'react-redux';
@@ -8,8 +8,9 @@ import {SharedAction} from '../../../actions';
 import LocatorButton from './LocatorButton';
 import {Colors} from '../../../styles';
 import * as RootNavigation from '../../../navigation/RootNavigation';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-const {addressChange, addressResetState} = SharedAction;
+const {addressChange} = SharedAction;
 
 const MapHeader = ({cb}) => {
   const dispatch = useDispatch();
@@ -17,15 +18,19 @@ const MapHeader = ({cb}) => {
   const {container, textInputContainer, listView} = autoCompleteStyles;
 
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <>
       <TouchableOpacity
         onPress={() => {
           cb(false);
-          dispatch(addressResetState());
           RootNavigation.goBack();
         }}
         activeOpacity={0.6}
-        style={{marginLeft: 10, zIndex: 99}}>
+        style={{
+          position: 'absolute',
+          top: RFValue(20),
+          zIndex: 99,
+          left: RFValue(10),
+        }}>
         <Icon
           type="AntDesign"
           name="arrowleft"
@@ -56,7 +61,7 @@ const MapHeader = ({cb}) => {
         }}
       />
       <LocatorButton />
-    </View>
+    </>
   );
 };
 
@@ -67,18 +72,21 @@ const autoCompleteStyles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'white',
-    height: 45,
+    height: RFValue(45),
   },
   container: {
     borderRadius: 10,
     zIndex: 99,
-    margin: 10,
+    position: 'absolute',
+    left: RFValue(50),
+    top: RFValue(10),
+    width: RFValue(253),
   },
   listView: {
     zIndex: 1,
-    marginTop: 10,
     elevation: 3,
     backgroundColor: 'white',
+    marginTop: 5,
   },
 });
 

@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
     padding: 5,
     height: 31,
     width: 31,
-    marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
+    top: 20,
+    right: 12,
   },
   locatorIcon: {
     fontSize: 21,

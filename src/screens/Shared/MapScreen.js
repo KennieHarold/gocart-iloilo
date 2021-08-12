@@ -39,6 +39,7 @@ class MapScreen extends React.PureComponent {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
+          showsCompass={false}
           style={styles.mapView}
         />
         <View style={styles.markerView}>
@@ -71,7 +72,9 @@ class MapScreen extends React.PureComponent {
                   </View>
                   <View style={{flex: 6}}>
                     <Text style={styles.addressText} numberOfLines={3}>
-                      {address.formattedAddress}
+                      {address.formattedAddress !== ''
+                        ? address.formattedAddress
+                        : 'Not set'}
                     </Text>
                   </View>
                 </View>

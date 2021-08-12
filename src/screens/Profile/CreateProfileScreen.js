@@ -165,7 +165,7 @@ class CreateProfileScreen extends React.Component {
                       </TouchableOpacity>
                       <View
                         style={{
-                          minHeight: RFValue(50),
+                          minHeight: RFValue(60),
                           justifyContent: 'center',
                           width: '85%',
                         }}>
