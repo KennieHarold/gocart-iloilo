@@ -197,7 +197,7 @@ export const changeResendSeconds = seconds => {
 
 export const geocode = (latitude, longitude) => {
   return async dispatch => {
-    dispatch(showSimpleLoadingModal(true));
+    //dispatch(showSimpleLoadingModal(true));
 
     await Geocoder.from(latitude, longitude)
       .then(json => {
@@ -224,7 +224,7 @@ export const geocode = (latitude, longitude) => {
         }
       });
 
-    dispatch(showSimpleLoadingModal(false));
+    //dispatch(showSimpleLoadingModal(false));
   };
 };
 
