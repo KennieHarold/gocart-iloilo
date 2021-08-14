@@ -45,6 +45,14 @@ const tabItems = [
     iconInactive: 'search-outline',
   },
   {
+    key: 'tab-item-chat',
+    name: 'Chat',
+    label: 'Chat Us',
+    screen: BrowseStackScreen,
+    iconActive: 'chatbubble-ellipses',
+    iconInactive: 'chatbubble-ellipses-outline',
+  },
+  {
     key: 'tab-item-orders',
     name: 'Orders',
     label: 'My Orders',
@@ -52,14 +60,14 @@ const tabItems = [
     iconActive: 'file-tray',
     iconInactive: 'file-tray-outline',
   },
-  {
-    key: 'tab-item-favorites',
-    name: 'Favorites',
-    label: 'Favorites',
-    screen: FavoritesStackScreen,
-    iconActive: 'star',
-    iconInactive: 'star-outline',
-  },
+  // {
+  //   key: 'tab-item-favorites',
+  //   name: 'Favorites',
+  //   label: 'Favorites',
+  //   screen: FavoritesStackScreen,
+  //   iconActive: 'star',
+  //   iconInactive: 'star-outline',
+  // },
   {
     key: 'tab-item-profile',
     name: 'Profile',

@@ -15,12 +15,15 @@ import {
   CLEAR_CANCELLED_ORDERS,
   CLEAR_DELIVERED_ORDERS,
   SELECT_ORDER,
+  SELECT_ORDER_ITEMS,
+  CLEAR_ORDER_ITEMS,
   CLEAR_ORDER,
   ORDER_RESET_STATE,
 } from '../actions/types';
 
 const initialState = {
   selectedOrder: {},
+  selectedOrderItems: [],
 
   //  Orders list by status
   processingOrders: [],
@@ -194,6 +197,18 @@ const OrderReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedOrder: action.order,
+      };
+
+    case SELECT_ORDER_ITEMS:
+      return {
+        ...state,
+        selectedOrderItems: action.orderItems,
+      };
+
+    case CLEAR_ORDER_ITEMS:
+      return {
+        ...state,
+        selectedOrderItems: [],
       };
 
     case CLEAR_ORDER:

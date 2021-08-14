@@ -346,7 +346,13 @@ export const checkout = (
     const transactionId = uuidv4();
     const userId = auth().currentUser.uid;
 
-    const items = selectedStoreProducts.products.map(item => item.productId);
+    const items = selectedStoreProducts.products.map(item => {
+      return {
+        productId: item.productId,
+        quantity: item.quantity,
+      };
+    });
+
     const cart = selectedStoreProducts.products.map(item => item.id);
 
     const orderData = {

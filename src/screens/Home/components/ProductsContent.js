@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Text} from 'native-base';
+import {Icon, Text} from 'native-base';
 import {ProductCard} from '../../../components/UIComponents';
-import {Colors, Layout} from '../../../styles';
+import {Colors, Fonts, Layout} from '../../../styles';
 import {StoreAction} from '../../../actions';
 import styles from './styles';
 
@@ -38,7 +38,12 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
               )
             }
             activeOpacity={0.6}>
-            <Text style={styles.seeMore}>See more</Text>
+            {/* <Text style={styles.seeMore}>See more</Text> */}
+            <Icon
+              type="AntDesign"
+              name="right"
+              style={{fontSize: Fonts.size.verySmall}}
+            />
           </TouchableOpacity>
         </View>
       </View>

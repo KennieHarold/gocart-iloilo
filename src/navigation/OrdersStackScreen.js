@@ -1,7 +1,11 @@
 import React from 'react';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import {createStackNavigator} from '@react-navigation/stack';
-import {OrdersScreen, OrderDetailsScreen} from '../screens/Orders';
+import {
+  OrdersScreen,
+  OrderDetailsScreen,
+  OrderItemsScreen,
+} from '../screens/Orders';
 
 const screenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -18,6 +22,7 @@ const OrdersStackScreen = () => {
       screenOptions={screenOptions}>
       <OrdersStack.Screen name="Orders" component={OrdersScreen} />
       <OrdersStack.Screen name="OrderDetails" component={OrderDetailsScreen} />
+      <OrdersStack.Screen name="OrderItems" component={OrderItemsScreen} />
     </OrdersStack.Navigator>
   );
 };

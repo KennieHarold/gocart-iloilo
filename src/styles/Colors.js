@@ -1,6 +1,6 @@
 export const primary = '#9ACC66';
-export const secondPrimary = '#06962c';
-export const lightPrimary = '#b3ffc6';
+export const secondPrimary = '#06962C';
+export const lightPrimary = '#DAF5E1';
 export const secondary = '#37C5F6';
 export const error = '#EC4134';
 export const readableText = 'rgba(0, 0, 0, 0.7)';

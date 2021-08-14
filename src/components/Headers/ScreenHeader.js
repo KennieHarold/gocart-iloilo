@@ -12,6 +12,8 @@ const ScreenHeader = ({title, rightKey}) => {
         backgroundColor: 'white',
         alignItems: 'center',
         elevation: 0,
+        borderBottomWidth: 0.5,
+        borderBottomColor: 'lightgray',
       }}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
       <View style={{flex: 2}}>

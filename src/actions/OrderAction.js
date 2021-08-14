@@ -14,6 +14,8 @@ import {
   CHANGE_MORE_CANCELLED_ORDERS_LOADING,
   CHANGE_MORE_DELIVERED_ORDERS_LOADING,
   SELECT_ORDER,
+  SELECT_ORDER_ITEMS,
+  CLEAR_ORDER_ITEMS,
   CLEAR_ORDER,
   ORDER_RESET_STATE,
   CLEAR_PROCESSING_ORDERS,
@@ -132,6 +134,19 @@ export const selectOrder = order => {
   return {
     type: SELECT_ORDER,
     order,
+  };
+};
+
+export const selectOrderItems = orderItems => {
+  return {
+    type: SELECT_ORDER_ITEMS,
+    orderItems,
+  };
+};
+
+export const clearOrderItems = () => {
+  return {
+    type: CLEAR_ORDER_ITEMS,
   };
 };
 
@@ -363,5 +378,12 @@ export const cancelOrder = order => {
       });
 
     dispatch(showSimpleLoadingModal(false));
+  };
+};
+
+export const navigateOrderItems = orderItems => {
+  return dispatch => {
+    dispatch(selectOrderItems(orderItems));
+    RootNavigation.navigate('OrderItems');
   };
 };

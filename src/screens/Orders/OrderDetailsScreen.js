@@ -51,9 +51,12 @@ class OrderDetailsScreen extends React.Component {
     const {selectedOrder} = this.props;
 
     let items = [];
-    for (const itemId of selectedOrder.items) {
-      const product = await productCollection.doc(itemId).get();
-      items.push(product.data());
+    for (const item of selectedOrder.items) {
+      const product = await productCollection.doc(item.productId).get();
+      items.push({
+        product: product.data(),
+        quantity: item.quantity,
+      });
     }
 
     this.setState({items});
@@ -99,7 +102,7 @@ class OrderDetailsScreen extends React.Component {
   };
 
   render() {
-    const {selectedOrder, cancelOrder} = this.props;
+    const {selectedOrder, cancelOrder, navigateOrderItems} = this.props;
 
     return (
       <>
@@ -152,13 +155,30 @@ class OrderDetailsScreen extends React.Component {
                   </View>
                 </View>
                 <View
-                  style={{...styles.orderDetailsSection, borderBottomWidth: 0}}>
-                  <Icon
-                    type="SimpleLineIcons"
-                    name="handbag"
-                    style={styles.orderDetailsIcon}
-                  />
-                  <Text style={styles.orderDetailsLabel}>Items</Text>
+                  style={{
+                    ...styles.orderDetailsSection,
+                    borderBottomWidth: 0,
+                    justifyContent: 'space-between',
+                  }}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon
+                      type="SimpleLineIcons"
+                      name="handbag"
+                      style={styles.orderDetailsIcon}
+                    />
+                    <Text style={styles.orderDetailsLabel}>Items</Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => navigateOrderItems(this.state.items)}
+                    activeOpacity={0.6}>
+                    <Text
+                      style={{
+                        fontSize: Fonts.size.mini,
+                        color: Colors.secondary,
+                      }}>
+                      More details
+                    </Text>
+                  </TouchableOpacity>
                 </View>
                 <FlatList
                   horizontal
@@ -169,11 +189,11 @@ class OrderDetailsScreen extends React.Component {
                   }}
                   scrollEnabled
                   data={this.state.items}
-                  keyExtractor={item => `order-item-${item.id}`}
+                  keyExtractor={item => `order-item-${item.product.id}`}
                   renderItem={({item}) => (
                     <FastImage
                       resizeMode={FastImage.resizeMode.contain}
-                      source={{uri: item.photoUri}}
+                      source={{uri: item.product.photoUri}}
                       style={styles.orderDetailsProductImg}
                     />
                   )}
@@ -269,7 +289,7 @@ class OrderDetailsScreen extends React.Component {
   }
 }
 
-const {clearOrder, cancelOrder} = OrderAction;
+const {clearOrder, cancelOrder, navigateOrderItems} = OrderAction;
 
 const mapStateToProps = state => {
   const {selectedOrder} = state.order;
@@ -278,6 +298,8 @@ const mapStateToProps = state => {
   return {selectedOrder, availableStores};
 };
 
-export default connect(mapStateToProps, {clearOrder, cancelOrder})(
-  OrderDetailsScreen,
-);
+export default connect(mapStateToProps, {
+  clearOrder,
+  cancelOrder,
+  navigateOrderItems,
+})(OrderDetailsScreen);

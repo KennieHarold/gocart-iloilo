@@ -4,9 +4,9 @@ import {Layout, Colors, Fonts} from '../../styles';
 
 const styles = StyleSheet.create({
   storeScreenCover: {
-    marginTop: 1,
+    marginTop: 5,
     width: '100%',
-    height: Dimensions.get('screen').height / 6,
+    height: Dimensions.get('screen').height / 8,
   },
   storeTabLabel: {
     color: Colors.primary,

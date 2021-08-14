@@ -104,6 +104,8 @@ export const CLEAR_PROCESSING_ORDERS = 'clear_processing_orders';
 export const CLEAR_CANCELLED_ORDERS = 'clear_cancelled_orders';
 export const CLEAR_DELIVERED_ORDERS = 'clear_delivered_orders';
 export const SELECT_ORDER = 'select_order';
+export const SELECT_ORDER_ITEMS = 'select_order_items';
+export const CLEAR_ORDER_ITEMS = 'clear_order_items';
 export const CLEAR_ORDER = 'clear_order';
 export const ORDER_RESET_STATE = 'order_reset_state';
 
