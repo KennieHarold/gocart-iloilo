@@ -51,10 +51,11 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
         keyExtractor={item => `store-product-${item.id}`}
         contentContainerStyle={{
           paddingHorizontal: 15,
+          backgroundColor: Colors.lightBackground,
         }}
         initialNumToRender={3}
         renderItem={({item}) => (
-          <View style={{marginHorizontal: 5}}>
+          <View style={{marginHorizontal: 5, paddingVertical: 15}}>
             <ProductCard product={item} />
           </View>
         )}

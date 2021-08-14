@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   productCardPriceLabel: {
     fontSize: Fonts.size.mini,
     color: Colors.price,
-    fontWeight: '700',
+    //fontWeight: '700',
     width: '100%',
   },
   productCardFavIcon: {

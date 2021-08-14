@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   qtyTicksIcon: {
     fontSize: Fonts.size.mini,
     color: 'white',
-    backgroundColor: '#FF7C78',
+    backgroundColor: Colors.secondPrimary,
     padding: RFValue(3),
     borderRadius: RFValue(2),
   },

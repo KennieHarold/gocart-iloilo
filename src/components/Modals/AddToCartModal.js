@@ -32,6 +32,7 @@ const AddToCartModal = () => {
 
   return (
     <BottomModalContainer
+      height={300}
       isVisible={isPressedProduct}
       onClose={() => dispatch(clearPressedProduct())}>
       <View style={{width: '100%', flex: 1, marginTop: RFValue(10)}}>

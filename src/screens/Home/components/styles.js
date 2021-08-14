@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width / 5,
   },
   categoryItemCircle: {
-    backgroundColor: '#fae4e3',
+    backgroundColor: Colors.lightPrimary,
     height: RFValue(60),
     width: RFValue(60),
     borderRadius: RFValue(30),
