@@ -54,7 +54,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
         }}
         initialNumToRender={3}
         renderItem={({item}) => (
-          <View style={{marginHorizontal: 10}}>
+          <View style={{marginHorizontal: 5}}>
             <ProductCard product={item} />
           </View>
         )}

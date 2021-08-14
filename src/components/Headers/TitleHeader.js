@@ -13,7 +13,7 @@ const TitleHeader = ({title, rightKey}) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
-        height: RFValue(89),
+        height: RFValue(82),
       }}>
       <Text style={{fontSize: Fonts.size.small, fontWeight: '700'}}>
         {title}

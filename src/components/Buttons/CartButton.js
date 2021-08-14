@@ -18,12 +18,12 @@ const CartButton = () => {
       activeOpacity={0.9}
       style={styles.cartButtonContainer}>
       {isLoading ? (
-        <ActivityIndicator color="white" />
+        <ActivityIndicator color="white" size="small" />
       ) : (
         <>
           <Icon
-            type="Ionicons"
-            name="cart-outline"
+            type="SimpleLineIcons"
+            name="handbag"
             style={styles.cartButtonIcon}
           />
           {numberOfItems !== 0 ? (

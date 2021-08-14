@@ -72,8 +72,8 @@ class SingleCategoryProductsScreen extends React.PureComponent {
               justifyContent: 'space-between',
             }}
             contentContainerStyle={{
-              paddingHorizontal: RFValue(Layout.defaultPaddingNum),
-              paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
+              paddingHorizontal: Layout.defaultPaddingNum,
+              paddingBottom: Layout.defaultPaddingNum * 2,
             }}
             initialNumToRender={INITIAL_NUM_TO_RENDER}
             onEndReachedThreshold={0.5}
