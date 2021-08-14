@@ -15,7 +15,8 @@ const {addressChange} = SharedAction;
 const MapHeader = ({cb}) => {
   const dispatch = useDispatch();
 
-  const {container, textInputContainer, listView} = autoCompleteStyles;
+  const {container, textInputContainer, textInput, listView} =
+    autoCompleteStyles;
 
   return (
     <View
@@ -45,10 +46,11 @@ const MapHeader = ({cb}) => {
           textInputContainer,
           container,
           listView,
+          textInput,
         }}
         fetchDetails
         enablePoweredByContainer={false}
-        placeholder="Search Location"
+        placeholder="Find Location"
         onPress={(data, details = null) => {
           const address = {
             latitude: details.geometry.location.lat,
@@ -76,6 +78,9 @@ const autoCompleteStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     height: 45,
+  },
+  textInput: {
+    color: Colors.readableText,
   },
   container: {
     borderRadius: 10,

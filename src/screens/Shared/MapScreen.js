@@ -21,7 +21,12 @@ class MapScreen extends React.PureComponent {
   onRegionChange = region => {
     if (this.state.isMapDragEnabled) {
       const {geocode} = this.props;
-      geocode(region.latitude, region.longitude);
+      geocode(
+        region.latitude,
+        region.longitude,
+        region.latitudeDelta,
+        region.longitudeDelta,
+      );
     }
   };
 
@@ -37,8 +42,8 @@ class MapScreen extends React.PureComponent {
           region={{
             latitude: address.latitude,
             longitude: address.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: address.latitudeDelta,
+            longitudeDelta: address.longitudeDelta,
           }}
           showsCompass={false}
           style={styles.mapView}

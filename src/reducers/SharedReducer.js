@@ -33,6 +33,8 @@ const initialState = {
     ...ADDRESS,
     latitude: 10.72402089984486,
     longitude: 122.55733011290431,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
     formattedAddress: '',
   },
   mapNextAction: () => {},

@@ -9,7 +9,7 @@ import {
 import {Container, Icon, Card, CardItem, Body, Content} from 'native-base';
 import {connect} from 'react-redux';
 import * as RootNavigation from '../../navigation/RootNavigation';
-import {Fonts, Layout} from '../../styles';
+import {Fonts} from '../../styles';
 import {PrimaryBigButton} from '../../components/Buttons';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import styles from './styles';

@@ -413,12 +413,15 @@ export const changeDeliveryAddressFromShared = () => {
       dispatch(
         changeCheckoutDetails({
           deliveryAddress: {
-            ...address,
+            latitude: address.latitude,
+            longitude: address.longitude,
+            formattedAddress: address.formattedAddress,
+            detailedAddress: address.detailedAddress,
+            noteToRider: address.noteToRider,
           },
         }),
       );
       dispatch(addressResetState());
-
       RootNavigation.navigate('Checkout');
     } else {
       errorHandler(dispatch, 'shared/missing-address');

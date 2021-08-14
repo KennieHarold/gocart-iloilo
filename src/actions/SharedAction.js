@@ -110,12 +110,20 @@ export const noteToRiderChange = text => {
   };
 };
 
-export const addressChange = ({latitude, longitude, formattedAddress}) => {
+export const addressChange = ({
+  latitude,
+  longitude,
+  latitudeDelta,
+  longitudeDelta,
+  formattedAddress,
+}) => {
   const payload = {
     isAddressSet: true,
     address: {
       latitude,
       longitude,
+      latitudeDelta,
+      longitudeDelta,
       formattedAddress,
     },
   };
@@ -195,7 +203,7 @@ export const changeResendSeconds = seconds => {
 
 /*********************** Public Methods *********************************/
 
-export const geocode = (latitude, longitude) => {
+export const geocode = (latitude, longitude, latitudeDelta, longitudeDelta) => {
   return async dispatch => {
     //dispatch(showSimpleLoadingModal(true));
 
@@ -206,6 +214,8 @@ export const geocode = (latitude, longitude) => {
         const address = {
           latitude,
           longitude,
+          latitudeDelta,
+          longitudeDelta,
           formattedAddress: addressObj,
         };
 
@@ -246,6 +256,8 @@ export const getCurrentLocation = () => {
                   const address = {
                     latitude,
                     longitude,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
                     formattedAddress: addressObj,
                   };
 
