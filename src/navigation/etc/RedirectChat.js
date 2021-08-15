@@ -1,10 +1,14 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {APP_MESSENGER_ID} from '@env';
-import {Linking, SafeAreaView} from 'react-native';
+import {Linking, SafeAreaView, View} from 'react-native';
 import {PrimaryBigButton} from '../../components/Buttons';
-import {Layout} from '../../styles';
+import {Text} from 'native-base';
 import {errorHandler} from '../../helpers';
+import banner from '../../assets/chat-banner.jpg';
+import FastImage from 'react-native-fast-image';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {Colors, Fonts} from '../../styles';
 
 const RedirectChat = () => {
   const dispatch = useDispatch();
@@ -33,13 +37,37 @@ const RedirectChat = () => {
     <SafeAreaView
       style={{
         backgroundColor: 'white',
-        ...Layout.flexCenterContainerWithPadding,
+        flex: 1,
       }}>
-      <PrimaryBigButton
-        action={() => redirectMessenger()}
-        text="Chat us on messenger"
-        customContainerStyles={{backgroundColor: '#0098F6'}}
-      />
+      <View style={{flex: 1}}>
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
+          source={banner}
+          style={{width: '100%', height: '100%'}}
+        />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          paddingBottom: RFValue(75),
+          paddingHorizontal: RFValue(25),
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: Fonts.size.verySmall,
+            color: Colors.readableText,
+          }}>
+          Hello! Welcome to GoCart Iloilo customer support. Send your questions
+          and inquiries via FB messenger and we will be ready to assist you.
+        </Text>
+        <PrimaryBigButton
+          action={() => redirectMessenger()}
+          text="Chat us on messenger"
+          customContainerStyles={{backgroundColor: '#0098F6'}}
+        />
+      </View>
     </SafeAreaView>
   );
 };
