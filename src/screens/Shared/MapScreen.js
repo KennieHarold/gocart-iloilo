@@ -45,6 +45,10 @@ class MapScreen extends React.PureComponent {
             latitudeDelta: address.latitudeDelta,
             longitudeDelta: address.longitudeDelta,
           }}
+          rotateEnabled={false}
+          pitchEnabled={false}
+          minZoomLevel={2}
+          maxZoomLevel={20}
           showsCompass={false}
           style={styles.mapView}
         />
@@ -70,7 +74,7 @@ class MapScreen extends React.PureComponent {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '85%',
-                    minHeight: RFValue(50),
+                    minHeight: RFValue(60),
                   }}>
                   <View style={{flex: 1}}>
                     <Icon

@@ -35,11 +35,7 @@ const MapHeader = ({cb}) => {
           zIndex: 99,
           margin: 10,
         }}>
-        <Icon
-          type="AntDesign"
-          name="arrowleft"
-          style={{color: Colors.primary}}
-        />
+        <Icon type="AntDesign" name="arrowleft" />
       </TouchableOpacity>
       <GooglePlacesAutocomplete
         styles={{
