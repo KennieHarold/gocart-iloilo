@@ -150,7 +150,7 @@ export const addProductToCart = ({product, qty}, selectedStore) => {
                   Snackbar.show({
                     text: 'Successfully added to cart',
                     duration: Snackbar.LENGTH_LONG,
-                    backgroundColor: Colors.success,
+                    //backgroundColor: Colors.success,
                   });
                 });
             } else {
@@ -175,7 +175,7 @@ export const addProductToCart = ({product, qty}, selectedStore) => {
                 Snackbar.show({
                   text: 'Successfully added to cart',
                   duration: Snackbar.LENGTH_LONG,
-                  backgroundColor: Colors.success,
+                  //backgroundColor: Colors.success,
                 });
               });
           }

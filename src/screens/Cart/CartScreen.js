@@ -75,7 +75,17 @@ class CartScreen extends React.Component {
       this.props;
 
     if (categorizedCart[selectedStoreId] !== undefined) {
-      navigateCheckout(categorizedCart[selectedStoreId], subtotal);
+      if (
+        subtotal > this.state.minPurchase &&
+        subtotal < this.state.maxPurchase
+      ) {
+        navigateCheckout(categorizedCart[selectedStoreId], subtotal);
+      } else {
+        Snackbar.show({
+          text: 'Please check your purchase limit',
+          duration: Snackbar.LENGTH_LONG,
+        });
+      }
     } else {
       Snackbar.show({
         text: 'Please choose a store',
@@ -103,6 +113,14 @@ class CartScreen extends React.Component {
     return message;
   };
 
+  getMaxPurchaseMessage = () => {
+    const message = `You've reached maximum purchase of ${String.fromCharCode(
+      0x20b1,
+    )}${toDecimal(this.state.maxPurchase)}`;
+
+    return message;
+  };
+
   render() {
     const {categorizedCart, cartLength, subtotal} = this.props;
 
@@ -124,7 +142,7 @@ class CartScreen extends React.Component {
                 {subtotal < this.state.minPurchase ? (
                   <WarningBanner message={this.getMinPurchaseMessage()} />
                 ) : subtotal > this.state.maxPurchase ? (
-                  <WarningBanner message="You've reached maximum purchase" />
+                  <WarningBanner message={this.getMaxPurchaseMessage()} />
                 ) : null}
 
                 <View style={{width: '100%'}}>
