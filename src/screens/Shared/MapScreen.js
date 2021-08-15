@@ -87,7 +87,7 @@ class MapScreen extends React.PureComponent {
                     <Text style={styles.addressText} numberOfLines={3}>
                       {address.formattedAddress !== ''
                         ? address.formattedAddress
-                        : 'Not set'}
+                        : 'Address not set'}
                     </Text>
                   </View>
                 </View>
