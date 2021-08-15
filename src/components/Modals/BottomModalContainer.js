@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import {Icon} from 'native-base';
 import {Colors, Fonts} from '../../styles';
 import styles from './styles';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const BottomModalContainer = ({children, isVisible, onClose, height}) => {
   return (
@@ -21,7 +22,10 @@ const BottomModalContainer = ({children, isVisible, onClose, height}) => {
           //backgroundColor: 'rgba(0, 0, 0, 0.3)',
         }}>
         <View
-          style={[styles.bottomContainer, height ? {minHeight: height} : null]}>
+          style={[
+            styles.bottomContainer,
+            height ? {minHeight: RFValue(height)} : null,
+          ]}>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={onClose}

@@ -51,7 +51,10 @@ const AddToCartModal = () => {
               {pressedProduct.product.name}
             </Text>
             <Text numberOfLines={1} style={styles.addCartModalPriceLabel}>
-              &#8369;{toDecimal(pressedProduct.product.price)}
+              &#8369;
+              {pressedProduct.product.price
+                ? toDecimal(pressedProduct.product.price)
+                : 0.0}
             </Text>
           </View>
         </View>
