@@ -14,6 +14,7 @@ import {
   OrderConfirmationScreen,
   ScheduleSelectorScreen,
 } from '../screens/Cart';
+import {FavoritesScreen} from '../screens/Favorites';
 
 const screenOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -52,6 +53,7 @@ const AppStackScreen = () => {
         name="OrderConfirmation"
         component={OrderConfirmationScreen}
       />
+      <AppStack.Screen name="Favorites" component={FavoritesScreen} />
     </AppStack.Navigator>
   ) : (
     //  Show this navigation if user don't have user profile

@@ -43,6 +43,14 @@ class ProfileScreen extends React.Component {
         isDivider: false,
       },
       {
+        id: 'profile-my-favs',
+        title: 'My Favorites',
+        action: () => navigation.navigate('Favorites'),
+        iconType: 'SimpleLineIcons',
+        iconName: 'star',
+        isDivider: false,
+      },
+      {
         id: 'profile-address-book',
         title: 'Address Book',
         action: () => {},

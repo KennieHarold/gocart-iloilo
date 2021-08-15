@@ -19,6 +19,8 @@ import {
 import {LoadingScreen} from '../components/UIComponents';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {errorHandler} from '../helpers';
+import RedirectChat from './etc/RedirectChat';
+
 const {getCurrentUserData} = CurrentUserAction;
 const {getAvailableStoresData} = StoreAction;
 const {getUserCartProducts} = CartAction;
@@ -48,7 +50,7 @@ const tabItems = [
     key: 'tab-item-chat',
     name: 'Chat',
     label: 'Chat Us',
-    screen: BrowseStackScreen,
+    screen: RedirectChat,
     iconActive: 'chatbubble-ellipses',
     iconInactive: 'chatbubble-ellipses-outline',
   },

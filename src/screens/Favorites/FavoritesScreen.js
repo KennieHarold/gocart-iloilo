@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, FlatList, View} from 'react-native';
 import {Text} from 'native-base';
 import {connect} from 'react-redux';
-import {TitleHeader} from '../../components/Headers';
+import {ScreenHeader, TitleHeader} from '../../components/Headers';
 import {CartButton} from '../../components/Buttons';
 import {FavoriteItem} from './components';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -15,7 +15,7 @@ class FavoritesScreen extends React.PureComponent {
 
     return (
       <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
-        <TitleHeader title="Favorites" rightKey={<CartButton />} />
+        <ScreenHeader title="Favorites" rightKey={<CartButton />} />
         {favorites.length > 0 ? (
           <FlatList
             showsVerticalScrollIndicator={false}

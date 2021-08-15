@@ -222,6 +222,16 @@ const errorHandler = (dispatch, errorCode) => {
       });
       return;
 
+    case 'gen/app-url-not-supported':
+      dispatch(
+        showAlert({
+          isDisplayed: true,
+          text: 'App URL not supported',
+          status: 'error',
+        }),
+      );
+      return;
+
     case 'gen/default':
       dispatch(
         showAlert({
