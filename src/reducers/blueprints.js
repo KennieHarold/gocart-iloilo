@@ -25,7 +25,7 @@ export const ADDRESS = {
   noteToRider: '',
 };
 
-export const DELIVERY_SCHEDULES = ['sameDay', 'nextDay'];
+//export const DELIVERY_SCHEDULES = ['sameDay', 'nextDay'];
 
 export const PAYMENT_METHOD = ['cashOnDelivery'];
 

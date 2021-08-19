@@ -1,44 +1,44 @@
-import {
-  todayHourList,
-  nextDayHourList,
-  otherDayHourList,
-} from './utils/rawHourList';
+import {todayHourList, nextDayHourList, otherDayHourList} from './rawHourList';
+import moment from 'moment';
 
 const getButtonString = type => {
+  let startHour = undefined;
+  let endHour = undefined;
+
   switch (type) {
     case 'todayMorning':
-      const startHour = moment(todayHourList[0]).format('LT');
-      const endHour = moment(todayHourList[1]).format('LT');
+      startHour = moment(todayHourList[0]).format('LT');
+      endHour = moment(todayHourList[1]).format('LT');
 
       return `${startHour} - ${endHour}`;
 
     case 'todayAfternoon':
-      const startHour = moment(todayHourList[2]).format('LT');
-      const endHour = moment(todayHourList[3]).format('LT');
+      startHour = moment(todayHourList[2]).format('LT');
+      endHour = moment(todayHourList[3]).format('LT');
 
       return `${startHour} - ${endHour}`;
 
     case 'nextDayMorning':
-      const startHour = moment(nextDayHourList[0]).format('LT');
-      const endHour = moment(nextDayHourList[2]).format('LT');
+      startHour = moment(nextDayHourList[0]).format('LT');
+      endHour = moment(nextDayHourList[2]).format('LT');
 
       return `${startHour} - ${endHour}`;
 
     case 'nextDayAfternoon':
-      const startHour = moment(nextDayHourList[2]).format('LT');
-      const endHour = moment(nextDayHourList[3]).format('LT');
+      startHour = moment(nextDayHourList[2]).format('LT');
+      endHour = moment(nextDayHourList[3]).format('LT');
 
       return `${startHour} - ${endHour}`;
 
     case 'otherDayMorning':
-      const startHour = moment(otherDayHourList[0]).format('LT');
-      const endHour = moment(otherDayHourList[1]).format('LT');
+      startHour = moment(otherDayHourList[0]).format('LT');
+      endHour = moment(otherDayHourList[1]).format('LT');
 
       return `${startHour} - ${endHour}`;
 
     case 'otherDayAfternoon':
-      const startHour = moment(otherDayHourList[2]).format('LT');
-      const endHour = moment(otherDayHourList[3]).format('LT');
+      startHour = moment(otherDayHourList[2]).format('LT');
+      endHour = moment(otherDayHourList[3]).format('LT');
 
       return `${startHour} - ${endHour}`;
 

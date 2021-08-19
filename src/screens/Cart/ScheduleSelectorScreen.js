@@ -17,6 +17,19 @@ class ScheduleSelectorScreen extends React.Component {
     changeCheckoutDetails({deliverySchedule});
   };
 
+  checkIfHourPassWorkingHours = () => {
+    const currentHour = new Date();
+
+    const d = new Date();
+    const threshold = d.setHours(18, 0);
+
+    if (currentHour > threshold) {
+      return true;
+    }
+
+    return false;
+  };
+
   render() {
     const {
       checkoutDetails: {deliverySchedule},
@@ -67,15 +80,26 @@ class ScheduleSelectorScreen extends React.Component {
                   text={getButtonString('todayAfternoon')}
                 />
               </View>
-
               <View style={{marginBottom: RFValue(25)}}>
                 <Text style={styles.deliveryScheduleTimeTitle}>
                   {moment().add(1, 'days').format('MMMM DD, YYYY - dddd')}
                 </Text>
-                <SecondaryBigButton
-                  customContainerStyles={{marginBottom: RFValue(15)}}
-                  text={getButtonString('nextDayMorning')}
-                />
+                {this.checkIfHourPassWorkingHours() ? (
+                  <SecondaryBigButton
+                    disabled
+                    customTextStyles={{color: 'gray'}}
+                    customContainerStyles={{
+                      marginBottom: RFValue(15),
+                      borderColor: 'gray',
+                    }}
+                    text={getButtonString('nextDayMorning')}
+                  />
+                ) : (
+                  <SecondaryBigButton
+                    customContainerStyles={{marginBottom: RFValue(15)}}
+                    text={getButtonString('nextDayMorning')}
+                  />
+                )}
                 <SecondaryBigButton
                   text={getButtonString('nextDayAfternoon')}
                 />

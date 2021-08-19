@@ -12,7 +12,7 @@ import {
   CLEAR_STORE_PRODUCTS,
   CHANGE_CHECKOUT_DETAILS,
 } from '../actions/types';
-import {ADDRESS, DELIVERY_SCHEDULES, PAYMENT_METHOD} from './blueprints';
+import {ADDRESS, PAYMENT_METHOD} from './blueprints';
 
 const initialState = {
   //  Cart
@@ -29,7 +29,7 @@ const initialState = {
   //  Checkout
   checkoutDetails: {
     subTotal: 0,
-    deliverySchedule: DELIVERY_SCHEDULES[0],
+    deliverySchedule: [undefined, undefined],
     paymentMethod: PAYMENT_METHOD[0],
     deliveryAddress: {
       ...ADDRESS,
