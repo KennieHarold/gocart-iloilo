@@ -1,18 +1,15 @@
 import React from 'react';
+import {View} from 'react-native';
 import {ScreenHeader} from '../../components/Headers';
-import {
-  Container,
-  Content,
-  List,
-  ListItem,
-  Left,
-  Text,
-  Radio,
-} from 'native-base';
+import {Container, Content, Text} from 'native-base';
 import {connect} from 'react-redux';
-import {Colors, Fonts} from '../../styles';
-import {RFValue} from 'react-native-responsive-fontsize';
+import {Colors, Fonts, Layout} from '../../styles';
 import {CartAction} from '../../actions';
+import moment from 'moment';
+import {SecondaryBigButton} from '../../components/Buttons';
+import styles from './styles';
+import getButtonString from './utils/getButtonString';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 class ScheduleSelectorScreen extends React.Component {
   handleChange = deliverySchedule => {
@@ -29,36 +26,74 @@ class ScheduleSelectorScreen extends React.Component {
       <Container>
         <ScreenHeader title="Delivery Schedule" />
         <Content>
-          <List>
-            <ListItem noIndent onPress={() => this.handleChange('sameDay')}>
-              <Left>
-                <Radio
-                  selected={deliverySchedule === 'sameDay'}
-                  onPress={() => this.handleChange('sameDay')}
-                  color={'rgb(0, 0, 0)'}
-                  selectedColor={Colors.primary}
-                  style={{marginRight: RFValue(15)}}
-                />
-                <Text style={{fontSize: Fonts.size.verySmall}}>
-                  Same Day Delivery
+          <View
+            style={{
+              width: '100%',
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              backgroundColor: Colors.lightError,
+            }}>
+            <Text style={{fontSize: Fonts.size.min, color: Colors.error}}>
+              NOTICE: Certain products may be subject to quantity limits, in
+              compliance with the Department of Trade and Industry Memorandum
+              Circular on Anti-Hoarding and Anti-Panic Buying and ordinances
+              imposed by the local government units.
+            </Text>
+          </View>
+          <View style={{padding: Layout.defaultPaddingNum}}>
+            <Text style={styles.deliveryScheduleInst}>
+              Please select your preferred delivery schedule
+            </Text>
+            <View style={{marginTop: RFValue(25)}}>
+              <View style={{marginBottom: RFValue(25)}}>
+                <Text style={styles.deliveryScheduleTimeTitle}>
+                  {moment().format('MMMM DD, YYYY - dddd')}
                 </Text>
-              </Left>
-            </ListItem>
-            <ListItem noIndent onPress={() => this.handleChange('nextDay')}>
-              <Left>
-                <Radio
-                  selected={deliverySchedule === 'nextDay'}
-                  onPress={() => this.handleChange('nextDay')}
-                  color={'rgb(0, 0, 0)'}
-                  selectedColor={Colors.primary}
-                  style={{marginRight: RFValue(15)}}
+                <SecondaryBigButton
+                  disabled
+                  customContainerStyles={{
+                    marginBottom: RFValue(15),
+                    borderColor: 'gray',
+                  }}
+                  customTextStyles={{color: 'gray'}}
+                  text={getButtonString('todayMorning')}
                 />
-                <Text style={{fontSize: Fonts.size.verySmall}}>
-                  Next Day Delivery
+                <SecondaryBigButton
+                  disabled
+                  customContainerStyles={{
+                    borderColor: 'gray',
+                  }}
+                  customTextStyles={{color: 'gray'}}
+                  text={getButtonString('todayAfternoon')}
+                />
+              </View>
+
+              <View style={{marginBottom: RFValue(25)}}>
+                <Text style={styles.deliveryScheduleTimeTitle}>
+                  {moment().add(1, 'days').format('MMMM DD, YYYY - dddd')}
                 </Text>
-              </Left>
-            </ListItem>
-          </List>
+                <SecondaryBigButton
+                  customContainerStyles={{marginBottom: RFValue(15)}}
+                  text={getButtonString('nextDayMorning')}
+                />
+                <SecondaryBigButton
+                  text={getButtonString('nextDayAfternoon')}
+                />
+              </View>
+              <View style={{marginBottom: RFValue(25)}}>
+                <Text style={styles.deliveryScheduleTimeTitle}>
+                  {moment().add(2, 'days').format('MMMM DD, YYYY - dddd')}
+                </Text>
+                <SecondaryBigButton
+                  customContainerStyles={{marginBottom: RFValue(15)}}
+                  text={getButtonString('otherDayMorning')}
+                />
+                <SecondaryBigButton
+                  text={getButtonString('otherDayAfternoon')}
+                />
+              </View>
+            </View>
+          </View>
         </Content>
       </Container>
     );

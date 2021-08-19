@@ -76,6 +76,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
+  deliveryScheduleInst: {
+    fontSize: Fonts.size.mini,
+    fontWeight: '700',
+  },
+  deliveryScheduleTimeTitle: {
+    fontSize: Fonts.size.mini,
+    fontWeight: '700',
+    marginBottom: 15,
+  },
 });
 
 export default styles;

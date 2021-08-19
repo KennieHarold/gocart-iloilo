@@ -64,7 +64,7 @@ const RedirectChat = () => {
         </Text>
         <PrimaryBigButton
           action={() => redirectMessenger()}
-          text="Chat us on messenger"
+          text="Chat with us"
           customContainerStyles={{backgroundColor: '#0098F6'}}
         />
       </View>
