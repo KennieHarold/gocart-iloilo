@@ -104,7 +104,8 @@ class EditProfileScreen extends React.Component {
         />
         <Content>
           <ScrollView>
-            <View style={{...Layout.flexCenterContainer}}>
+            <View
+              style={{...Layout.flexCenterContainer, marginTop: RFValue(25)}}>
               <View style={{marginBottom: 10}}>
                 <TouchableOpacity activeOpacity={0.8}>
                   <FastImage

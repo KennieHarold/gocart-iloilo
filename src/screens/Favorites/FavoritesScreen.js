@@ -30,7 +30,11 @@ class FavoritesScreen extends React.PureComponent {
             renderItem={({item}) => <FavoriteItem product={item} />}
           />
         ) : (
-          <View style={{...Layout.fullWidthCenterContainer}}>
+          <View
+            style={{
+              ...Layout.fullWidthCenterContainer,
+              marginTop: RFValue(25),
+            }}>
             <Text
               style={{color: Colors.readableText, fontSize: Fonts.size.mini}}>
               You have no favorites
