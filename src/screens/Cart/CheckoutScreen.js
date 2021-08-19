@@ -134,7 +134,7 @@ class CheckoutScreen extends React.PureComponent {
       {
         id: 'checkout-list-item-delivery-schedule',
         title: 'Delivery Schedule',
-        subtitle: parseDeliverySchedule(checkoutDetails.deliverySchedule),
+        subtitle: 'test schedule',
         iconType: 'AntDesign',
         iconName: 'clockcircleo',
         action: () => navigation.navigate('ScheduleSelector'),

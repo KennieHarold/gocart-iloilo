@@ -3,16 +3,18 @@ import {View} from 'react-native';
 import {ScreenHeader} from '../../components/Headers';
 import {Container, Content, Text} from 'native-base';
 import {connect} from 'react-redux';
-import {Colors, Fonts, Layout} from '../../styles';
+import {Colors, Layout} from '../../styles';
 import {CartAction} from '../../actions';
 import moment from 'moment';
 import {SecondaryBigButton} from '../../components/Buttons';
 import styles from './styles';
 import getButtonString from './utils/getButtonString';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {nextDayHourList, otherDayHourList} from './utils/rawHourList';
+import {HoardNoticeBanner} from './components';
 
-class ScheduleSelectorScreen extends React.Component {
-  handleChange = deliverySchedule => {
+class ScheduleSelectorScreen extends React.PureComponent {
+  handlePress = deliverySchedule => {
     const {changeCheckoutDetails} = this.props;
     changeCheckoutDetails({deliverySchedule});
   };
@@ -30,29 +32,31 @@ class ScheduleSelectorScreen extends React.Component {
     return false;
   };
 
-  render() {
+  checkSelected = hourList => {
+    console.log('Calledsjs');
     const {
       checkoutDetails: {deliverySchedule},
     } = this.props;
 
+    //  If one of them is undefined return false
+    if (
+      deliverySchedule[0] === undefined &&
+      deliverySchedule[1] === undefined
+    ) {
+      return false;
+    }
+
+    return (
+      hourList[0] === deliverySchedule[0] && hourList[1] === deliverySchedule[1]
+    );
+  };
+
+  render() {
     return (
       <Container>
         <ScreenHeader title="Delivery Schedule" />
         <Content>
-          <View
-            style={{
-              width: '100%',
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              backgroundColor: Colors.lightError,
-            }}>
-            <Text style={{fontSize: Fonts.size.min, color: Colors.error}}>
-              NOTICE: Certain products may be subject to quantity limits, in
-              compliance with the Department of Trade and Industry Memorandum
-              Circular on Anti-Hoarding and Anti-Panic Buying and ordinances
-              imposed by the local government units.
-            </Text>
-          </View>
+          <HoardNoticeBanner />
           <View style={{padding: Layout.defaultPaddingNum}}>
             <Text style={styles.deliveryScheduleInst}>
               Please select your preferred delivery schedule
@@ -96,11 +100,51 @@ class ScheduleSelectorScreen extends React.Component {
                   />
                 ) : (
                   <SecondaryBigButton
-                    customContainerStyles={{marginBottom: RFValue(15)}}
+                    action={() => {
+                      const hourList = [nextDayHourList[0], nextDayHourList[1]];
+                      this.handlePress(hourList);
+                    }}
+                    customContainerStyles={{
+                      marginBottom: RFValue(15),
+                      backgroundColor: this.checkSelected([
+                        nextDayHourList[0],
+                        nextDayHourList[1],
+                      ])
+                        ? Colors.primary
+                        : 'white',
+                    }}
+                    customTextStyles={{
+                      color: this.checkSelected([
+                        nextDayHourList[0],
+                        nextDayHourList[1],
+                      ])
+                        ? 'white'
+                        : Colors.primary,
+                    }}
                     text={getButtonString('nextDayMorning')}
                   />
                 )}
                 <SecondaryBigButton
+                  action={() => {
+                    const hourList = [nextDayHourList[2], nextDayHourList[3]];
+                    this.handlePress(hourList);
+                  }}
+                  customContainerStyles={{
+                    backgroundColor: this.checkSelected([
+                      nextDayHourList[2],
+                      nextDayHourList[3],
+                    ])
+                      ? Colors.primary
+                      : 'white',
+                  }}
+                  customTextStyles={{
+                    color: this.checkSelected([
+                      nextDayHourList[2],
+                      nextDayHourList[3],
+                    ])
+                      ? 'white'
+                      : Colors.primary,
+                  }}
                   text={getButtonString('nextDayAfternoon')}
                 />
               </View>
@@ -109,10 +153,50 @@ class ScheduleSelectorScreen extends React.Component {
                   {moment().add(2, 'days').format('MMMM DD, YYYY - dddd')}
                 </Text>
                 <SecondaryBigButton
-                  customContainerStyles={{marginBottom: RFValue(15)}}
+                  action={() => {
+                    const hourList = [otherDayHourList[0], otherDayHourList[1]];
+                    this.handlePress(hourList);
+                  }}
+                  customContainerStyles={{
+                    marginBottom: RFValue(15),
+                    backgroundColor: this.checkSelected([
+                      otherDayHourList[0],
+                      otherDayHourList[1],
+                    ])
+                      ? Colors.primary
+                      : 'white',
+                  }}
+                  customTextStyles={{
+                    color: this.checkSelected([
+                      otherDayHourList[0],
+                      otherDayHourList[1],
+                    ])
+                      ? 'white'
+                      : Colors.primary,
+                  }}
                   text={getButtonString('otherDayMorning')}
                 />
                 <SecondaryBigButton
+                  action={() => {
+                    const hourList = [otherDayHourList[2], otherDayHourList[3]];
+                    this.handlePress(hourList);
+                  }}
+                  customContainerStyles={{
+                    backgroundColor: this.checkSelected([
+                      otherDayHourList[2],
+                      otherDayHourList[3],
+                    ])
+                      ? Colors.primary
+                      : 'white',
+                  }}
+                  customTextStyles={{
+                    color: this.checkSelected([
+                      otherDayHourList[2],
+                      otherDayHourList[3],
+                    ])
+                      ? 'white'
+                      : Colors.primary,
+                  }}
                   text={getButtonString('otherDayAfternoon')}
                 />
               </View>
