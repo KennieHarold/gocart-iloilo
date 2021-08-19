@@ -11,7 +11,7 @@ import {ScreenHeader} from '../../components/Headers';
 import {OrderAction} from '../../actions';
 import {Colors, Fonts, Layout} from '../../styles';
 import FastImage from 'react-native-fast-image';
-import {toDecimal} from '../../helpers';
+import {parseDeliverySchedule, toDecimal} from '../../helpers';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styles from './styles';
 import {
@@ -95,7 +95,9 @@ class OrderDetailsScreen extends React.Component {
             <Text style={{fontSize: Fonts.size.min}}>Cancelled</Text>
           </Badge>
         ) : (
-          <Text style={styles.orderDetailsLabel}>Today</Text>
+          <Text style={styles.orderDetailsLabel}>
+            {parseDeliverySchedule(selectedOrder.deliverySchedule)}
+          </Text>
         )}
       </View>
     );

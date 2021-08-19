@@ -189,6 +189,13 @@ const errorHandler = (dispatch, errorCode) => {
       );
       return;
 
+    case 'cart/checkout-delivery-schedule-missing':
+      Snackbar.show({
+        text: 'Delivery schedule is missing',
+        duration: Snackbar.LENGTH_LONG,
+      });
+      return;
+
     /****************** Favorites Error *******************/
     case "favorites/can't-add":
       Snackbar.show({

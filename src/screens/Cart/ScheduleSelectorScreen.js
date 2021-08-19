@@ -33,7 +33,6 @@ class ScheduleSelectorScreen extends React.PureComponent {
   };
 
   checkSelected = hourList => {
-    console.log('Calledsjs');
     const {
       checkoutDetails: {deliverySchedule},
     } = this.props;
@@ -52,6 +51,7 @@ class ScheduleSelectorScreen extends React.PureComponent {
   };
 
   render() {
+    console.log('render');
     return (
       <Container>
         <ScreenHeader title="Delivery Schedule" />

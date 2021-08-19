@@ -337,77 +337,95 @@ export const checkout = (
   totalPayment,
 ) => {
   return async dispatch => {
-    const orderId = uuidv4();
+    try {
+      if (
+        checkoutDetails.deliverySchedule[0] === undefined &&
+        checkoutDetails.deliverySchedule[1] === undefined
+      ) {
+        throw new Error('delivery-schedule-missing');
+      }
 
-    const nanoid = customAlphabet('1234567890', 10);
-    const randomLetters = nanoid();
-    const reference = 'GCI-' + randomLetters;
+      const orderId = uuidv4();
 
-    const transactionId = uuidv4();
-    const userId = auth().currentUser.uid;
+      const nanoid = customAlphabet('1234567890', 8);
+      const randomLetters = nanoid();
+      const reference = 'GCI-' + randomLetters;
 
-    const items = selectedStoreProducts.products.map(item => {
-      return {
-        productId: item.productId,
-        quantity: item.quantity,
-      };
-    });
+      const transactionId = uuidv4();
+      const userId = auth().currentUser.uid;
 
-    const cart = selectedStoreProducts.products.map(item => item.id);
-
-    const orderData = {
-      ...ORDER,
-      id: orderId,
-      reference,
-      transactionId: transactionId,
-      userId,
-      storeId: selectedStoreProducts.storeId,
-      items,
-      deliverySchedule: checkoutDetails.deliverySchedule,
-      contact: {
-        ...checkoutDetails.contact,
-      },
-      deliveryAddress: {
-        ...ADDRESS,
-        ...checkoutDetails.deliveryAddress,
-      },
-    };
-
-    const transactionData = {
-      ...TRANSACTION,
-      id: transactionId,
-      paymentDetails: {
-        ...TRANSACTION.paymentDetails,
-        method: checkoutDetails.paymentMethod,
-        shoppingFee,
-        deliveryFee,
-        subTotal: checkoutDetails.subTotal,
-        totalPayment,
-      },
-    };
-
-    dispatch(showSimpleLoadingModal(true));
-
-    const orderRef = orderCollection.doc(orderId).set(orderData);
-
-    const transactionRef = transactionCollection
-      .doc(transactionId)
-      .set(transactionData);
-
-    //  Create an order and transaction documents and delete checkout items in the cart
-    await Promise.all([orderRef, transactionRef])
-      .then(() => {
-        cart.forEach(item => {
-          cartCollection.doc(item).delete();
-        });
-
-        RootNavigation.navigate('OrderConfirmation');
-      })
-      .catch(error => {
-        console.log(error);
+      const items = selectedStoreProducts.products.map(item => {
+        return {
+          productId: item.productId,
+          quantity: item.quantity,
+        };
       });
 
-    dispatch(showSimpleLoadingModal(false));
+      const cart = selectedStoreProducts.products.map(item => item.id);
+
+      const orderData = {
+        ...ORDER,
+        id: orderId,
+        dateCreated: new Date(),
+        reference,
+        transactionId: transactionId,
+        userId,
+        storeId: selectedStoreProducts.storeId,
+        items,
+        deliverySchedule: checkoutDetails.deliverySchedule,
+        contact: {
+          ...checkoutDetails.contact,
+        },
+        deliveryAddress: {
+          ...ADDRESS,
+          ...checkoutDetails.deliveryAddress,
+        },
+      };
+
+      const transactionData = {
+        ...TRANSACTION,
+        id: transactionId,
+        transactionDate: new Date(),
+        paymentDetails: {
+          ...TRANSACTION.paymentDetails,
+          method: checkoutDetails.paymentMethod,
+          shoppingFee,
+          deliveryFee,
+          subTotal: checkoutDetails.subTotal,
+          totalPayment,
+        },
+      };
+
+      dispatch(showSimpleLoadingModal(true));
+
+      const orderRef = orderCollection.doc(orderId).set(orderData);
+
+      const transactionRef = transactionCollection
+        .doc(transactionId)
+        .set(transactionData);
+
+      //  Create an order and transaction documents and delete checkout items in the cart
+      await Promise.all([orderRef, transactionRef]);
+
+      cart.forEach(item => cartCollection.doc(item).delete());
+
+      RootNavigation.navigate('OrderConfirmation');
+
+      dispatch(showSimpleLoadingModal(false));
+
+      //  End of try block
+    } catch (error) {
+      console.log(error);
+
+      //  Just to make sure that the loader is stopped after an error
+      dispatch(showSimpleLoadingModal(false));
+
+      if (error.message === 'delivery-schedule-missing') {
+        errorHandler(dispatch, 'cart/checkout-delivery-schedule-missing');
+      } else {
+        errorHandler(dispatch, 'gen/default');
+      }
+    }
   };
 };
 

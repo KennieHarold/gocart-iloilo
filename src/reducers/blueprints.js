@@ -58,6 +58,7 @@ export const ORDER = {
   deliveredAt: null,
   cancelledAt: null,
   riderAlias: '',
+  note: '',
   contact: {
     code: '+63',
     number: '',
