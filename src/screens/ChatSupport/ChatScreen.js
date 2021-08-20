@@ -1,15 +1,14 @@
 import React from 'react';
 import {APP_MESSENGER_ID} from '@env';
-import {Linking, SafeAreaView, View} from 'react-native';
+import {Linking, View} from 'react-native';
 import {PrimaryBigButton} from '../../components/Buttons';
-import {Text, Accordion, Icon} from 'native-base';
-import {Fonts} from '../../styles';
-
-const dataArray = [
-  {title: 'First Element', content: 'Lorem ipsum dolor sit amet'},
-  {title: 'Second Element', content: 'Lorem ipsum dolor sit amet'},
-  {title: 'Third Element', content: 'Lorem ipsum dolor sit amet'},
-];
+import {Text, Accordion, Icon, Container, Content} from 'native-base';
+import {Colors, Fonts} from '../../styles';
+import supportDataArray from './utils/supportDataArray';
+import FastImage from 'react-native-fast-image';
+import styles from './styles';
+import {RFValue} from 'react-native-responsive-fontsize';
+import agent from '../../assets/support-agent.png';
 
 class ChatScreen extends React.Component {
   redirectMessenger = () => {
@@ -34,26 +33,20 @@ class ChatScreen extends React.Component {
 
   _renderHeader = (item, expanded) => {
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingVertical: 15,
-          paddingHorizontal: 10,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          borderBottomColor: 'lightgray',
-          borderBottomWidth: 0.5,
-        }}>
-        <Text style={{fontWeight: '600'}}> {item.title}</Text>
+      <View style={styles.supportHeaderContainer}>
+        <Text style={styles.supportHeaderTitle}>{item.title}</Text>
         {expanded ? (
           <Icon
-            style={{fontSize: Fonts.size.min}}
+            style={{fontSize: Fonts.size.mini}}
             type="AntDesign"
             name="down"
           />
         ) : (
-          <Icon style={{fontSize: Fonts.size.min}} type="AntDesign" name="up" />
+          <Icon
+            style={{fontSize: Fonts.size.mini}}
+            type="AntDesign"
+            name="up"
+          />
         )}
       </View>
     );
@@ -61,38 +54,65 @@ class ChatScreen extends React.Component {
 
   _renderContent = item => {
     return (
-      <Text
-        style={{
-          backgroundColor: 'white',
-          padding: 14,
-          borderBottomColor: 'lightgray',
-          borderBottomWidth: 0.5,
-        }}>
-        {item.content}
-      </Text>
+      <View style={styles.supportContentContainer}>
+        <Text
+          style={{
+            fontSize: Fonts.size.mini,
+            color: Colors.readableText,
+          }}>
+          {item.content}
+        </Text>
+      </View>
     );
   };
 
   render() {
     return (
-      <SafeAreaView
-        style={{
-          backgroundColor: 'white',
-          flex: 1,
-        }}>
-        <Accordion
-          dataArray={dataArray}
-          animation={true}
-          expanded={[]}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
-        <PrimaryBigButton
-          action={() => redirectMessenger()}
-          text="Chat with us"
-          customContainerStyles={{backgroundColor: '#0098F6'}}
-        />
-      </SafeAreaView>
+      <Container>
+        <Content>
+          <View>
+            <View style={styles.supportGrayDivider}>
+              <Text style={styles.supportGrayDividerText}>How it works?</Text>
+            </View>
+          </View>
+          <Accordion
+            dataArray={supportDataArray}
+            animation={true}
+            expanded={[]}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+            style={{backgroundColor: 'white'}}
+          />
+          <View style={{marginTop: RFValue(60), marginBottom: RFValue(75)}}>
+            <View style={styles.supportGrayDivider}>
+              <Text style={styles.supportGrayDividerText}>
+                Need further assistance?
+              </Text>
+            </View>
+            <View style={styles.supportSubsContainer}>
+              <FastImage source={agent} style={styles.supportIcon} />
+              <View style={{flex: 1}}>
+                <Text
+                  style={{
+                    fontSize: Fonts.size.mini,
+                    color: Colors.readableText,
+                  }}>
+                  Hello! welcome to GoCart Iloilo customer support. Send your
+                  questions and inquiries via Facevook messenger and we will be
+                  ready to assist you
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{paddingHorizontal: RFValue(15), paddingTop: RFValue(10)}}>
+              <PrimaryBigButton
+                action={this.redirectMessenger}
+                text="Chat with us"
+              />
+            </View>
+          </View>
+        </Content>
+      </Container>
     );
   }
 }
