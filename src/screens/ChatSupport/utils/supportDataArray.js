@@ -6,23 +6,28 @@ const supportDataArray = [
   },
   {
     title: 'Checkout your cart',
-    content: 'Lorem ipsum dolor sit amet',
+    content:
+      'Once you are done, you can checkout your Kart and see your total order price.',
   },
   {
     title: 'Enter your shipping adddress',
-    content: 'Lorem ipsum dolor sit amet',
+    content:
+      'Input your delivery address. You can have it delivered to other address as well.',
   },
   {
     title: 'Schedule a delivery',
-    content: 'Lorem ipsum dolor sit amet',
+    content:
+      'Choose a time and date when we should deliver your grocery items.',
   },
   {
     title: 'Choose your payment option',
-    content: 'Lorem ipsum dolor sit amet',
+    content:
+      'Finally, choose your payment option. As of the moment we only accept COD (cash on delivery)',
   },
   {
     title: 'Confirm checkout',
-    content: 'Lorem ipsum dolor sit amet',
+    content:
+      'Confirm your checkout, then wait for your items to arrive on your scheduled delivery!',
   },
 ];
 

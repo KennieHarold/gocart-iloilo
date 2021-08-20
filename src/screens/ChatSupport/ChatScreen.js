@@ -8,7 +8,7 @@ import supportDataArray from './utils/supportDataArray';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {RFValue} from 'react-native-responsive-fontsize';
-import agent from '../../assets/support-agent.png';
+import agent from '../../assets/support-agent.jpg';
 
 class ChatScreen extends React.Component {
   redirectMessenger = () => {

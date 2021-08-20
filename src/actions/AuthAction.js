@@ -329,6 +329,11 @@ export const signOut = () => {
         dispatch(orderResetState());
         dispatch(searchResetState());
         dispatch(favoritesResetState());
+
+        //  Logout providers
+        GoogleSignin.revokeAccess();
+        GoogleSignin.signOut();
+        LoginManager.logOut();
       })
       .catch(error => {
         console.log(error);
