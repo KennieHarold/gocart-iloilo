@@ -4,12 +4,17 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   onboardingContainer: {
-    flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'space-around',
-    alignItems: 'center',
     width: '100%',
-    ...Layout.defaultPadding,
+    flex: 1,
+  },
+  logoOverLay: {
+    width: RFValue(110),
+    height: RFValue(110),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: RFValue(55),
   },
   welcomeLabel: {
     fontSize: Fonts.size.veryBig,
@@ -30,6 +35,12 @@ const styles = StyleSheet.create({
   link: {
     fontSize: Fonts.size.mini,
     color: Colors.secondary,
+  },
+  footer: {
+    position: 'absolute',
+    width: '100%',
+    bottom: RFValue(25),
+    alignItems: 'center',
   },
 });
 
