@@ -23,9 +23,9 @@ class OnboardingScreen extends React.Component {
       navigation,
       signInWithFacebook,
       signInWithGoogle,
+      signInWithEmailAndPassword,
       email,
       password,
-      signInWithEmailAndPassword,
       isLoading,
     } = this.props;
 
@@ -41,7 +41,12 @@ class OnboardingScreen extends React.Component {
               height: RFValue(200),
             }}
           />
-          <View style={{width: '100%', alignItems: 'center', marginTop: -50}}>
+          <View
+            style={{
+              width: '100%',
+              alignItems: 'center',
+              marginTop: RFValue(-50),
+            }}>
             <View style={styles.logoOverLay}>
               <FastImage
                 source={logo}
@@ -59,6 +64,7 @@ class OnboardingScreen extends React.Component {
               disabled={isLoading}
               action={() => signInWithEmailAndPassword(email, password)}
               text="Log In"
+              customContainerStyles={{marginBottom: RFValue(10)}}
             />
           </View>
           <View
@@ -68,18 +74,17 @@ class OnboardingScreen extends React.Component {
             }}>
             <Text
               style={{
-                fontSize: Fonts.size.verySmall,
+                fontSize: Fonts.size.mini,
                 color: Colors.readableText,
-                fontWeight: '700',
               }}>
-              OR
+              Or continue through our social links
             </Text>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 width: '100%',
-                marginTop: 25,
+                marginTop: RFValue(20),
               }}>
               <SocialButton
                 action={() => signInWithFacebook()}
@@ -98,7 +103,7 @@ class OnboardingScreen extends React.Component {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginBottom: 5,
+                marginBottom: RFValue(10),
               }}>
               <Text style={styles.subLabel}>{"Don't have an account? "}</Text>
               <TouchableOpacity

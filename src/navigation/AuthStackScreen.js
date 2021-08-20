@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/stack';
 import {
   OnboardingScreen,
-  LoginScreen,
+  //LoginScreen,
   SignUpScreen,
 } from '../screens/Onboarding';
 
@@ -23,7 +23,7 @@ const AuthStackScreen = () => {
       mode="card"
       screenOptions={screenOptions}>
       <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
-      <AuthStack.Screen name="Login" component={LoginScreen} />
+      {/* <AuthStack.Screen name="Login" component={LoginScreen} /> */}
       <AuthStack.Screen name="Signup" component={SignUpScreen} />
     </AuthStack.Navigator>
   );

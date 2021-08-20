@@ -3,18 +3,19 @@ import {View, StatusBar, SafeAreaView, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {Text} from 'native-base';
 import styles from './styles';
-import {PrimaryBigButton, SocialButton} from '../../components/Buttons';
+import {PrimaryBigButton} from '../../components/Buttons';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {InputEmail, InputPassword, InputConfirmPassword} from './components';
-import {ArrowLeft} from '../../components/UIComponents';
 import {AuthAction} from '../../actions';
+import FastImage from 'react-native-fast-image';
+import banner from '../../assets/banner.jpg';
+import logo from '../../assets/logo.png';
+import {Layout} from '../../styles';
 
 class SignUpScreen extends React.Component {
   render() {
     const {
       navigation,
-      signInWithFacebook,
-      signInWithGoogle,
       signUpWithEmailAndPassword,
       email,
       password,
@@ -26,85 +27,52 @@ class SignUpScreen extends React.Component {
       <SafeAreaView style={{flex: 1}}>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
         <View style={styles.onboardingContainer}>
-          <ArrowLeft />
+          <FastImage
+            source={banner}
+            resizeMode={FastImage.resizeMode.stretch}
+            style={{
+              height: RFValue(200),
+            }}
+          />
           <View
             style={{
-              flex: 1,
-              alignItems: 'center',
               width: '100%',
-              justifyContent: 'space-evenly',
+              alignItems: 'center',
+              marginTop: RFValue(-50),
             }}>
-            <View style={{width: '100%', alignItems: 'center'}}>
-              <Text style={[styles.welcomeLabel, {marginBottom: RFValue(5)}]}>
-                Sign Up
-              </Text>
-              <Text style={styles.subLabel}>
-                Please sign up to continue using our app
-              </Text>
-            </View>
-            <View style={{width: '100%', alignItems: 'center'}}>
-              <Text style={[styles.subLabel, {marginBottom: RFValue(20)}]}>
-                Continue via social links
-              </Text>
-              <View
+            <View style={styles.logoOverLay}>
+              <FastImage
+                source={logo}
                 style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                }}>
-                <SocialButton
-                  action={() => signInWithFacebook()}
-                  social="facebook"
-                  customButtonStyles={{width: '48%'}}
-                />
-                <SocialButton
-                  action={() => signInWithGoogle()}
-                  social="google"
-                  customButtonStyles={{width: '48%'}}
-                />
-              </View>
-            </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              width: '100%',
-              justifyContent: 'space-between',
-            }}>
-            <View
-              style={{
-                width: '100%',
-                alignItems: 'center',
-              }}>
-              <Text style={[styles.subLabel, {marginBottom: RFValue(20)}]}>
-                Or sign up with email
-              </Text>
-              <InputEmail customItemStyles={{marginBottom: RFValue(10)}} />
-              <InputPassword customItemStyles={{marginBottom: RFValue(10)}} />
-              <InputConfirmPassword
-                customItemStyles={{marginBottom: RFValue(25)}}
-              />
-              <PrimaryBigButton
-                disabled={isLoading}
-                action={() =>
-                  signUpWithEmailAndPassword(email, password, confirmPassword)
-                }
-                text="Sign Up"
-                customContainerStyles={{
-                  marginBottom: RFValue(15),
+                  height: RFValue(100),
+                  width: RFValue(100),
                 }}
               />
             </View>
+          </View>
+          <View style={{...Layout.defaultPadding}}>
+            <InputEmail customItemStyles={{marginBottom: RFValue(10)}} />
+            <InputPassword customItemStyles={{marginBottom: RFValue(10)}} />
+            <InputConfirmPassword
+              customItemStyles={{marginBottom: RFValue(25)}}
+            />
+            <PrimaryBigButton
+              disabled={isLoading}
+              action={() =>
+                signUpWithEmailAndPassword(email, password, confirmPassword)
+              }
+              text="Sign Up"
+            />
+          </View>
+          <View style={styles.footer}>
             <View
               style={{
-                justifyContent: 'flex-end',
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
-              <Text style={styles.subLabel}>{`Already have an account? `}</Text>
+              <Text style={styles.subLabel}>{'Already have an account? '}</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('Login')}
+                onPress={() => navigation.navigate('Onboarding')}
                 activeOpacity={0.7}>
                 <Text style={styles.link}>Log In</Text>
               </TouchableOpacity>
