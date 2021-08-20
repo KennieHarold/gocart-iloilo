@@ -373,6 +373,7 @@ export const checkout = (
         storeId: selectedStoreProducts.storeId,
         items,
         deliverySchedule: checkoutDetails.deliverySchedule,
+        notes: checkoutDetails.notes,
         contact: {
           ...checkoutDetails.contact,
         },

@@ -34,6 +34,7 @@ const initialState = {
     deliveryAddress: {
       ...ADDRESS,
     },
+    notes: '',
     contact: {
       code: '+63',
       number: '',

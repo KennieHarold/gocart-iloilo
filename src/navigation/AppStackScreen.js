@@ -13,6 +13,7 @@ import {
   AddressSelectorScreen,
   OrderConfirmationScreen,
   ScheduleSelectorScreen,
+  DeliveryInstScreen,
 } from '../screens/Cart';
 import {FavoritesScreen} from '../screens/Favorites';
 
@@ -46,6 +47,7 @@ const AppStackScreen = () => {
         name="ScheduleSelector"
         component={ScheduleSelectorScreen}
       />
+      <AppStack.Screen name="DeliveryInst" component={DeliveryInstScreen} />
       <AppStack.Screen name="Map" component={MapScreen} />
       <AppStack.Screen name="PhoneForm" component={PhoneFormScreen} />
       <AppStack.Screen name="PhoneVerify" component={PhoneVerifyScreen} />

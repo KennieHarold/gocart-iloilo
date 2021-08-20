@@ -155,6 +155,14 @@ class CheckoutScreen extends React.PureComponent {
         iconName: 'creditcard',
         action: () => {},
       },
+      {
+        id: 'checkout-list-item-delivery-inst',
+        title: 'Delivery Instructions (optional)',
+        subtitle: 'Press here for delivery instructions',
+        iconType: 'FontAwesome',
+        iconName: 'sticky-note-o',
+        action: () => navigation.navigate('DeliveryInst'),
+      },
     ];
 
     const totalPayment = checkoutDetails.subTotal + shoppingFee + deliveryFee;

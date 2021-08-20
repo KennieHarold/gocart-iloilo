@@ -10,7 +10,7 @@ const checkDateObject = date => {
 
 const parseDeliverySchedule = deliverySchedule => {
   if (deliverySchedule[0] === undefined && deliverySchedule[1] === undefined) {
-    return 'Click here to set delivery schedule';
+    return 'Press here to set delivery schedule';
   }
 
   const date = moment(checkDateObject(deliverySchedule[0])).format('dddd');
