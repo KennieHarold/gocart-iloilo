@@ -6,7 +6,8 @@ import HomeStackScreen from './HomeStackScreen';
 import BrowseStackScreen from './BrowseStackScreen';
 import ProfileStackScreen from './ProfileStackScreen';
 import OrdersStackScreen from './OrdersStackScreen';
-import FavoritesStackScreen from './FavoritesStackScreen';
+import {ChatScreen} from '../screens/ChatSupport';
+//import FavoritesStackScreen from './FavoritesStackScreen';
 import {Icon, Text} from 'native-base';
 import {Colors, Fonts} from '../styles';
 import {
@@ -19,8 +20,8 @@ import {
 import {LoadingScreen} from '../components/UIComponents';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {errorHandler} from '../helpers';
-import RedirectChat from './etc/RedirectChat';
 
+//  Actions
 const {getCurrentUserData} = CurrentUserAction;
 const {getAvailableStoresData} = StoreAction;
 const {getUserCartProducts} = CartAction;
@@ -50,7 +51,7 @@ const tabItems = [
     key: 'tab-item-chat',
     name: 'Chat',
     label: 'Chat Us',
-    screen: RedirectChat,
+    screen: ChatScreen,
     iconActive: 'chatbubble-ellipses',
     iconInactive: 'chatbubble-ellipses-outline',
   },
