@@ -22,6 +22,7 @@ import {
   SHARED_RESET_STATE,
 } from './types';
 import {showSimpleLoadingModal, showAlert} from './ModalAlertAction';
+import {userCollection} from '../firebase/collections';
 
 Geocoder.init(GOOGLE_CLOUD_API_KEY);
 
@@ -92,6 +93,20 @@ const callVerifyApi = async (phone, code, callback) => {
       console.log(error);
       errorHandler(dispatch, 'shared/phone-verify-error');
     });
+};
+
+const checkPhoneAlreadyExists = async number => {
+  const query = {
+    code: '+63',
+    isVerified: true,
+    number,
+  };
+
+  const snapshots = await userCollection.where('phone', '==', query).get();
+
+  console.log('Sizeed: ', snapshots.size);
+
+  return snapshots.size > 0;
 };
 
 /*********************** Dispatchers *********************************/
@@ -298,15 +313,31 @@ export const getCurrentLocation = () => {
 
 export const startPhoneVerification = phone => {
   return async (dispatch, getState) => {
-    const {hasUserDocument} = getState().auth;
+    try {
+      const {hasUserDocument} = getState().auth;
 
-    let phoneRe = /9\d{9}/;
+      let phoneRe = /9\d{9}/;
 
-    if (phoneRe.test(phone.number)) {
+      if (!phoneRe.test(phone.number)) {
+        throw new Error('wrong-format');
+      }
+
+      dispatch(showSimpleLoadingModal(true));
+
+      const isExists = await checkPhoneAlreadyExists(phone.number);
+
+      dispatch(showSimpleLoadingModal(false));
+
+      if (isExists) {
+        throw new Error('already-exists');
+      }
+
       const apiUrl = CLOUD_FUNCTIONS_API_URL + 'http-startPhoneVerification';
       const token = await auth().currentUser.getIdToken();
 
-      fetch(apiUrl, {
+      //console.log(token);
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -315,24 +346,28 @@ export const startPhoneVerification = phone => {
         body: JSON.stringify({
           phone: phone.code + phone.number,
         }),
-      })
-        .then(response => {
-          if (response.status !== 200) {
-            errorHandler(dispatch, 'shared/phone-verify-error');
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          errorHandler(dispatch, 'shared/phone-verify-error');
-        });
+      });
+
+      if (response.status !== 200) {
+        //  Just trigger an error
+        throw new Error('');
+      }
 
       if (hasUserDocument) {
         RootNavigation.navigate('PhoneVerify');
       } else {
         RootNavigation.navigate('NoDoc__PhoneVerify');
       }
-    } else {
-      errorHandler(dispatch, 'shared/wrong-format-phone');
+    } catch (error) {
+      console.log(error);
+
+      if (error.message === 'wrong-format') {
+        errorHandler(dispatch, 'shared/wrong-format-phone');
+      } else if (error.message === 'already-exists') {
+        errorHandler(dispatch, 'shared/phone-exists');
+      } else {
+        errorHandler(dispatch, 'shared/phone-verify-error');
+      }
     }
   };
 };

@@ -84,8 +84,7 @@ class SignUpScreen extends React.Component {
   }
 }
 
-const {signUpWithEmailAndPassword, signInWithFacebook, signInWithGoogle} =
-  AuthAction;
+const {signUpWithEmailAndPassword} = AuthAction;
 
 const mapStateToProps = state => {
   const {isLoading} = state.modalAlert;
@@ -99,7 +98,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  signInWithFacebook,
-  signInWithGoogle,
   signUpWithEmailAndPassword,
 })(SignUpScreen);

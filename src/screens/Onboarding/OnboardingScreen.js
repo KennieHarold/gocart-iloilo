@@ -122,7 +122,8 @@ class OnboardingScreen extends React.Component {
   }
 }
 
-const {signInWithFacebook, signInWithGoogle} = AuthAction;
+const {signInWithFacebook, signInWithGoogle, signInWithEmailAndPassword} =
+  AuthAction;
 
 const mapStateToProps = state => {
   const {isLoading} = state.modalAlert;
@@ -134,4 +135,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   signInWithFacebook,
   signInWithGoogle,
+  signInWithEmailAndPassword,
 })(OnboardingScreen);

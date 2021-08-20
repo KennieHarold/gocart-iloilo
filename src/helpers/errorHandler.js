@@ -144,6 +144,16 @@ const errorHandler = (dispatch, errorCode) => {
       );
       return;
 
+    case 'shared/phone-exists':
+      dispatch(
+        showAlert({
+          isDisplayed: true,
+          text: 'Your phone number is already exist. Please try another one',
+          status: 'error',
+        }),
+      );
+      return;
+
     case 'shared/wrong-verify-code':
       dispatch(
         showAlert({
