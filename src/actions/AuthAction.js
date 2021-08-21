@@ -137,7 +137,7 @@ const sendEmailVerification = dispatch => {
           Please verify your email before logging in',
 
           actionText: 'LOGIN NOW',
-          action: () => RootNavigation.navigate('Login'),
+          action: () => RootNavigation.navigate('Onboarding'),
           status: 'info',
         }),
       );
