@@ -97,14 +97,14 @@ class MapScreen extends React.PureComponent {
           <PrimaryTextBox
             value={address.detailedAddress}
             title="Detailed Address"
-            placeholder="Enter detailed address"
+            placeholder="House Number, Subdv, Barangay"
             customItemStyles={{marginBottom: 10}}
             onChangeText={e => detailedAddressChange(e)}
           />
           <PrimaryTextBox
             value={address.noteToRider}
             title="Landmarks"
-            placeholder="Enter landmarks"
+            placeholder="e.g. corner lot, red gate, in front of gas station"
             onChangeText={e => noteToRiderChange(e)}
           />
         </View>

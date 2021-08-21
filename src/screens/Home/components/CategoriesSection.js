@@ -3,6 +3,7 @@ import {View, FlatList} from 'react-native';
 import {Text} from 'native-base';
 import {Layout, Fonts} from '../../../styles';
 import CategoryItem from './CategoryItem';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const CategoriesSection = ({categories}) => {
   return (
@@ -24,7 +25,7 @@ const CategoriesSection = ({categories}) => {
         data={categories}
         keyExtractor={item => item.id}
         contentContainerStyle={{
-          paddingHorizontal: 15,
+          paddingHorizontal: RFValue(15),
         }}
         initialNumToRender={5}
         renderItem={({item}) => <CategoryItem category={item} />}

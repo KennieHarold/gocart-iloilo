@@ -208,8 +208,10 @@ class CheckoutScreen extends React.PureComponent {
           <View style={{padding: RFValue(20)}}>
             <View
               style={[styles.checkoutRowLayout, {marginBottom: RFValue(10)}]}>
-              <Text style={styles.checkoutSubLabel}>Subtotal</Text>
-              <Text style={styles.checkoutSubLabel}>
+              <Text style={[styles.checkoutSubLabel, {fontWeight: '700'}]}>
+                Subtotal
+              </Text>
+              <Text style={[styles.checkoutSubLabel, {fontWeight: '700'}]}>
                 &#8369;{toDecimal(checkoutDetails.subTotal)}
               </Text>
             </View>
@@ -246,9 +248,17 @@ class CheckoutScreen extends React.PureComponent {
                 </Text>
               )}
             </View>
-            <View style={styles.checkoutRowLayout}>
+            <View
+              style={[
+                styles.checkoutRowLayout,
+                {
+                  borderTopWidth: 1,
+                  borderColor: 'lightgray',
+                  paddingTop: 15,
+                },
+              ]}>
               <Text style={styles.checkoutTotalLabel}>Total</Text>
-              {isShoppingFeeLoading ? (
+              {isShoppingFeeLoading && isDeliveryFeeError ? (
                 <ActivityIndicator size="small" color={Colors.primary} />
               ) : isShoppingFeeError ? (
                 <Text style={{...styles.checkoutSubLabel, color: Colors.error}}>

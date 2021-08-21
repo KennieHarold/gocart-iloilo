@@ -5,7 +5,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 const styles = StyleSheet.create({
   bigButtonLayout: {
     width: '100%',
-    height: RFValue(50),
+    height: RFValue(43),
     borderRadius: RFValue(10),
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   searchWideButtonItem: {
     borderColor: 'transparent',
     backgroundColor: Colors.lightBackground,
-    height: RFValue(50),
+    height: RFValue(43),
     borderRadius: RFValue(15),
     paddingHorizontal: RFValue(10),
     marginLeft: 0,

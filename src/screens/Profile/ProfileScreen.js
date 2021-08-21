@@ -10,8 +10,9 @@ import {
   ListItem,
   Left,
   Right,
+  Badge,
 } from 'native-base';
-import {Fonts, Layout} from '../../styles';
+import {Fonts, Layout, Colors} from '../../styles';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {AuthAction} from '../../actions';
@@ -21,6 +22,7 @@ class ProfileScreen extends React.Component {
   render() {
     const {
       user: {username, photoUrl, address},
+      favorites,
       signOut,
       navigation,
     } = this.props;
@@ -57,6 +59,7 @@ class ProfileScreen extends React.Component {
         iconType: 'SimpleLineIcons',
         iconName: 'location-pin',
         isDivider: false,
+        isComingSoon: true,
       },
       {
         id: 'profile-divider-reference',
@@ -70,6 +73,7 @@ class ProfileScreen extends React.Component {
         iconType: 'Ionicons',
         iconName: 'md-notifications-outline',
         isDivider: false,
+        isComingSoon: true,
       },
       {
         id: 'profile-change-password',
@@ -78,6 +82,7 @@ class ProfileScreen extends React.Component {
         iconType: 'Ionicons',
         iconName: 'md-lock-closed-outline',
         isDivider: false,
+        isComingSoon: true,
       },
       {
         id: 'profile-divider-about-us',
@@ -185,6 +190,23 @@ class ProfileScreen extends React.Component {
                     <Text style={styles.profileItemTitle}>
                       {profileItem.title}
                     </Text>
+                    {profileItem.isComingSoon ? (
+                      <Badge
+                        style={{
+                          marginLeft: 10,
+                          backgroundColor: Colors.secondary,
+                        }}>
+                        <Text style={{fontSize: Fonts.size.min}}>Soon!</Text>
+                      </Badge>
+                    ) : null}
+                    {/* {profileItem.id === 'profile-my-favs' ? (
+                      <Badge danger style={{marginLeft: 10, height: 25}}>
+                        <Text
+                          style={{fontSize: Fonts.size.min, fontWeight: '700'}}>
+                          {favorites.length}
+                        </Text>
+                      </Badge>
+                    ) : null} */}
                   </Left>
                   <Right>
                     <Icon
@@ -207,7 +229,9 @@ const {signOut} = AuthAction;
 
 const mapStateToProps = state => {
   const {user} = state.currentUser;
-  return {user};
+  const {favorites} = state.favorites;
+
+  return {user, favorites};
 };
 
 export default connect(mapStateToProps, {signOut})(ProfileScreen);

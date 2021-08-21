@@ -11,6 +11,7 @@ import {ProductCard} from '../../../components/UIComponents';
 import {Colors, Fonts, Layout} from '../../../styles';
 import {StoreAction} from '../../../actions';
 import styles from './styles';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const {getProductsByCategoryList, navigateSingleCategoryProductsScreen} =
   StoreAction;
@@ -19,7 +20,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
   const dispatch = useDispatch();
 
   return (
-    <View key={categorizedProduct.id} style={{marginBottom: 15}}>
+    <View key={categorizedProduct.id} style={{marginBottom: RFValue(15)}}>
       <View style={styles.productsSectionHeaderLayout}>
         <View style={{flex: 7}}>
           <Text numberOfLines={1} style={styles.productsSectionTitle}>
@@ -53,12 +54,16 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
         data={categorizedProduct.products}
         keyExtractor={item => `store-product-${item.id}`}
         contentContainerStyle={{
-          paddingHorizontal: 15,
+          paddingHorizontal: RFValue(15),
           backgroundColor: Colors.lightBackground,
         }}
         initialNumToRender={3}
         renderItem={({item}) => (
-          <View style={{marginHorizontal: 5, paddingVertical: 15}}>
+          <View
+            style={{
+              marginHorizontal: RFValue(5),
+              paddingVertical: RFValue(15),
+            }}>
             <ProductCard product={item} />
           </View>
         )}
@@ -94,7 +99,7 @@ const ProductsContent = ({categories}) => {
   return (
     <View style={{width: '100%', marginBottom: Layout.defaultPaddingNum * 2}}>
       <View style={styles.productsContentDiv} />
-      <View style={{marginTop: Layout.defaultPaddingNum}}>
+      <View style={{marginTop: 15}}>
         {isLoading ? (
           <ActivityIndicator
             size="large"
