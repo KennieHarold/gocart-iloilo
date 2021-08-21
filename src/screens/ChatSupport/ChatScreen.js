@@ -45,7 +45,7 @@ class ChatScreen extends React.Component {
           <Icon
             style={{fontSize: Fonts.size.mini}}
             type="AntDesign"
-            name="up"
+            name="right"
           />
         )}
       </View>
@@ -58,7 +58,7 @@ class ChatScreen extends React.Component {
         <Text
           style={{
             fontSize: Fonts.size.mini,
-            color: Colors.readableText,
+            color: 'gray',
           }}>
           {item.content}
         </Text>
@@ -83,7 +83,7 @@ class ChatScreen extends React.Component {
             renderContent={this._renderContent}
             style={{backgroundColor: 'white'}}
           />
-          <View style={{marginTop: RFValue(60), marginBottom: RFValue(75)}}>
+          <View style={{marginTop: RFValue(40), marginBottom: RFValue(75)}}>
             <View style={styles.supportGrayDivider}>
               <Text style={styles.supportGrayDividerText}>
                 Need further assistance?
@@ -98,7 +98,7 @@ class ChatScreen extends React.Component {
                     color: Colors.readableText,
                   }}>
                   Hello! welcome to GoCart Iloilo customer support. Send your
-                  questions and inquiries via Facevook messenger and we will be
+                  questions and inquiries via Facebook messenger and we will be
                   ready to assist you
                 </Text>
               </View>

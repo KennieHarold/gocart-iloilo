@@ -5,7 +5,7 @@ const hdifyPP = (photoUrl, provider) => {
       return newPhotoUrl;
 
     default:
-      return photUrl;
+      return photoUrl;
   }
 };
 

@@ -19,9 +19,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
   const dispatch = useDispatch();
 
   return (
-    <View
-      key={categorizedProduct.id}
-      style={{marginBottom: Layout.defaultPaddingNum}}>
+    <View key={categorizedProduct.id} style={{marginBottom: 15}}>
       <View style={styles.productsSectionHeaderLayout}>
         <View style={{flex: 7}}>
           <Text numberOfLines={1} style={styles.productsSectionTitle}>

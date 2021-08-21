@@ -19,6 +19,7 @@ import {
   transactionCollection,
 } from '../../firebase/collections';
 import {OptionsModal} from './components';
+import {SecondaryBigButton} from '../../components/Buttons';
 
 class OrderDetailsScreen extends React.Component {
   state = {
@@ -172,14 +173,21 @@ class OrderDetailsScreen extends React.Component {
                   </View>
                   <TouchableOpacity
                     onPress={() => navigateOrderItems(this.state.items)}
-                    activeOpacity={0.6}>
+                    activeOpacity={0.6}
+                    style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Text
                       style={{
                         fontSize: Fonts.size.mini,
-                        color: Colors.secondary,
+                        color: Colors.primary,
+                        marginRight: 5,
                       }}>
                       More details
                     </Text>
+                    <Icon
+                      type="AntDesign"
+                      name="right"
+                      style={{fontSize: Fonts.size.mini, color: Colors.primary}}
+                    />
                   </TouchableOpacity>
                 </View>
                 <FlatList
@@ -207,8 +215,12 @@ class OrderDetailsScreen extends React.Component {
                       styles.transactionRowLayout,
                       {marginBottom: RFValue(10)},
                     ]}>
-                    <Text style={styles.transactionSubLabel}>Subtotal</Text>
-                    <Text style={styles.transactionSubLabel}>
+                    <Text
+                      style={[styles.transactionSubLabel, {fontWeight: '700'}]}>
+                      Subtotal
+                    </Text>
+                    <Text
+                      style={[styles.transactionSubLabel, {fontWeight: '700'}]}>
                       &#8369;{' '}
                       {this.state.transaction
                         ? toDecimal(
@@ -235,7 +247,7 @@ class OrderDetailsScreen extends React.Component {
                   <View
                     style={[
                       styles.transactionRowLayout,
-                      {marginBottom: Layout.defaultPaddingNum},
+                      {marginBottom: RFValue(15)},
                     ]}>
                     <Text style={styles.transactionSubLabel}>Delivery Fee</Text>
                     <Text style={styles.transactionSubLabel}>
@@ -247,9 +259,17 @@ class OrderDetailsScreen extends React.Component {
                         : 'Error loading delivery fee'}
                     </Text>
                   </View>
-                  <View style={styles.transactionRowLayout}>
+                  <View
+                    style={[
+                      styles.transactionRowLayout,
+                      {
+                        borderTopWidth: 1,
+                        borderColor: 'lightgray',
+                        paddingTop: 15,
+                      },
+                    ]}>
                     <Text style={styles.transactionTotalLabel}>Total</Text>
-                    <Text style={styles.transactionTotalLabel}>
+                    <Text style={[styles.transactionTotalLabel]}>
                       &#8369;{' '}
                       {this.state.transaction
                         ? toDecimal(
@@ -267,17 +287,14 @@ class OrderDetailsScreen extends React.Component {
               width: '100%',
               alignItems: 'center',
               position: 'absolute',
-              bottom: 75,
+              bottom: RFValue(75),
+              paddingHorizontal: RFValue(15),
             }}>
-            <TouchableOpacity
-              onPress={() => this.setState({isOpen: true})}
+            <SecondaryBigButton
+              action={() => this.setState({isOpen: true})}
               disabled={this.state.isLoading}
-              activeOpacity={0.6}>
-              <Text
-                style={{color: Colors.secondary, fontSize: Fonts.size.mini}}>
-                Need help?
-              </Text>
-            </TouchableOpacity>
+              text="Need Help?"
+            />
           </View>
         </Container>
         <OptionsModal

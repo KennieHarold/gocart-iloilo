@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
     paddingLeft: RFValue(15),
   },
   supportGrayDividerText: {
-    fontSize: Fonts.size.mini,
-    color: Colors.secondPrimary,
+    fontSize: Fonts.size.verySmall,
     fontWeight: '700',
   },
   supportSubsContainer: {

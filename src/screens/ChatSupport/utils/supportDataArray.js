@@ -2,17 +2,17 @@ const supportDataArray = [
   {
     title: 'Choose a store',
     content:
-      'See your grocery list and start shopping! Browse or search the item. Review the details of your order before placing your order',
+      'See your grocery list and start shopping! Browse or search the item. Review the details of your order before placing your order.',
   },
   {
     title: 'Checkout your cart',
     content:
-      'Once you are done, you can checkout your Kart and see your total order price.',
+      'Once you are done, you can checkout your cart and see your total order price.',
   },
   {
     title: 'Enter your shipping adddress',
     content:
-      'Input your delivery address. You can have it delivered to other address as well.',
+      'Enter your delivery address. You can have it delivered to another address as well.',
   },
   {
     title: 'Schedule a delivery',
@@ -22,7 +22,7 @@ const supportDataArray = [
   {
     title: 'Choose your payment option',
     content:
-      'Finally, choose your payment option. As of the moment we only accept COD (cash on delivery)',
+      'Finally, choose your payment option. As of the moment we only accept COD (cash on delivery).',
   },
   {
     title: 'Confirm checkout',

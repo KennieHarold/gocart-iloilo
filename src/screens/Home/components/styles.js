@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   productsSectionHeaderLayout: {
     marginHorizontal: Layout.defaultPaddingNum,
-    marginBottom: Layout.defaultPaddingNum,
+    marginBottom: 15,
     flexDirection: 'row',
     alignItems: 'center',
   },
