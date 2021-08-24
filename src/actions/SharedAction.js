@@ -101,11 +101,7 @@ const checkPhoneAlreadyExists = async number => {
     isVerified: true,
     number,
   };
-
   const snapshots = await userCollection.where('phone', '==', query).get();
-
-  console.log('Sizeed: ', snapshots.size);
-
   return snapshots.size > 0;
 };
 
@@ -325,6 +321,7 @@ export const startPhoneVerification = phone => {
       dispatch(showSimpleLoadingModal(true));
 
       const isExists = await checkPhoneAlreadyExists(phone.number);
+      const token = await auth().currentUser.getIdToken();
 
       dispatch(showSimpleLoadingModal(false));
 
@@ -333,7 +330,6 @@ export const startPhoneVerification = phone => {
       }
 
       const apiUrl = CLOUD_FUNCTIONS_API_URL + 'http-startPhoneVerification';
-      const token = await auth().currentUser.getIdToken();
 
       //console.log(token);
 

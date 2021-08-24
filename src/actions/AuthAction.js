@@ -28,23 +28,33 @@ import {favoritesResetState} from './FavoritesAction';
 
 const getFacebookCredential = async dispatch => {
   try {
-    LoginManager.setLoginBehavior('WEB_ONLY');
+    //LoginManager.setLoginBehavior('WEB_ONLY');
+
+    //  Make sure everything is clean
+    LoginManager.logOut();
+
     const result = await LoginManager.logInWithPermissions([
       'public_profile',
       'email',
     ]);
+
     if (result.isCancelled) {
       throw new Error('cancelled');
     }
+
     const data = await AccessToken.getCurrentAccessToken();
+
     if (!data) {
       throw new Error('general');
     }
+
     const credential = firebase.auth.FacebookAuthProvider.credential(
       data.accessToken,
     );
+
     return credential;
   } catch (error) {
+    console.log(error);
     if (error.message === 'cancelled') {
       errorHandler(dispatch, 'auth/cancelled');
     } else {
@@ -120,7 +130,10 @@ const signInWithCredential = async (dispatch, credential) => {
       };
       checkCreateProfileOrLogin(dispatch, authObject, uid);
     })
-    .catch(error => errorHandler(dispatch, error.code));
+    .catch(error => {
+      console.log(error);
+      errorHandler(dispatch, error.code);
+    });
 
   dispatch(showLoadingModal({isLoading: false}));
 };
@@ -315,11 +328,23 @@ export const checkUserLoggedIn = () => {
 };
 
 export const signOut = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     dispatch(showLoadingModal({isLoading: true, text: 'Signing Out...'}));
     await auth()
       .signOut()
       .then(() => {
+        const {provider} = getState().auth;
+
+        if (provider === 'google.com') {
+          GoogleSignin.revokeAccess();
+          GoogleSignin.signOut();
+        } else if (provider === 'facebook.com') {
+          LoginManager.logOut();
+        } else {
+          //  Do nothing...
+        }
+
+        //  Clear all states
         dispatch(authResetState());
         dispatch(profileResetState());
         dispatch(currentUserResetState());
@@ -329,11 +354,6 @@ export const signOut = () => {
         dispatch(orderResetState());
         dispatch(searchResetState());
         dispatch(favoritesResetState());
-
-        //  Logout providers
-        GoogleSignin.revokeAccess();
-        GoogleSignin.signOut();
-        LoginManager.logOut();
       })
       .catch(error => {
         console.log(error);
