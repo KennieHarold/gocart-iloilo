@@ -111,13 +111,13 @@ class EditProfileScreen extends React.Component {
                   <FastImage
                     source={{uri: currentUser.photoUrl}}
                     style={styles.myProfileDp}>
-                    <View style={styles.myProfileDpOverlay}>
+                    {/* <View style={styles.myProfileDpOverlay}>
                       <Icon
                         type="AntDesign"
                         name="camerao"
                         style={{fontSize: Fonts.size.veryBig, color: 'white'}}
                       />
-                    </View>
+                    </View> */}
                   </FastImage>
                 </TouchableOpacity>
               </View>

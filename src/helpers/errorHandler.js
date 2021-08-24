@@ -171,6 +171,16 @@ const errorHandler = (dispatch, errorCode) => {
       });
       return;
 
+    case 'shared/location-out-coverage':
+      dispatch(
+        showAlert({
+          isDisplayed: true,
+          text: 'Your location is not supported by the app. Please choose a location within Iloilo City',
+          status: 'error',
+        }),
+      );
+      return;
+
     /****************** Cart Error *******************/
     case 'cart/max-qty':
       Snackbar.show({

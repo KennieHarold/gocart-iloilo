@@ -218,32 +218,33 @@ export const geocode = (latitude, longitude, latitudeDelta, longitudeDelta) => {
   return async dispatch => {
     //dispatch(showSimpleLoadingModal(true));
 
-    await Geocoder.from(latitude, longitude)
-      .then(json => {
-        const addressObj = json.results[0].formatted_address;
+    if (checkCoverageArea(latitude, longitude)) {
+      console.log(checkCoverageArea(latitude, longitude));
+      await Geocoder.from(latitude, longitude)
+        .then(json => {
+          const addressObj = json.results[0].formatted_address;
 
-        const address = {
-          latitude,
-          longitude,
-          latitudeDelta,
-          longitudeDelta,
-          formattedAddress: addressObj,
-        };
+          const address = {
+            latitude,
+            longitude,
+            latitudeDelta,
+            longitudeDelta,
+            formattedAddress: addressObj,
+          };
 
-        dispatch(addressChange(address));
-      })
-      .catch(error => {
-        console.log(error);
-
-        //  Just to make sure
-        dispatch(showSimpleLoadingModal(false));
-
-        if (error.code === 2) {
-          errorHandler(dispatch, 'gen/network-error');
-        } else {
-          errorHandler(dispatch, 'gen/default');
-        }
-      });
+          dispatch(addressChange(address));
+        })
+        .catch(error => {
+          console.log(error);
+          if (error.code === 2) {
+            errorHandler(dispatch, 'gen/network-error');
+          } else {
+            errorHandler(dispatch, 'gen/default');
+          }
+        });
+    } else {
+      errorHandler(dispatch, 'shared/location-out-coverage');
+    }
 
     //dispatch(showSimpleLoadingModal(false));
   };
@@ -253,6 +254,7 @@ export const getCurrentLocation = () => {
   return async dispatch => {
     try {
       dispatch(showSimpleLoadingModal(true));
+
       await askLocationPermission(callback => {
         if (callback) {
           Geolocation.getCurrentPosition(
@@ -262,17 +264,23 @@ export const getCurrentLocation = () => {
 
               await Geocoder.from(latitude, longitude)
                 .then(json => {
-                  const addressObj = json.results[0].formatted_address;
+                  if (checkCoverageArea(latitude, longitude)) {
+                    const addressObj = json.results[0].formatted_address;
 
-                  const address = {
-                    latitude,
-                    longitude,
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01,
-                    formattedAddress: addressObj,
-                  };
+                    const address = {
+                      latitude,
+                      longitude,
+                      latitudeDelta: 0.01,
+                      longitudeDelta: 0.01,
+                      formattedAddress: addressObj,
+                    };
 
-                  dispatch(addressChange(address));
+                    dispatch(addressChange(address));
+                  } else {
+                    //  Just to make sure
+                    dispatch(showSimpleLoadingModal(false));
+                    errorHandler(dispatch, 'shared/location-out-coverage');
+                  }
                 })
                 .catch(error => {
                   console.log(error);
@@ -416,4 +424,21 @@ export const resendVerificationTimer = seconds => {
       }
     }, 1000);
   };
+};
+
+//  This is a normal public function no need to dispatch
+export const checkCoverageArea = (latitude, longitude) => {
+  const COVERAGE_LATITUDE = [10.757, 10.687]; //  Within only Iloilo city
+  const COVERAGE_LONGITUDE = [122.593, 122.5]; // Within only Iloilo city
+
+  //  Check if location is within Iloilo city
+  if (
+    latitude > COVERAGE_LATITUDE[1] &&
+    latitude < COVERAGE_LATITUDE[0] &&
+    longitude > COVERAGE_LONGITUDE[1] &&
+    longitude < COVERAGE_LONGITUDE[0]
+  ) {
+    return true;
+  }
+  return false;
 };

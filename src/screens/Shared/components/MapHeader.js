@@ -9,6 +9,8 @@ import LocatorButton from './LocatorButton';
 import {Colors} from '../../../styles';
 import * as RootNavigation from '../../../navigation/RootNavigation';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {checkCoverageArea} from '../../../actions/SharedAction';
+import {errorHandler} from '../../../helpers';
 
 const {addressChange} = SharedAction;
 
@@ -17,6 +19,25 @@ const MapHeader = ({cb}) => {
 
   const {container, textInputContainer, textInput, listView} =
     autoCompleteStyles;
+
+  const handlePress = details => {
+    const latitude = details.geometry.location.lat;
+    const longitude = details.geometry.location.lng;
+    const formattedAddress = details.formatted_address;
+
+    if (checkCoverageArea(latitude, longitude)) {
+      const address = {
+        latitude,
+        longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+        formattedAddress,
+      };
+      dispatch(addressChange(address));
+    } else {
+      errorHandler(dispatch, 'shared/location-out-coverage');
+    }
+  };
 
   return (
     <View
@@ -48,12 +69,7 @@ const MapHeader = ({cb}) => {
         enablePoweredByContainer={false}
         placeholder="Find Location"
         onPress={(data, details = null) => {
-          const address = {
-            latitude: details.geometry.location.lat,
-            longitude: details.geometry.location.lng,
-            formattedAddress: details.formatted_address,
-          };
-          dispatch(addressChange(address));
+          handlePress(details);
         }}
         query={{
           key: GOOGLE_CLOUD_API_KEY,
