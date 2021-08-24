@@ -328,22 +328,11 @@ export const checkUserLoggedIn = () => {
 };
 
 export const signOut = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     dispatch(showLoadingModal({isLoading: true, text: 'Signing Out...'}));
     await auth()
       .signOut()
       .then(() => {
-        const {provider} = getState().auth;
-
-        if (provider === 'google.com') {
-          GoogleSignin.revokeAccess();
-          GoogleSignin.signOut();
-        } else if (provider === 'facebook.com') {
-          LoginManager.logOut();
-        } else {
-          //  Do nothing...
-        }
-
         //  Clear all states
         dispatch(authResetState());
         dispatch(profileResetState());
@@ -354,6 +343,15 @@ export const signOut = () => {
         dispatch(orderResetState());
         dispatch(searchResetState());
         dispatch(favoritesResetState());
+
+        if (Object.entries(GoogleSignin).length > 0) {
+          GoogleSignin.revokeAccess();
+          GoogleSignin.signOut();
+        }
+
+        if (Object.entries(LoginManager).length > 0) {
+          LoginManager.logOut();
+        }
       })
       .catch(error => {
         console.log(error);

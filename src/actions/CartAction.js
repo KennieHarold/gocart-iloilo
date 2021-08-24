@@ -221,7 +221,7 @@ export const getUserCartProducts = () => {
       .onSnapshot(snapshot => {
         dispatch(changeIsCartLoading(true));
 
-        let docChangesSize = snapshot.docChanges().length;
+        let docChangesSize = snapshot ? snapshot.docChanges().length : 0;
 
         if (docChangesSize > 0) {
           snapshot.docChanges().forEach(async (change, index) => {

@@ -23,16 +23,22 @@ export const currentUserResetState = () => {
 
 export const getCurrentUserData = () => {
   return dispatch => {
-    const uid = auth().currentUser.uid;
+    try {
+      const uid = auth().currentUser.uid;
 
-    userCollection.where('id', '==', uid).onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
-        const data = change.doc.data();
+      userCollection.where('id', '==', uid).onSnapshot(snapshot => {
+        if (snapshot) {
+          snapshot.docChanges().forEach(change => {
+            const data = change.doc.data();
 
-        if (change.type === 'added' || change.type === 'modified') {
-          dispatch(setCurrentUser(data));
+            if (change.type === 'added' || change.type === 'modified') {
+              dispatch(setCurrentUser(data));
+            }
+          });
         }
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
