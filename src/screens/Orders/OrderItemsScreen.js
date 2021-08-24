@@ -27,7 +27,7 @@ class OrderItemsScreen extends React.PureComponent {
           <FlatList
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
-            //contentContainerStyle={{marginTop: Layout.defaultPaddingNum}}
+            contentContainerStyle={{marginBottom: RFValue(75)}}
             scrollEnabled
             data={selectedOrderItems}
             keyExtractor={item => `order-item${item.product.id}`}
@@ -36,7 +36,7 @@ class OrderItemsScreen extends React.PureComponent {
                 <ListItem noIndent>
                   <Left style={{flex: 1.5}}>
                     <FastImage
-                      resizeMode={FastImage.resizeMode.cover}
+                      resizeMode={FastImage.resizeMode.contain}
                       source={{uri: item.product.photoUri}}
                       style={{height: RFValue(50), width: RFValue(50)}}
                     />

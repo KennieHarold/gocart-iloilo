@@ -28,6 +28,9 @@ const AddToCartModal = () => {
     },
   );
 
+  //  If user doen't choose a store. Use this
+  const tempSelectedStore = useSelector(state => state.store.tempSelectedStore);
+
   const dispatch = useDispatch();
 
   return (
@@ -68,9 +71,14 @@ const AddToCartModal = () => {
           />
         </View>
         <PrimaryBigButton
-          action={() =>
-            dispatch(addProductToCart(pressedProduct, selectedStore))
-          }
+          action={() => {
+            let store =
+              Object.entries(selectedStore).length > 0
+                ? selectedStore
+                : tempSelectedStore;
+
+            dispatch(addProductToCart(pressedProduct, store));
+          }}
           text="Add to cart"
           customContainerStyles={{
             position: 'absolute',

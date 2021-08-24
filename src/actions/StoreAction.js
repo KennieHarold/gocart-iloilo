@@ -13,6 +13,7 @@ import {
   CHANGE_CATEGORIZED_PRODUCTS_LOADING,
   CLEAR_SELECTED_STORE_CATEGORIES,
   SELECT_STORE,
+  SELECT_TEMP_STORE,
   STORE_RESET_STATE,
   ADD_SELECTED_STORE_CATEGORIZED_PRODUCTS,
   SELECT_CATEGORY,
@@ -29,6 +30,13 @@ export const selectStore = store => {
   return {
     type: SELECT_STORE,
     store,
+  };
+};
+
+export const selectTempStore = tempStore => {
+  return {
+    type: SELECT_TEMP_STORE,
+    tempStore,
   };
 };
 

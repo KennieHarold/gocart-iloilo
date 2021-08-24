@@ -321,16 +321,13 @@ export const startPhoneVerification = phone => {
       dispatch(showSimpleLoadingModal(true));
 
       const isExists = await checkPhoneAlreadyExists(phone.number);
-      const token = await auth().currentUser.getIdToken();
-
-      dispatch(showSimpleLoadingModal(false));
 
       if (isExists) {
         throw new Error('already-exists');
       }
 
       const apiUrl = CLOUD_FUNCTIONS_API_URL + 'http-startPhoneVerification';
-
+      const token = await auth().currentUser.getIdToken();
       //console.log(token);
 
       const response = await fetch(apiUrl, {
@@ -343,6 +340,8 @@ export const startPhoneVerification = phone => {
           phone: phone.code + phone.number,
         }),
       });
+
+      dispatch(showSimpleLoadingModal(false));
 
       if (response.status !== 200) {
         //  Just trigger an error

@@ -2,6 +2,7 @@ import {
   STORE_RESET_STATE,
   ADD_AVAILABLE_STORE,
   SELECT_STORE,
+  SELECT_TEMP_STORE,
   CHANGE_AVAILABLE_STORES_LOADING,
   ADD_SELECTED_STORE_CATEGORIES,
   CHANGE_SELECTED_STORE_CATEGORIES_LOADING,
@@ -22,6 +23,9 @@ const initialState = {
 
   //  Selected store
   selectedStore: {},
+
+  // Temp selected store (used by browse)
+  tempSelectedStore: {},
 
   //  List of categories of the selected store
   selectedStoreCategories: [],
@@ -143,6 +147,13 @@ const StoreReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedStore: action.store,
+      };
+
+    //  Select temp store
+    case SELECT_TEMP_STORE:
+      return {
+        ...state,
+        tempSelectedStore: action.tempStore,
       };
 
     //  Select category

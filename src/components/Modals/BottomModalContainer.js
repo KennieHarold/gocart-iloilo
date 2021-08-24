@@ -12,9 +12,9 @@ const BottomModalContainer = ({children, isVisible, onClose, height}) => {
       backdropColor="rgba(0,0,0,0.5)"
       transparent={true}
       style={{margin: 0}}
-      animationType="fade"
-      isVisible={isVisible}>
-      <StatusBar barStyle="dark-content" backgroundColor="rgba(0, 0, 0, 0.3)" />
+      animationType="slide"
+      visible={isVisible}>
+      {/* <StatusBar barStyle="dark-content" backgroundColor="rgba(0, 0, 0, 0.3)" /> */}
       <View
         style={{
           flex: 1,

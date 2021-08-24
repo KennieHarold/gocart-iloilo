@@ -51,7 +51,6 @@ class ScheduleSelectorScreen extends React.PureComponent {
   };
 
   render() {
-    console.log('render');
     return (
       <Container>
         <ScreenHeader title="Delivery Schedule" />

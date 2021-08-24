@@ -26,6 +26,7 @@ export const SET_CURRENT_USER = 'set_current_user';
 export const STORE_RESET_STATE = 'store_reset_state';
 export const ADD_AVAILABLE_STORE = 'add_available_store';
 export const SELECT_STORE = 'select_store';
+export const SELECT_TEMP_STORE = 'select_temp_store';
 export const CHANGE_AVAILABLE_STORES_LOADING =
   'change_available_stores_loading';
 export const ADD_SELECTED_STORE_CATEGORIES = 'add_selected_store_categories';
@@ -60,6 +61,7 @@ export const SELECT_STORE_ID_IN_CART = 'select_store_id_in_cart';
 export const SELECT_STORE_PRODUCTS = 'select_store_products';
 export const CLEAR_STORE_PRODUCTS = 'clear_store_products';
 export const CHANGE_CHECKOUT_DETAILS = 'change_checkout_details';
+export const CLEAR_CHECKOUT_DETAILS = 'clear_checkout_details';
 
 //  App
 export const ADD_BANNER = 'add_banner';

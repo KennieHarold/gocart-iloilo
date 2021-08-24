@@ -30,7 +30,7 @@ const FavoriteItem = ({product}) => {
     <ListItem noIndent>
       <Left style={{flex: 1.25}}>
         <FastImage
-          resizeMode={FastImage.resizeMode.cover}
+          resizeMode={FastImage.resizeMode.contain}
           source={{uri: product.photoUri}}
           style={styles.favoriteItemImage}
         />

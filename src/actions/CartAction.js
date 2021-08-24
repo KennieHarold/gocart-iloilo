@@ -12,7 +12,6 @@ import {
   transactionCollection,
 } from '../firebase/collections';
 import * as RootNavigation from '../navigation/RootNavigation';
-import {Colors} from '../styles';
 import {
   CART_RESET_STATE,
   SELECT_PRESSED_PRODUCT,
@@ -26,6 +25,7 @@ import {
   SELECT_STORE_PRODUCTS,
   CLEAR_STORE_PRODUCTS,
   CHANGE_CHECKOUT_DETAILS,
+  CLEAR_CHECKOUT_DETAILS,
 } from './types';
 import {CART, ORDER, ADDRESS, TRANSACTION} from '../reducers/blueprints';
 import {addressResetState, phoneResetState} from './SharedAction';
@@ -119,6 +119,12 @@ export const changeCheckoutDetails = checkoutDetails => {
   };
 };
 
+export const clearCheckoutDetails = () => {
+  return {
+    type: CLEAR_CHECKOUT_DETAILS,
+  };
+};
+
 /*********************** Public methods *********************************/
 
 export const addProductToCart = ({product, qty}, selectedStore) => {
@@ -154,7 +160,6 @@ export const addProductToCart = ({product, qty}, selectedStore) => {
                   });
                 });
             } else {
-              console.log('Error men');
               errorHandler(dispatch, 'cart/server-max-qty');
             }
           } else {
@@ -197,6 +202,11 @@ export const removeProductToCart = cartProduct => {
     await cartCollection.doc(cartProduct.id).delete();
 
     dispatch(showSimpleLoadingModal(false));
+
+    Snackbar.show({
+      text: 'Successfully removed from cart',
+      duration: Snackbar.LENGTH_LONG,
+    });
   };
 };
 
@@ -405,10 +415,14 @@ export const checkout = (
         .doc(transactionId)
         .set(transactionData);
 
-      //  Create an order and transaction documents and delete checkout items in the cart
+      //  Create an order and transaction documents
       await Promise.all([orderRef, transactionRef]);
 
+      //  Remove items from cart
       cart.forEach(item => cartCollection.doc(item).delete());
+
+      //  Clear checkout details state
+      dispatch(clearCheckoutDetails());
 
       RootNavigation.navigate('OrderConfirmation');
 

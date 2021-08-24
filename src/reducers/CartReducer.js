@@ -10,6 +10,7 @@ import {
   SELECT_STORE_ID_IN_CART,
   SELECT_STORE_PRODUCTS,
   CLEAR_STORE_PRODUCTS,
+  CLEAR_CHECKOUT_DETAILS,
   CHANGE_CHECKOUT_DETAILS,
 } from '../actions/types';
 import {ADDRESS, PAYMENT_METHOD} from './blueprints';
@@ -158,6 +159,20 @@ const CartReducer = (state = initialState, action) => {
         checkoutDetails: {
           ...state.checkoutDetails,
           ...action.checkoutDetails,
+        },
+      };
+
+    case CLEAR_CHECKOUT_DETAILS:
+      return {
+        ...state,
+        checkoutDetails: {
+          ...initialState.checkoutDetails,
+          deliveryAddress: {
+            ...initialState.checkoutDetails.deliveryAddress,
+          },
+          contact: {
+            ...initialState.checkoutDetails.contact,
+          },
         },
       };
 

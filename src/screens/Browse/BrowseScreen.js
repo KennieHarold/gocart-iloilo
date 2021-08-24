@@ -66,7 +66,6 @@ class BrowseScreen extends React.PureComponent {
           <>
             <SearchSegment
               action={index => {
-                console.log('Index: ', index);
                 this.setState({selectedStoreIndex: index});
               }}
               index={selectedStoreIndex}
