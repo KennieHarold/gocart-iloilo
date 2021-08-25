@@ -61,7 +61,11 @@ const OrderItem = ({order}) => {
           style={{
             minWidth: RFValue(75),
             backgroundColor:
-              order.status === 'processing' ? 'orange' : Colors.error,
+              order.status === 'processing'
+                ? 'orange'
+                : order.status === 'delivered'
+                ? Colors.primary
+                : Colors.error,
           }}>
           <Text style={styles.orderItemStatusLabel}>{order.status}</Text>
         </Badge>

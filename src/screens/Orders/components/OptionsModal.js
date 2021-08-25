@@ -14,11 +14,13 @@ const OptionsModal = ({isVisible, onClose, cancelOrder, order}) => {
         customContainerStyles={{marginBottom: RFValue(15)}}
       />
       <PrimaryBigButton
-        disabled={order.status === 'cancelled'}
+        disabled={order.status === 'cancelled' || order.status === 'delivered'}
         action={cancelOrder ? cancelOrder : () => {}}
         text="Cancel Order"
         customContainerStyles={
-          order.status === 'cancelled' ? {backgroundColor: 'lightgray'} : null
+          order.status === 'cancelled' || order.status === 'delivered'
+            ? {backgroundColor: 'lightgray'}
+            : null
         }
       />
     </BottomModalContainer>

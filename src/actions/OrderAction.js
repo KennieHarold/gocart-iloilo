@@ -346,6 +346,13 @@ export const refreshProcessingOrders = () => {
   };
 };
 
+export const refreshDeliveredOrders = () => {
+  return dispatch => {
+    dispatch(clearProcessingOrders());
+    dispatch(getDeliveredOrders());
+  };
+};
+
 export const refreshCancelledOrders = () => {
   return dispatch => {
     dispatch(clearCancelledOrders());

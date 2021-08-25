@@ -14,9 +14,7 @@ class ProcessingTab extends React.Component {
     this.getOrders();
   }
 
-  getOrders = () => {
-    this.props.getProcessingOrders();
-  };
+  getOrders = () => this.props.getDeliveredOrders();
 
   renderFooter = () => (
     <View
@@ -34,36 +32,34 @@ class ProcessingTab extends React.Component {
 
   render() {
     const {
-      processingOrders,
-      refreshProcessingOrders,
-      isProcessingOrdersLoading,
-      isMoreProcessingOrdersLoading,
+      deliveredOrders,
+      refreshDeliveredOrders,
+      isDeliveredOrdersLoading,
+      isMoreDeliveredOrdersLoading,
     } = this.props;
 
-    return isProcessingOrdersLoading ? (
+    return isDeliveredOrdersLoading ? (
       <ActivityIndicator
         size="large"
         color={Colors.primary}
         style={{marginTop: Layout.defaultPaddingNum}}
       />
-    ) : processingOrders.length > 0 ? (
+    ) : deliveredOrders.length > 0 ? (
       <FlatList
         showsVerticalScrollIndicator={false}
         scrollEnabled
-        data={processingOrders}
-        keyExtractor={item => `processing-order-${item.id}`}
+        data={deliveredOrders}
+        keyExtractor={item => `delivered-order-${item.id}`}
         initialNumToRender={INITIAL_NUM_TO_RENDER}
-        refreshing={isProcessingOrdersLoading}
-        onRefresh={() => refreshProcessingOrders()}
+        refreshing={isDeliveredOrdersLoading}
+        onRefresh={() => refreshDeliveredOrders()}
         onEndReachedThreshold={0.5}
         onEndReached={
-          processingOrders.length > INITIAL_NUM_TO_RENDER
-            ? this.getOrders
-            : null
+          deliveredOrders.length > INITIAL_NUM_TO_RENDER ? this.getOrders : null
         }
         ListFooterComponent={() =>
-          isMoreProcessingOrdersLoading &&
-          processingOrders.length > INITIAL_NUM_TO_RENDER
+          isMoreDeliveredOrdersLoading &&
+          deliveredOrders.length > INITIAL_NUM_TO_RENDER
             ? this.renderFooter()
             : null
         }
@@ -73,33 +69,33 @@ class ProcessingTab extends React.Component {
       <View
         style={{...Layout.fullWidthCenterContainer, ...Layout.defaultPadding}}>
         <Text style={{color: Colors.readableText, fontSize: Fonts.size.mini}}>
-          You have no processing orders
+          You have no delivered orders
         </Text>
       </View>
     );
   }
 }
 
-const {getProcessingOrders, refreshProcessingOrders} = OrderAction;
+const {getDeliveredOrders, refreshDeliveredOrders} = OrderAction;
 
 const mapStateToProps = state => {
   const {
-    processingOrders,
-    isProcessingOrdersLoading,
-    isMoreProcessingOrdersLoading,
+    deliveredOrders,
+    isDeliveredOrdersLoading,
+    isMoreDeliveredOrdersLoading,
   } = state.order;
 
   const {availableStores} = state.store;
 
   return {
-    processingOrders,
-    isProcessingOrdersLoading,
-    isMoreProcessingOrdersLoading,
+    deliveredOrders,
+    isDeliveredOrdersLoading,
+    isMoreDeliveredOrdersLoading,
     availableStores,
   };
 };
 
 export default connect(mapStateToProps, {
-  getProcessingOrders,
-  refreshProcessingOrders,
+  getDeliveredOrders,
+  refreshDeliveredOrders,
 })(ProcessingTab);

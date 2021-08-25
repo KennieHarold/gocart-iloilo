@@ -33,6 +33,7 @@ class ProcessingTab extends React.Component {
   render() {
     const {
       cancelledOrders,
+      refreshCancelledOrders,
       isCancelledOrdersLoading,
       isMoreCancelledOrdersLoading,
     } = this.props;
@@ -50,6 +51,8 @@ class ProcessingTab extends React.Component {
         data={cancelledOrders}
         keyExtractor={item => `cancelled-order-${item.id}`}
         initialNumToRender={INITIAL_NUM_TO_RENDER}
+        refreshing={isCancelledOrdersLoading}
+        onRefresh={() => refreshCancelledOrders()}
         onEndReachedThreshold={0.5}
         onEndReached={
           cancelledOrders.length > INITIAL_NUM_TO_RENDER ? this.getOrders : null
@@ -73,7 +76,7 @@ class ProcessingTab extends React.Component {
   }
 }
 
-const {getCancelledOrders} = OrderAction;
+const {getCancelledOrders, refreshCancelledOrders} = OrderAction;
 
 const mapStateToProps = state => {
   const {
@@ -92,4 +95,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {getCancelledOrders})(ProcessingTab);
+export default connect(mapStateToProps, {
+  getCancelledOrders,
+  refreshCancelledOrders,
+})(ProcessingTab);
