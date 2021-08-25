@@ -3,12 +3,15 @@ import {View, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {TitleHeader} from '../../components/Headers';
 import {CartButton} from '../../components/Buttons';
-import {Container, Item, Input, Icon} from 'native-base';
+import {Container, Item, Input, Icon, Text} from 'native-base';
 import styles from './styles';
-import {Colors, Layout} from '../../styles';
+import {Colors, Fonts, Layout} from '../../styles';
 import {SearchAction} from '../../actions';
 import {groupProductsByStoreComputer} from '../../computers';
 import {SearchList, NoResults, SearchSegment} from './components';
+import FastImage from 'react-native-fast-image';
+import searchPlaceHolder from '../../assets/search-placeholder.png';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 class BrowseScreen extends React.PureComponent {
   state = {
@@ -32,6 +35,7 @@ class BrowseScreen extends React.PureComponent {
       searchQuery,
       groupedProducts,
       isSearchResultProductsLoading,
+      isSearchTriggered,
     } = this.props;
 
     const {selectedStoreIndex} = this.state;
@@ -71,10 +75,32 @@ class BrowseScreen extends React.PureComponent {
               index={selectedStoreIndex}
               products={groupedProducts}
             />
-            {Object.keys(groupedProducts).length > 0 ? (
-              <SearchList products={this.renderData()} />
+            {isSearchTriggered ? (
+              Object.keys(groupedProducts).length > 0 ? (
+                <SearchList products={this.renderData()} />
+              ) : (
+                <NoResults />
+              )
             ) : (
-              <NoResults />
+              <View
+                style={{
+                  ...Layout.fullWidthCenterContainer,
+                  marginTop: RFValue(50),
+                }}>
+                <FastImage
+                  source={searchPlaceHolder}
+                  style={{height: RFValue(150), width: RFValue(150)}}
+                  resizeMode={FastImage.resizeMode.contain}
+                />
+                <Text
+                  style={{
+                    fontSize: Fonts.size.mini,
+                    marginTop: 5,
+                    color: Colors.readableText,
+                  }}>
+                  Search everything here!
+                </Text>
+              </View>
             )}
           </>
         )}
@@ -86,8 +112,12 @@ class BrowseScreen extends React.PureComponent {
 const {searchProducts, changeSearchQuery} = SearchAction;
 
 const mapStateToProps = state => {
-  const {searchQuery, searchResultProducts, isSearchResultProductsLoading} =
-    state.search;
+  const {
+    searchQuery,
+    searchResultProducts,
+    isSearchResultProductsLoading,
+    isSearchTriggered,
+  } = state.search;
 
   const {availableStores} = state.store;
 
@@ -100,6 +130,7 @@ const mapStateToProps = state => {
     searchQuery,
     groupedProducts,
     isSearchResultProductsLoading,
+    isSearchTriggered,
   };
 };
 

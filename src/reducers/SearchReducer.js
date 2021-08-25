@@ -19,6 +19,10 @@ const initialState = {
   searchQuery: '',
   searchStoreQuery: '',
 
+  //  Triggers (Used to show welcome search icon)
+  isSearchTriggered: false,
+  isSearchStoreTriggered: false,
+
   //  Loaders
   isSearchResultProductsLoading: false,
   isSearchResultStoreProductsLoading: false,
@@ -56,6 +60,7 @@ const SearchReducer = (state = initialState, action) => {
     case CHANGE_SEARCH_RESULT_PRODUCTS_LOADING:
       return {
         ...state,
+        isSearchTriggered: true,
         isSearchResultProductsLoading: action.payload,
       };
 
@@ -69,6 +74,7 @@ const SearchReducer = (state = initialState, action) => {
     case CHANGE_SEARCH_RESULT_STORE_PRODUCTS_LOADING:
       return {
         ...state,
+        isSearchStoreTriggered: true,
         isSearchResultStoreProductsLoading: action.payload,
       };
 

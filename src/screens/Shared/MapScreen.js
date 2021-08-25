@@ -104,7 +104,7 @@ class MapScreen extends React.PureComponent {
           <PrimaryTextBox
             value={address.noteToRider}
             title="Landmarks"
-            placeholder="e.g. corner lot, red gate, in front of gas station"
+            placeholder="e.g. corner lot, red gate"
             onChangeText={e => noteToRiderChange(e)}
           />
         </View>

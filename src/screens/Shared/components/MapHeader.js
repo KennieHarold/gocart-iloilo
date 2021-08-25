@@ -65,6 +65,9 @@ const MapHeader = ({cb}) => {
           listView,
           textInput,
         }}
+        textInputProps={{
+          placeholderTextColor: Colors.readableText,
+        }}
         fetchDetails
         enablePoweredByContainer={false}
         placeholder="Find Location"
@@ -103,6 +106,9 @@ const autoCompleteStyles = StyleSheet.create({
     elevation: 3,
     backgroundColor: 'white',
     marginTop: 5,
+  },
+  placeholder: {
+    color: 'black',
   },
 });
 

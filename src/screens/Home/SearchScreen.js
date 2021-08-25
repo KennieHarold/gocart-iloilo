@@ -7,13 +7,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {Container, Content, Input, Icon, Item} from 'native-base';
+import {Container, Content, Input, Icon, Item, Text} from 'native-base';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Layout, Fonts, Colors} from '../../styles';
 import {SearchAction} from '../../actions';
 import {ProductCard} from '../../components/UIComponents';
 import styles from './styles';
 import NoResults from '../Browse/components/NoResults';
+import FastImage from 'react-native-fast-image';
 
 class SearchScreen extends React.PureComponent {
   componentWillUnmount() {
@@ -34,6 +35,7 @@ class SearchScreen extends React.PureComponent {
       searchResultStoreProducts,
       isSearchResultStoreProductsLoading,
       selectedStore,
+      isSearchStoreTriggered,
     } = this.props;
     return (
       <>
@@ -65,37 +67,65 @@ class SearchScreen extends React.PureComponent {
             </Item>
           </View>
           <Content>
-            {isSearchResultStoreProductsLoading ? (
-              <ActivityIndicator
-                color={Colors.primary}
-                size="large"
-                style={{marginTop: Layout.defaultPaddingNum}}
-              />
-            ) : searchResultStoreProducts.length > 0 ? (
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                scrollEnabled
-                data={searchResultStoreProducts}
-                keyExtractor={item => `search-result-store-product-${item.id}`}
-                numColumns={2}
-                columnWrapperStyle={{
-                  justifyContent: 'space-between',
-                }}
-                contentContainerStyle={{
-                  paddingHorizontal: RFValue(Layout.defaultPaddingNum),
-                  paddingTop: RFValue(15),
-                  paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
-                }}
-                renderItem={({item}) => {
-                  return (
-                    <View style={{marginBottom: RFValue(15)}}>
-                      <ProductCard product={item} />
-                    </View>
-                  );
-                }}
-              />
+            {isSearchStoreTriggered ? (
+              isSearchResultStoreProductsLoading ? (
+                <ActivityIndicator
+                  color={Colors.primary}
+                  size="large"
+                  style={{marginTop: Layout.defaultPaddingNum}}
+                />
+              ) : searchResultStoreProducts.length > 0 ? (
+                <FlatList
+                  showsVerticalScrollIndicator={false}
+                  scrollEnabled
+                  data={searchResultStoreProducts}
+                  keyExtractor={item =>
+                    `search-result-store-product-${item.id}`
+                  }
+                  numColumns={2}
+                  columnWrapperStyle={{
+                    justifyContent: 'space-between',
+                  }}
+                  contentContainerStyle={{
+                    paddingHorizontal: RFValue(Layout.defaultPaddingNum),
+                    paddingTop: RFValue(15),
+                    paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
+                  }}
+                  renderItem={({item}) => {
+                    return (
+                      <View style={{marginBottom: RFValue(15)}}>
+                        <ProductCard product={item} />
+                      </View>
+                    );
+                  }}
+                />
+              ) : (
+                <NoResults />
+              )
             ) : (
-              <NoResults />
+              <View
+                style={{
+                  ...Layout.fullWidthCenterContainer,
+                  marginTop: RFValue(25),
+                }}>
+                <FastImage
+                  resizeMode={FastImage.resizeMode.center}
+                  source={{uri: selectedStore.photoUri}}
+                  style={{
+                    height: RFValue(200),
+                    width: RFValue(200),
+                    //backgroundColor: 'red',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: Colors.readableText,
+                    fontSize: Fonts.size.mini,
+                    //fontWeight: '700',
+                  }}>
+                  Search in this store!
+                </Text>
+              </View>
             )}
           </Content>
         </Container>
@@ -116,6 +146,7 @@ const mapStateToProps = state => {
     searchResultStoreProducts,
     searchStoreQuery,
     isSearchResultStoreProductsLoading,
+    isSearchStoreTriggered,
   } = state.search;
 
   return {
@@ -123,6 +154,7 @@ const mapStateToProps = state => {
     searchResultStoreProducts,
     searchStoreQuery,
     isSearchResultStoreProductsLoading,
+    isSearchStoreTriggered,
   };
 };
 
