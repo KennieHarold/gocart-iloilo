@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StatusBar, ScrollView} from 'react-native';
+import {View, StatusBar, Linking} from 'react-native';
 import {connect} from 'react-redux';
 import {
   Text,
@@ -23,6 +23,7 @@ class ProfileScreen extends React.Component {
     const {
       user: {username, photoUrl, address},
       favorites,
+      cart,
       signOut,
       navigation,
     } = this.props;
@@ -92,7 +93,12 @@ class ProfileScreen extends React.Component {
       {
         id: 'profile-privacy-policy',
         title: 'Privacy Policy',
-        action: () => {},
+        action: () => {
+          const url = 'http://www.gocartiloilo.com/privacy-policy/';
+          Linking.openURL(url).catch(error => {
+            console.log(error);
+          });
+        },
         iconType: 'Ionicons',
         iconName: 'shield-checkmark-outline',
         isDivider: false,
@@ -100,7 +106,12 @@ class ProfileScreen extends React.Component {
       {
         id: 'profile-terms',
         title: 'Terms and Conditions',
-        action: () => {},
+        action: () => {
+          const url = 'http://www.gocartiloilo.com/terms-and-conditions/';
+          Linking.openURL(url).catch(error => {
+            console.log(error);
+          });
+        },
         iconType: 'SimpleLineIcons',
         iconName: 'notebook',
         isDivider: false,
@@ -199,14 +210,32 @@ class ProfileScreen extends React.Component {
                         <Text style={{fontSize: Fonts.size.min}}>Soon!</Text>
                       </Badge>
                     ) : null}
-                    {/* {profileItem.id === 'profile-my-favs' ? (
-                      <Badge danger style={{marginLeft: 10, height: 25}}>
-                        <Text
-                          style={{fontSize: Fonts.size.min, fontWeight: '700'}}>
-                          {favorites.length}
-                        </Text>
-                      </Badge>
-                    ) : null} */}
+                    {profileItem.id === 'profile-my-favs' ? (
+                      favorites.length > 0 ? (
+                        <Badge danger style={{marginLeft: 10, height: 25}}>
+                          <Text
+                            style={{
+                              fontSize: Fonts.size.min,
+                              fontWeight: '700',
+                            }}>
+                            {favorites.length}
+                          </Text>
+                        </Badge>
+                      ) : null
+                    ) : null}
+                    {profileItem.id === 'profile-my-cart' ? (
+                      cart.length > 0 ? (
+                        <Badge danger style={{marginLeft: 10, height: 25}}>
+                          <Text
+                            style={{
+                              fontSize: Fonts.size.min,
+                              fontWeight: '700',
+                            }}>
+                            {cart.length}
+                          </Text>
+                        </Badge>
+                      ) : null
+                    ) : null}
                   </Left>
                   <Right>
                     <Icon
@@ -230,8 +259,9 @@ const {signOut} = AuthAction;
 const mapStateToProps = state => {
   const {user} = state.currentUser;
   const {favorites} = state.favorites;
+  const {cart} = state.cart;
 
-  return {user, favorites};
+  return {user, favorites, cart};
 };
 
 export default connect(mapStateToProps, {signOut})(ProfileScreen);
