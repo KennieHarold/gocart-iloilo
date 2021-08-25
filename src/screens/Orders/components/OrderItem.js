@@ -67,7 +67,9 @@ const OrderItem = ({order}) => {
                 ? Colors.primary
                 : Colors.error,
           }}>
-          <Text style={styles.orderItemStatusLabel}>{order.status}</Text>
+          <Text maxFontSizeMultiplier={1.2} style={styles.orderItemStatusLabel}>
+            {order.status}
+          </Text>
         </Badge>
         <Icon
           type="AntDesign"

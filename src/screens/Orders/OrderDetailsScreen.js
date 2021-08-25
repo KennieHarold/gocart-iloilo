@@ -93,7 +93,11 @@ class OrderDetailsScreen extends React.Component {
         />
         {selectedOrder.status === 'cancelled' ? (
           <Badge style={{backgroundColor: Colors.error}}>
-            <Text style={{fontSize: Fonts.size.min}}>Cancelled</Text>
+            <Text
+              maxFontSizeMultiplier={1.2}
+              style={{fontSize: Fonts.size.min}}>
+              Cancelled
+            </Text>
           </Badge>
         ) : (
           <Text style={styles.orderDetailsLabel}>

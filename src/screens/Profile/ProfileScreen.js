@@ -207,13 +207,18 @@ class ProfileScreen extends React.Component {
                           marginLeft: 10,
                           backgroundColor: Colors.secondary,
                         }}>
-                        <Text style={{fontSize: Fonts.size.min}}>Soon!</Text>
+                        <Text
+                          maxFontSizeMultiplier={1.1}
+                          style={{fontSize: Fonts.size.min}}>
+                          Soon!
+                        </Text>
                       </Badge>
                     ) : null}
                     {profileItem.id === 'profile-my-favs' ? (
                       favorites.length > 0 ? (
                         <Badge danger style={{marginLeft: 10, height: 25}}>
                           <Text
+                            maxFontSizeMultiplier={1.1}
                             style={{
                               fontSize: Fonts.size.min,
                               fontWeight: '700',
@@ -227,6 +232,7 @@ class ProfileScreen extends React.Component {
                       cart.length > 0 ? (
                         <Badge danger style={{marginLeft: 10, height: 25}}>
                           <Text
+                            maxFontSizeMultiplier={1.1}
                             style={{
                               fontSize: Fonts.size.min,
                               fontWeight: '700',
