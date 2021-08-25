@@ -89,7 +89,12 @@ const mapStateToProps = state => {
   const {searchQuery, searchResultProducts, isSearchResultProductsLoading} =
     state.search;
 
-  const groupedProducts = groupProductsByStoreComputer(searchResultProducts);
+  const {availableStores} = state.store;
+
+  const groupedProducts = groupProductsByStoreComputer(
+    searchResultProducts,
+    availableStores,
+  );
 
   return {
     searchQuery,

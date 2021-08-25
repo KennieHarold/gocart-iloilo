@@ -20,9 +20,9 @@ class SearchList extends React.PureComponent {
           justifyContent: 'space-between',
         }}
         contentContainerStyle={{
-          paddingHorizontal: RFValue(Layout.defaultPaddingNum),
+          paddingHorizontal: Layout.defaultPaddingNum,
           paddingTop: Layout.defaultPaddingNum,
-          paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
+          paddingBottom: Layout.defaultPaddingNum * 2,
         }}
         renderItem={({item}) => {
           return (

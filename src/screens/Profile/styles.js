@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     marginRight: RFValue(15),
     fontSize: Fonts.size.small,
     color: Colors.readableText,
+    width: RFValue(22),
   },
   profileItemTitle: {
     fontSize: Fonts.size.mini,

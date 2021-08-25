@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   productCardFavIcon: {
     fontSize: Fonts.size.medium,
-    width: 22,
+    width: RFValue(23),
     color: Colors.gold,
     marginRight: RFValue(5),
   },

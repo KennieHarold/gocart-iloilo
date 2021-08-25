@@ -28,7 +28,7 @@ const FavoriteItem = ({product}) => {
 
   return (
     <ListItem noIndent>
-      <Left style={{flex: 1.25}}>
+      <Left style={{flex: 1.2}}>
         <FastImage
           resizeMode={FastImage.resizeMode.contain}
           source={{uri: product.photoUri}}
@@ -77,7 +77,7 @@ const FavoriteItem = ({product}) => {
           </Text>
         </TouchableOpacity>
       </Body>
-      <Right style={[{flex: 1}]}>
+      <Right style={{flex: 1}}>
         <TouchableOpacity
           onPress={() => dispatch(toggleFavorites(product, true))}
           activeOpacity={0.7}>

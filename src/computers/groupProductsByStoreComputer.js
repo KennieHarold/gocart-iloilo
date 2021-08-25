@@ -1,18 +1,23 @@
-const groupProductsByStoreComputer = products => {
+const groupProductsByStoreComputer = (products, availableStores) => {
   let groupedProducts = {};
 
   products.forEach(product => {
     const storeId = product.storeId;
+    const storeIndex = availableStores.findIndex(store => store.id === storeId);
 
     if (groupedProducts[storeId] !== undefined) {
-      groupedProducts[storeId].products = [
-        ...groupedProducts[storeId].products,
-        product,
-      ];
+      if (storeIndex !== -1) {
+        groupedProducts[storeId].products = [
+          ...groupedProducts[storeId].products,
+          product,
+        ];
+      }
     } else {
-      groupedProducts[storeId] = {
-        products: [product],
-      };
+      if (storeIndex !== -1) {
+        groupedProducts[storeId] = {
+          products: [product],
+        };
+      }
     }
   });
 

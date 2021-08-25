@@ -22,11 +22,10 @@ class FavoritesScreen extends React.PureComponent {
             scrollEnabled
             data={favorites}
             contentContainerStyle={{
-              paddingBottom: RFValue(200),
+              paddingBottom: RFValue(75),
             }}
             keyExtractor={item => `favorite-${item.id}`}
             initialNumToRender={INITIAL_NUM_TO_RENDER}
-            //onEndReachedThreshold={0.5}
             renderItem={({item}) => <FavoriteItem product={item} />}
           />
         ) : (
