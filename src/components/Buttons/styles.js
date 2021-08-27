@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   },
   searchWideButtonItem: {
     borderColor: 'transparent',
-    backgroundColor: Colors.lightBackground,
-    height: RFValue(43),
+    backgroundColor: 'white',
+    height: RFValue(35),
     borderRadius: RFValue(15),
     paddingHorizontal: RFValue(10),
     marginLeft: 0,

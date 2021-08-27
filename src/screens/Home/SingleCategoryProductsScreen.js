@@ -69,11 +69,12 @@ class SingleCategoryProductsScreen extends React.PureComponent {
             keyExtractor={item => `single-category-product-${item.id}`}
             numColumns={2}
             columnWrapperStyle={{
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
             }}
             contentContainerStyle={{
               paddingHorizontal: Layout.defaultPaddingNum,
               paddingBottom: Layout.defaultPaddingNum * 2,
+              paddingTop: RFValue(15),
             }}
             initialNumToRender={INITIAL_NUM_TO_RENDER}
             onEndReachedThreshold={0.5}

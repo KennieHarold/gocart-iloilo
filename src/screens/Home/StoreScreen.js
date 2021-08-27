@@ -3,7 +3,7 @@ import {View, ActivityIndicator} from 'react-native';
 import {Text, Container, Content, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {Layout, Colors} from '../../styles';
-import FastImage from 'react-native-fast-image';
+//import FastImage from 'react-native-fast-image';
 import {ScreenHeader} from '../../components/Headers';
 import {CartButton, SearchWideButton} from '../../components/Buttons';
 import {CategoriesSection, ProductsContent} from './components';
@@ -38,15 +38,22 @@ class StoreScreen extends React.Component {
       <Container>
         <ScreenHeader title={name} rightKey={<CartButton />} />
         <Content>
-          <View style={{width: '100%'}}>
+          {/* <View style={{width: '100%'}}>
             <FastImage
               source={{uri: photoUri}}
               style={styles.storeScreenCover}
               resizeMode={FastImage.resizeMode.contain}
             />
-          </View>
-          <View style={{...Layout.defaultPadding}}>
-            <SearchWideButton action={() => navigation.navigate('Search')} />
+          </View> */}
+          <View
+            style={{
+              ...Layout.defaultPadding,
+              backgroundColor: Colors.primary,
+            }}>
+            <SearchWideButton
+              action={() => navigation.navigate('Search')}
+              placeholder="Search for products or brand"
+            />
           </View>
           {isSelectedStoreCategoriesLoading ? (
             <ActivityIndicator

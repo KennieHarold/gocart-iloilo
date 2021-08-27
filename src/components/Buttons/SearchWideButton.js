@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import {Item, Icon, Input} from 'native-base';
 import styles from './styles';
 
-const SearchWideButton = ({action}) => {
+const SearchWideButton = ({action, placeholder}) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={action}>
       <View pointerEvents="none">
@@ -11,7 +11,7 @@ const SearchWideButton = ({action}) => {
           <Icon name="ios-search" style={styles.searchWideButtonIcon} />
           <Input
             disabled
-            placeholder="Search"
+            placeholder={placeholder ? placeholder : 'Search'}
             style={styles.searchWideButtonInput}
             placeholderTextColor="gray"
           />

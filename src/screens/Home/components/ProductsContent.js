@@ -98,7 +98,7 @@ const ProductsContent = ({categories}) => {
 
   return (
     <View style={{width: '100%', marginBottom: Layout.defaultPaddingNum * 2}}>
-      <View style={styles.productsContentDiv} />
+      {/* <View style={styles.productsContentDiv} /> */}
       <View style={{marginTop: 15}}>
         {isLoading ? (
           <ActivityIndicator

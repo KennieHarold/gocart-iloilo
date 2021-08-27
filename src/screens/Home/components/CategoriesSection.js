@@ -1,14 +1,18 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
-import {Text} from 'native-base';
-import {Layout, Fonts} from '../../../styles';
+//import {Text} from 'native-base';
+import {Colors} from '../../../styles';
 import CategoryItem from './CategoryItem';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 const CategoriesSection = ({categories}) => {
   return (
-    <View style={{paddingBottom: Layout.defaultPaddingNum}}>
-      <View
+    <View
+      style={{
+        paddingVertical: RFValue(15),
+        backgroundColor: Colors.lightBackground,
+      }}>
+      {/* <View
         style={{
           marginHorizontal: Layout.defaultPaddingNum,
           marginBottom: Layout.defaultPaddingNum,
@@ -16,7 +20,7 @@ const CategoriesSection = ({categories}) => {
         <Text style={{fontSize: Fonts.size.small, fontWeight: '700'}}>
           Categories
         </Text>
-      </View>
+      </View> */}
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -25,7 +29,7 @@ const CategoriesSection = ({categories}) => {
         data={categories}
         keyExtractor={item => item.id}
         contentContainerStyle={{
-          paddingHorizontal: RFValue(15),
+          paddingHorizontal: RFValue(20),
         }}
         initialNumToRender={5}
         renderItem={({item}) => <CategoryItem category={item} />}
