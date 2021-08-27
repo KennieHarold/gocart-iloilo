@@ -157,7 +157,7 @@ android {
         release {
             storeFile file('gocartiloilo.keystore')
             storePassword "@gocartiloilo"
-            keyAlias "gocartiloilo"
+            keyAlias "gocart"
             keyPassword "@gocartiloilo"
         }
     }
