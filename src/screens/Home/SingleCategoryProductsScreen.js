@@ -8,6 +8,7 @@ import {ProductCard} from '../../components/UIComponents';
 import {StoreAction} from '../../actions';
 import {Colors, Layout} from '../../styles';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {validateProduct} from '../../helpers';
 
 const INITIAL_NUM_TO_RENDER = 6;
 
@@ -89,11 +90,13 @@ class SingleCategoryProductsScreen extends React.PureComponent {
                 ? this.renderFooter()
                 : null
             }
-            renderItem={({item}) => (
-              <View style={{marginBottom: RFValue(10)}}>
-                <ProductCard product={item} />
-              </View>
-            )}
+            renderItem={({item}) => {
+              return validateProduct ? (
+                <View style={{marginBottom: RFValue(10)}}>
+                  <ProductCard product={item} />
+                </View>
+              ) : null;
+            }}
           />
         )}
       </Container>

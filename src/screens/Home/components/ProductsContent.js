@@ -12,6 +12,7 @@ import {Colors, Fonts, Layout} from '../../../styles';
 import {StoreAction} from '../../../actions';
 import styles from './styles';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {validateProduct} from '../../../helpers';
 
 const {getProductsByCategoryList, navigateSingleCategoryProductsScreen} =
   StoreAction;
@@ -58,15 +59,17 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
           backgroundColor: Colors.lightBackground,
         }}
         initialNumToRender={3}
-        renderItem={({item}) => (
-          <View
-            style={{
-              marginHorizontal: RFValue(5),
-              paddingVertical: RFValue(15),
-            }}>
-            <ProductCard product={item} />
-          </View>
-        )}
+        renderItem={({item}) => {
+          return validateProduct(item) ? (
+            <View
+              style={{
+                marginHorizontal: RFValue(5),
+                paddingVertical: RFValue(15),
+              }}>
+              <ProductCard product={item} />
+            </View>
+          ) : null;
+        }}
       />
     </View>
   );

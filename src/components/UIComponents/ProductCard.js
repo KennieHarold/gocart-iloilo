@@ -20,12 +20,14 @@ const ProductCard = ({product}) => {
     return index !== -1;
   });
 
+  const photoUri = product.photoUri ? product.photoUri : null;
+
   return (
     <TouchableOpacity activeOpacity={1}>
       <Card style={styles.productCard}>
         <CardItem cardBody style={styles.productCardImageContainer}>
           <FastImage
-            source={{uri: product.photoUri}}
+            source={{uri: photoUri}}
             resizeMode={FastImage.resizeMode.contain}
             style={styles.productCardImage}
           />

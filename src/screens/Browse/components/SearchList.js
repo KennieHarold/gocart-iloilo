@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {FlatList} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {ProductCard} from '../../../components/UIComponents';
+import {validateProduct} from '../../../helpers';
 import {Layout} from '../../../styles';
 
 class SearchList extends React.PureComponent {
@@ -25,11 +26,11 @@ class SearchList extends React.PureComponent {
           paddingBottom: Layout.defaultPaddingNum * 2,
         }}
         renderItem={({item}) => {
-          return (
+          return validateProduct(item) ? (
             <View style={{marginBottom: RFValue(15)}}>
               <ProductCard product={item} />
             </View>
-          );
+          ) : null;
         }}
       />
     );

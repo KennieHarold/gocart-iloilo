@@ -15,6 +15,7 @@ import {ProductCard} from '../../components/UIComponents';
 import styles from './styles';
 import NoResults from '../Browse/components/NoResults';
 import FastImage from 'react-native-fast-image';
+import {validateProduct} from '../../helpers';
 
 class SearchScreen extends React.PureComponent {
   componentWillUnmount() {
@@ -92,11 +93,11 @@ class SearchScreen extends React.PureComponent {
                     paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
                   }}
                   renderItem={({item}) => {
-                    return (
+                    return validateProduct ? (
                       <View style={{marginBottom: RFValue(15)}}>
                         <ProductCard product={item} />
                       </View>
-                    );
+                    ) : null;
                   }}
                 />
               ) : (

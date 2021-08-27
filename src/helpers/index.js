@@ -3,6 +3,7 @@ import hdifyPP from './hdifyPP';
 import parseDeliverySchedule from './parseDeliverySchedule';
 import parsePaymentMethod from './parsePaymentMethod';
 import toDecimal from './toDecimal';
+import validateProduct from './validateProduct';
 
 export {
   errorHandler,
@@ -10,4 +11,5 @@ export {
   parseDeliverySchedule,
   parsePaymentMethod,
   toDecimal,
+  validateProduct,
 };
