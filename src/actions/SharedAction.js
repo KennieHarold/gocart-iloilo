@@ -364,6 +364,9 @@ export const startPhoneVerification = phone => {
     } catch (error) {
       console.log(error);
 
+      //  Just to make sure
+      dispatch(showSimpleLoadingModal(false));
+
       if (error.message === 'wrong-format') {
         errorHandler(dispatch, 'shared/wrong-format-phone');
       } else if (error.message === 'already-exists') {

@@ -13,7 +13,7 @@ const productCardDefaultPadding = {
 const styles = StyleSheet.create({
   productCard: {
     borderRadius: RFValue(10),
-    width: Dimensions.get('screen').width / 2 - 38,
+    width: RFValue(140),
     borderWidth: RFValue(1),
     padding: RFValue(1),
   },
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.medium,
     width: RFValue(23),
     color: Colors.gold,
-    marginRight: RFValue(5),
+    marginRight: RFValue(3),
   },
   productCardFavLabel: {
     fontSize: Fonts.size.min - 1,

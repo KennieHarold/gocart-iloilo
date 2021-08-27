@@ -146,9 +146,7 @@ const sendEmailVerification = dispatch => {
       dispatch(
         showAlert({
           isDisplayed: true,
-          text: 'We have sent an email with a verification link to your email address. \
-          Please verify your email before logging in',
-
+          text: 'We have sent an email with a verification link to your email address. Please verify your email before logging in',
           actionText: 'LOGIN NOW',
           action: () => RootNavigation.navigate('Onboarding'),
           status: 'info',
