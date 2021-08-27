@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   searchItem: {
     borderColor: 'transparent',
     backgroundColor: Colors.lightBackground,
-    height: RFValue(50),
+    height: RFValue(40),
     borderRadius: RFValue(15),
     paddingHorizontal: RFValue(10),
     marginLeft: 0,

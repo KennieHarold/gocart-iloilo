@@ -1,3 +1,4 @@
+import {validateProduct} from '../helpers';
 import {
   searchProductsByProductName,
   searchStoreProductsByProductName,
@@ -87,7 +88,9 @@ export const searchProducts = query => {
 
     //  Use foreach to add the products one by one
     products.forEach(product => {
-      dispatch(addSearchResultProduct(product));
+      if (validateProduct(product)) {
+        dispatch(addSearchResultProduct(product));
+      }
     });
 
     dispatch(changeSearchQuery(''));
@@ -104,7 +107,9 @@ export const searchStoreProducts = (query, storeId) => {
 
     //  Use foreach to add the products one by one
     products.forEach(product => {
-      dispatch(addSearchResultStoreProduct(product));
+      if (validateProduct(product)) {
+        dispatch(addSearchResultStoreProduct(product));
+      }
     });
 
     dispatch(changeSearchResultStoreProductsLoading(false));

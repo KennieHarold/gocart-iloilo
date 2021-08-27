@@ -4,7 +4,7 @@ import {
   categoryCollection,
   productCollection,
 } from '../firebase/collections';
-import {errorHandler} from '../helpers';
+import {errorHandler, validateProduct} from '../helpers';
 import {
   ADD_AVAILABLE_STORE,
   ADD_SELECTED_STORE_CATEGORIES,
@@ -160,7 +160,10 @@ export const getProductsByCategoryList = (categories, selectedStore) => {
             let products = [];
             snapshots.docs.forEach(doc => {
               let data = doc.data();
-              products.push(data);
+
+              if (validateProduct(data)) {
+                products.push(data);
+              }
             });
             dispatch(
               addSelectedStoreCategorizedProducts({
@@ -251,7 +254,10 @@ export const getSingleCategoryProducts = category => {
         if (snapshots.size > 0) {
           snapshots.docs.forEach(doc => {
             let data = doc.data();
-            dispatch(addSingleCategoryProduct(data));
+
+            if (validateProduct(data)) {
+              dispatch(addSingleCategoryProduct(data));
+            }
           });
         }
       } catch (error) {
@@ -274,7 +280,10 @@ export const getSingleCategoryProducts = category => {
         if (snapshots.size > 0) {
           snapshots.docs.forEach(doc => {
             let data = doc.data();
-            dispatch(addSingleCategoryProduct(data));
+
+            if (validateProduct(data)) {
+              dispatch(addSingleCategoryProduct(data));
+            }
           });
         }
       } catch (error) {

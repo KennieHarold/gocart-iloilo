@@ -1,10 +1,13 @@
 import axios from 'axios';
 import {ELASTIC_SEARCH_API_URL, ELASTIC_SEARCH_API_KEY} from '@env';
 
+const apiUrl = ELASTIC_SEARCH_API_URL;
+const apiKey = ELASTIC_SEARCH_API_KEY;
+
 const searchApi = axios.create({
-  baseURL: ELASTIC_SEARCH_API_URL,
+  baseURL: apiUrl,
   headers: {
-    Authorization: 'Basic ' + ELASTIC_SEARCH_API_KEY,
+    Authorization: 'Basic ' + apiKey,
     'Content-Type': 'application/json',
   },
 });
