@@ -156,7 +156,7 @@ export const getProductsByCategoryList = (categories, selectedStore) => {
             .limit(10)
             .get();
 
-          if (snapshots.size > 0) {
+          if (snapshots.size >= 10) {
             let products = [];
             snapshots.docs.forEach(doc => {
               let data = doc.data();
