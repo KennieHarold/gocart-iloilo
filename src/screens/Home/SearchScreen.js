@@ -11,11 +11,10 @@ import {Container, Content, Input, Icon, Item, Text} from 'native-base';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Layout, Fonts, Colors} from '../../styles';
 import {SearchAction} from '../../actions';
-import {ProductCard} from '../../components/UIComponents';
+import {GhostProductCard, ProductCard} from '../../components/UIComponents';
 import styles from './styles';
 import NoResults from '../Browse/components/NoResults';
 import FastImage from 'react-native-fast-image';
-import {validateProduct} from '../../helpers';
 
 class SearchScreen extends React.PureComponent {
   componentWillUnmount() {
@@ -85,19 +84,25 @@ class SearchScreen extends React.PureComponent {
                   }
                   numColumns={2}
                   columnWrapperStyle={{
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-around',
                   }}
                   contentContainerStyle={{
                     paddingHorizontal: RFValue(Layout.defaultPaddingNum),
                     paddingTop: RFValue(15),
                     paddingBottom: RFValue(Layout.defaultPaddingNum * 2),
                   }}
-                  renderItem={({item}) => {
-                    return validateProduct ? (
-                      <View style={{marginBottom: RFValue(15)}}>
-                        <ProductCard product={item} />
-                      </View>
-                    ) : null;
+                  renderItem={({item, index}) => {
+                    return (
+                      <>
+                        <View style={{marginBottom: RFValue(15)}}>
+                          <ProductCard product={item} />
+                        </View>
+                        <GhostProductCard
+                          products={searchResultStoreProducts}
+                          index={index}
+                        />
+                      </>
+                    );
                   }}
                 />
               ) : (

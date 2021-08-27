@@ -37,12 +37,17 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
                 ),
               )
             }
+            style={{flexDirection: 'row', alignItems: 'center'}}
             activeOpacity={0.6}>
-            {/* <Text style={styles.seeMore}>See more</Text> */}
+            <Text style={styles.seeMore}>More</Text>
             <Icon
               type="AntDesign"
               name="right"
-              style={{fontSize: Fonts.size.verySmall}}
+              style={{
+                fontSize: Fonts.size.verySmall,
+                marginLeft: 3,
+                color: Colors.readableText,
+              }}
             />
           </TouchableOpacity>
         </View>
@@ -60,7 +65,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
         }}
         initialNumToRender={3}
         renderItem={({item}) => {
-          return validateProduct(item) ? (
+          return (
             <View
               style={{
                 marginHorizontal: RFValue(5),
@@ -68,7 +73,7 @@ const MemoizedSection = React.memo(({categorizedProduct}) => {
               }}>
               <ProductCard product={item} />
             </View>
-          ) : null;
+          );
         }}
       />
     </View>

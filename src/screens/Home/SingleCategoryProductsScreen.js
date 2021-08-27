@@ -4,11 +4,10 @@ import {Container, View} from 'native-base';
 import {connect} from 'react-redux';
 import {ScreenHeader} from '../../components/Headers';
 import {CartButton} from '../../components/Buttons';
-import {ProductCard} from '../../components/UIComponents';
+import {GhostProductCard, ProductCard} from '../../components/UIComponents';
 import {StoreAction} from '../../actions';
 import {Colors, Layout} from '../../styles';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {validateProduct} from '../../helpers';
 
 const INITIAL_NUM_TO_RENDER = 6;
 
@@ -90,12 +89,18 @@ class SingleCategoryProductsScreen extends React.PureComponent {
                 ? this.renderFooter()
                 : null
             }
-            renderItem={({item}) => {
-              return validateProduct ? (
-                <View style={{marginBottom: RFValue(10)}}>
-                  <ProductCard product={item} />
-                </View>
-              ) : null;
+            renderItem={({item, index}) => {
+              return (
+                <>
+                  <View style={{marginBottom: RFValue(10)}}>
+                    <ProductCard product={item} />
+                  </View>
+                  <GhostProductCard
+                    products={singleCategoryProducts}
+                    index={index}
+                  />
+                </>
+              );
             }}
           />
         )}
