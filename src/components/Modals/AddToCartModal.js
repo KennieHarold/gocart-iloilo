@@ -38,11 +38,7 @@ const AddToCartModal = () => {
     if (pressedProduct.from === 'store') {
       return selectedStore;
     } else if (pressedProduct.from === 'search') {
-      if (Object.entries(selectedStore).length <= 0) {
-        return tempSelectedStore;
-      } else {
-        throw new Error('No selected store');
-      }
+      return tempSelectedStore;
     } else {
       throw new Error('Property from is undefined');
     }
