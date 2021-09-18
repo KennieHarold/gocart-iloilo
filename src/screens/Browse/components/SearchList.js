@@ -28,7 +28,7 @@ class SearchList extends React.PureComponent {
           return (
             <>
               <View style={{marginBottom: RFValue(15)}}>
-                <ProductCard product={item} />
+                <ProductCard product={item} from="search" />
               </View>
               <GhostProductCard products={products} index={index} />
             </>

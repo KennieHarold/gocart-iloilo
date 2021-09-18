@@ -32,7 +32,7 @@ import {addressResetState, phoneResetState} from './SharedAction';
 import {showSimpleLoadingModal} from './ModalAlertAction';
 
 /*********************** Dispatchers *********************************/
-export const selectPressedProduct = product => {
+export const selectPressedProduct = (product, from) => {
   return {
     type: SELECT_PRESSED_PRODUCT,
     payload: {
@@ -40,6 +40,7 @@ export const selectPressedProduct = product => {
       pressedProduct: {
         product,
         qty: 1,
+        from,
       },
     },
   };

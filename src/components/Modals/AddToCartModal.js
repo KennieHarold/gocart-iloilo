@@ -18,6 +18,8 @@ const {
 } = CartAction;
 
 const AddToCartModal = () => {
+  const dispatch = useDispatch();
+
   const [isPressedProduct, pressedProduct, selectedStore] = useSelector(
     state => {
       return [
@@ -31,7 +33,20 @@ const AddToCartModal = () => {
   //  If user doen't choose a store. Use this
   const tempSelectedStore = useSelector(state => state.store.tempSelectedStore);
 
-  const dispatch = useDispatch();
+  //  Decided if the the addcart modal was clicked on store or search
+  const getStore = () => {
+    if (pressedProduct.from === 'store') {
+      return selectedStore;
+    } else if (pressedProduct.from === 'search') {
+      if (Object.entries(selectedStore).length <= 0) {
+        return tempSelectedStore;
+      } else {
+        throw new Error('No selected store');
+      }
+    } else {
+      throw new Error('Property from is undefined');
+    }
+  };
 
   return (
     <BottomModalContainer
@@ -72,11 +87,7 @@ const AddToCartModal = () => {
         </View>
         <PrimaryBigButton
           action={() => {
-            let store =
-              Object.entries(selectedStore).length > 0
-                ? selectedStore
-                : tempSelectedStore;
-
+            let store = getStore();
             dispatch(addProductToCart(pressedProduct, store));
           }}
           text="Add to cart"

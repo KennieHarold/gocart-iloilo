@@ -7,10 +7,11 @@ import styles from './styles';
 import {toDecimal} from '../../helpers';
 import {CartAction, FavoritesAction} from '../../actions';
 
+//  Actions
 const {selectPressedProduct} = CartAction;
 const {toggleFavorites} = FavoritesAction;
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, from}) => {
   const dispatch = useDispatch();
 
   const isFavorite = useSelector(state => {
@@ -21,6 +22,14 @@ const ProductCard = ({product}) => {
   });
 
   const photoUri = product.photoUri ? product.photoUri : null;
+
+  const handlePress = () => {
+    if (from && from !== undefined) {
+      dispatch(selectPressedProduct(product, from));
+    } else {
+      dispatch(selectPressedProduct(product, 'store'));
+    }
+  };
 
   return (
     <TouchableOpacity activeOpacity={1}>
@@ -71,7 +80,7 @@ const ProductCard = ({product}) => {
         </CardItem>
         <CardItem style={styles.productCardFooter}>
           <TouchableOpacity
-            onPress={() => dispatch(selectPressedProduct(product))}
+            onPress={() => handlePress()}
             activeOpacity={0.8}
             style={styles.addCartButton}>
             <Icon

@@ -16,18 +16,25 @@ import {
 import {ADDRESS, PAYMENT_METHOD} from './blueprints';
 
 const initialState = {
-  //  Cart
+  //  This is uses in the cart screen when user presses one of the checkboxes
   selectedStoreId: '',
   selectedStoreProducts: {},
+
+  //  This is used when user presses add to cart in the product cart
   isPressedProduct: false,
   pressedProduct: {
     product: {},
     qty: 0,
+    from: 'store',
   },
+
+  //  Cart Loading
   isCartLoading: false,
+
+  //  Cart Items
   cart: [],
 
-  //  Checkout
+  //  Checkout Object
   checkoutDetails: {
     subTotal: 0,
     deliverySchedule: [undefined, undefined],
@@ -56,6 +63,7 @@ const CartReducer = (state = initialState, action) => {
         pressedProduct: {
           product: action.payload.pressedProduct.product,
           qty: action.payload.pressedProduct.qty,
+          from: action.payload.pressedProduct.from,
         },
       };
 

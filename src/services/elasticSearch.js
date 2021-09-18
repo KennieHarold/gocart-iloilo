@@ -1,8 +1,15 @@
 import axios from 'axios';
-import {ELASTIC_SEARCH_API_URL, ELASTIC_SEARCH_API_KEY} from '@env';
+import {
+  ELASTIC_SEARCH_API_URL,
+  ELASTIC_SEARCH_DEV_API_URL,
+  ELASTIC_SEARCH_API_KEY,
+  APP_ENV,
+} from '@env';
 
-const apiUrl = ELASTIC_SEARCH_API_URL;
+const appEnv = APP_ENV;
 const apiKey = ELASTIC_SEARCH_API_KEY;
+const apiUrl =
+  appEnv === 'production' ? ELASTIC_SEARCH_API_URL : ELASTIC_SEARCH_DEV_API_URL;
 
 const searchApi = axios.create({
   baseURL: apiUrl,

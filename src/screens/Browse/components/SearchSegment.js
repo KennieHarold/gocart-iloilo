@@ -17,6 +17,7 @@ class SearchSegment extends React.PureComponent {
     }
   }
 
+  //  This will select a temporary store because we are in the browse screen where the store is undefined
   selectTempStoreInSegment = () => {
     const {availableStores, selectTempStore} = this.props;
 

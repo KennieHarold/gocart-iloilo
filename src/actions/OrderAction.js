@@ -348,7 +348,7 @@ export const refreshProcessingOrders = () => {
 
 export const refreshDeliveredOrders = () => {
   return dispatch => {
-    dispatch(clearProcessingOrders());
+    dispatch(clearDeliveredOrders());
     dispatch(getDeliveredOrders());
   };
 };
@@ -373,7 +373,7 @@ export const cancelOrder = order => {
 
     await orderCollection
       .doc(order.id)
-      .update({status: 'cancelled'})
+      .update({status: 'cancelled', cancelledAt: new Date()})
       .then(() => {
         dispatch(refreshProcessingOrders());
         dispatch(refreshCancelledOrders());
