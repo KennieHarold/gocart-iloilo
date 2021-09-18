@@ -13,8 +13,15 @@ import {
   AUTH_RESET_STATE,
   HAS_USER_DOCUMENT_CHANGE,
   AUTH_LOADING_CHANGE,
+  SETTINGS_PASS_CHANGE,
+  SETTINGS_CONFIRM_PASS_CHANGE,
+  SETTINGS_NEW_PASS_CHANGE,
 } from './types';
-import {showLoadingModal, showAlert} from './ModalAlertAction';
+import {
+  showLoadingModal,
+  showAlert,
+  showSimpleLoadingModal,
+} from './ModalAlertAction';
 import {currentUserResetState} from './CurrentUserAction';
 import {profileResetState} from './ProfileAction';
 import {storeResetState} from './StoreAction';
@@ -203,6 +210,27 @@ export const authLoadingChange = payload => {
   };
 };
 
+export const settingsPassChange = text => {
+  return {
+    type: SETTINGS_PASS_CHANGE,
+    text,
+  };
+};
+
+export const settingsNewPassChange = text => {
+  return {
+    type: SETTINGS_NEW_PASS_CHANGE,
+    text,
+  };
+};
+
+export const settingsConfirmPassChange = text => {
+  return {
+    type: SETTINGS_CONFIRM_PASS_CHANGE,
+    text,
+  };
+};
+
 /************************ Public functions **********************************/
 
 export const signInWithFacebook = () => {
@@ -322,6 +350,42 @@ export const checkUserLoggedIn = () => {
         dispatch(authLoadingChange(false));
       }
     });
+  };
+};
+
+export const changePassword = (password, newPassword, confirmPassword) => {
+  return async dispatch => {
+    dispatch(showSimpleLoadingModal(true));
+
+    try {
+      const user = auth().currentUser;
+      const credential = firebase.auth.EmailAuthProvider.credential(
+        user.email,
+        password,
+      );
+
+      if (newPassword === confirmPassword) {
+        await user.reauthenticateWithCredential(credential);
+        await user.updatePassword(newPassword);
+
+        dispatch(
+          showAlert({
+            isDisplayed: true,
+            text: 'Your password was successfully updated',
+            status: 'success',
+          }),
+        );
+
+        RootNavigation.navigate('Profile');
+      } else {
+        errorHandler(dispatch, 'auth/passwords-doesnt-match');
+      }
+    } catch (error) {
+      console.log(error);
+      errorHandler(dispatch, error.code);
+    }
+
+    dispatch(showSimpleLoadingModal(false));
   };
 };
 

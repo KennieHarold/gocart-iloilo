@@ -98,7 +98,7 @@ class MapScreen extends React.PureComponent {
             value={address.detailedAddress}
             title="Detailed Address"
             placeholder="House Number, Subdv, Barangay"
-            customItemStyles={{marginBottom: 10}}
+            customItemStyles={{marginBottom: RFValue(10)}}
             onChangeText={e => detailedAddressChange(e)}
           />
           <PrimaryTextBox

@@ -134,6 +134,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: Fonts.size.verySmall,
   },
+  versionFooter: {
+    textAlign: 'center',
+    marginTop: RFValue(50),
+    marginBottom: RFValue(10),
+    fontSize: Fonts.size.min,
+    color: 'gray',
+  },
 });
 
 export default styles;

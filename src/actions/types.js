@@ -6,6 +6,9 @@ export const PASSWORD_CHANGE = 'password_change';
 export const AUTH_RESET_STATE = 'auth_reset_state';
 export const CONFIRM_PASSWORD_CHANGE = 'confirm_password_change';
 export const HAS_USER_DOCUMENT_CHANGE = 'has_user_document_change';
+export const SETTINGS_PASS_CHANGE = 'settings_pass_change';
+export const SETTINGS_CONFIRM_PASS_CHANGE = 'settings_confirm_pass_change';
+export const SETTINGS_NEW_PASS_CHANGE = 'settings_new_pass_change';
 
 //  ModalAlert
 export const SHOW_LOADING_MODAL = 'show_modal_loading';

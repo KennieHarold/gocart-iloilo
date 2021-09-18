@@ -22,9 +22,9 @@ class App extends React.Component {
     try {
       const response = await VersionCheck.needUpdate({country: 'us'});
 
-      const title = 'Please Update';
+      const title = 'Update GoCart Iloilo';
       const message =
-        'You will have to update your app to the latest version to continue using.';
+        'You will have to update the app to the latest version to continue using';
 
       if (response && response.isNeeded) {
         Alert.alert(
@@ -32,7 +32,7 @@ class App extends React.Component {
           message,
           [
             {
-              text: string.Update,
+              text: 'Update',
               onPress: () => {
                 Linking.openURL(response.storeUrl).finally(() => {
                   RNExitApp.exitApp();

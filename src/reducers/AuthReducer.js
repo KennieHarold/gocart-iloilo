@@ -6,6 +6,9 @@ import {
   CONFIRM_PASSWORD_CHANGE,
   AUTH_RESET_STATE,
   HAS_USER_DOCUMENT_CHANGE,
+  SETTINGS_PASS_CHANGE,
+  SETTINGS_CONFIRM_PASS_CHANGE,
+  SETTINGS_NEW_PASS_CHANGE,
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +23,11 @@ const initialState = {
   providerUID: '',
   providerPhotoURL: '',
   isEmailVerified: false,
+
+  //  For change password inputs
+  settingsPass: '',
+  settingsConfirmPass: '',
+  settingsNewPass: '',
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -58,6 +66,24 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         hasUserDocument: action.payload,
+      };
+
+    case SETTINGS_PASS_CHANGE:
+      return {
+        ...state,
+        settingsPass: action.text,
+      };
+
+    case SETTINGS_CONFIRM_PASS_CHANGE:
+      return {
+        ...state,
+        settingsConfirmPass: action.text,
+      };
+
+    case SETTINGS_NEW_PASS_CHANGE:
+      return {
+        ...state,
+        settingsNewPass: action.text,
       };
 
     case AUTH_RESET_STATE:

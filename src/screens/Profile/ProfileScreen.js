@@ -17,6 +17,9 @@ import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {AuthAction} from '../../actions';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {APP_VERSION} from '@env';
+
+const appVersion = APP_VERSION;
 
 class ProfileScreen extends React.Component {
   render() {
@@ -79,11 +82,11 @@ class ProfileScreen extends React.Component {
       {
         id: 'profile-change-password',
         title: 'Change Password',
-        action: () => {},
+        action: () => navigation.navigate('ChangePassword'),
         iconType: 'Ionicons',
         iconName: 'md-lock-closed-outline',
         isDivider: false,
-        isComingSoon: true,
+        isComingSoon: false,
       },
       {
         id: 'profile-divider-about-us',
@@ -129,43 +132,38 @@ class ProfileScreen extends React.Component {
     return (
       <Container>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
-        <Content>
-          <View style={{...Layout.defaultPadding}}>
-            <View style={{width: '100%', flexDirection: 'row'}}>
-              <View style={{marginRight: RFValue(10)}}>
-                <FastImage
-                  source={{uri: photoUrl}}
-                  style={styles.myProfileDp}
-                />
+        <View style={{...Layout.defaultPadding}}>
+          <View style={{width: '100%', flexDirection: 'row'}}>
+            <View style={{marginRight: RFValue(10)}}>
+              <FastImage source={{uri: photoUrl}} style={styles.myProfileDp} />
+            </View>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <View>
+                <Text numberOfLines={1} style={styles.myProfileUsername}>
+                  {username}
+                </Text>
               </View>
-              <View style={{flex: 1, justifyContent: 'center'}}>
-                <View>
-                  <Text numberOfLines={1} style={styles.myProfileUsername}>
-                    {username}
+              <View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: RFValue(10),
+                  }}>
+                  <Icon
+                    type="Entypo"
+                    name="location-pin"
+                    style={styles.myProfileLocationIcon}
+                  />
+                  <Text numberOfLines={2} style={styles.myProfileAddressLabel}>
+                    {address[0].formattedAddress}
                   </Text>
-                </View>
-                <View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginTop: RFValue(10),
-                    }}>
-                    <Icon
-                      type="Entypo"
-                      name="location-pin"
-                      style={styles.myProfileLocationIcon}
-                    />
-                    <Text
-                      numberOfLines={2}
-                      style={styles.myProfileAddressLabel}>
-                      {address[0].formattedAddress}
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
           </View>
+        </View>
+        <Content>
           <List style={{marginBottom: RFValue(50)}}>
             {profileItems.map(profileItem =>
               profileItem.isDivider ? (
@@ -253,6 +251,7 @@ class ProfileScreen extends React.Component {
                 </ListItem>
               ),
             )}
+            <Text style={styles.versionFooter}>{'Version ' + appVersion}</Text>
           </List>
         </Content>
       </Container>

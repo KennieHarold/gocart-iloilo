@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Item, Input, Text} from 'native-base';
+import {Colors, Fonts} from '../../styles';
+import {TouchableOpacity} from 'react-native';
+import {Icon} from 'native-base';
 import styles from './styles';
 
 const PrimaryTextBox = ({
@@ -8,7 +11,10 @@ const PrimaryTextBox = ({
   customItemStyles,
   value,
   onChangeText,
+  isPassword,
 }) => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   return (
     <>
       <Text style={styles.title}>{title}</Text>
@@ -18,7 +24,33 @@ const PrimaryTextBox = ({
           placeholder={placeholder}
           style={styles.input}
           onChangeText={onChangeText}
+          secureTextEntry={isPassword && !isShowPassword}
         />
+        {isPassword ? (
+          <TouchableOpacity
+            onPress={() => setIsShowPassword(!isShowPassword)}
+            activeOpacity={0.7}>
+            {isShowPassword ? (
+              <Icon
+                type="Entypo"
+                name="eye"
+                style={{
+                  color: Colors.readableText,
+                  fontSize: Fonts.size.lightMedium,
+                }}
+              />
+            ) : (
+              <Icon
+                type="Entypo"
+                name="eye-with-line"
+                style={{
+                  color: Colors.readableText,
+                  fontSize: Fonts.size.lightMedium,
+                }}
+              />
+            )}
+          </TouchableOpacity>
+        ) : null}
       </Item>
     </>
   );

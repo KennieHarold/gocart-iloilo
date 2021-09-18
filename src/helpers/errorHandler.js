@@ -82,7 +82,7 @@ const errorHandler = (dispatch, errorCode) => {
       dispatch(
         showAlert({
           isDisplayed: true,
-          text: 'Oops! I think you entered wrong email or password',
+          text: 'You enter a wrong password',
           status: 'error',
         }),
       );
