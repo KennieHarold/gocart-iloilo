@@ -16,6 +16,7 @@ import {
   SETTINGS_PASS_CHANGE,
   SETTINGS_CONFIRM_PASS_CHANGE,
   SETTINGS_NEW_PASS_CHANGE,
+  RESET_EMAIL_CHANGE,
 } from './types';
 import {
   showLoadingModal,
@@ -172,6 +173,13 @@ const sendEmailVerification = dispatch => {
 export const emailChange = text => {
   return {
     type: EMAIL_CHANGE,
+    text,
+  };
+};
+
+export const resetEmailChange = text => {
+  return {
+    type: RESET_EMAIL_CHANGE,
     text,
   };
 };
@@ -358,27 +366,63 @@ export const changePassword = (password, newPassword, confirmPassword) => {
     dispatch(showSimpleLoadingModal(true));
 
     try {
-      const user = auth().currentUser;
-      const credential = firebase.auth.EmailAuthProvider.credential(
-        user.email,
-        password,
-      );
+      if (password && newPassword && password !== '' && newPassword !== '') {
+        const user = auth().currentUser;
+        const credential = firebase.auth.EmailAuthProvider.credential(
+          user.email,
+          password,
+        );
 
-      if (newPassword === confirmPassword) {
-        await user.reauthenticateWithCredential(credential);
-        await user.updatePassword(newPassword);
+        if (newPassword === confirmPassword) {
+          await user.reauthenticateWithCredential(credential);
+          await user.updatePassword(newPassword);
 
+          dispatch(
+            showAlert({
+              isDisplayed: true,
+              text: 'Your password was successfully updated',
+              status: 'success',
+            }),
+          );
+
+          RootNavigation.navigate('Profile');
+        } else {
+          errorHandler(dispatch, 'auth/passwords-doesnt-match');
+        }
+      } else {
+        errorHandler(dispatch, 'gen/missing-fields');
+      }
+    } catch (error) {
+      console.log(error);
+      errorHandler(dispatch, error.code);
+    }
+
+    dispatch(showSimpleLoadingModal(false));
+  };
+};
+
+export const resetPassword = email => {
+  return async dispatch => {
+    dispatch(showSimpleLoadingModal(true));
+
+    try {
+      const provider = await auth().fetchSignInMethodsForEmail(email.trim());
+
+      if (provider[0] === 'password') {
+        await auth().sendPasswordResetEmail(email.trim());
+
+        //  Success sent reset email
         dispatch(
           showAlert({
             isDisplayed: true,
-            text: 'Your password was successfully updated',
+            text: 'We successfully sent a reset email to your email address. Please check your inbox',
+            actionText: 'LOGIN NOW',
+            action: () => RootNavigation.navigate('Onboarding'),
             status: 'success',
           }),
         );
-
-        RootNavigation.navigate('Profile');
       } else {
-        errorHandler(dispatch, 'auth/passwords-doesnt-match');
+        errorHandler(dispatch, 'auth/reset-password-not-allow');
       }
     } catch (error) {
       console.log(error);

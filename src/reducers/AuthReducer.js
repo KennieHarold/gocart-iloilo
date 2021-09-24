@@ -9,11 +9,13 @@ import {
   SETTINGS_PASS_CHANGE,
   SETTINGS_CONFIRM_PASS_CHANGE,
   SETTINGS_NEW_PASS_CHANGE,
+  RESET_EMAIL_CHANGE,
 } from '../actions/types';
 
 const initialState = {
   isAuthLoading: true,
   email: '',
+  resetEmail: '',
   password: '',
   confirmPassword: '',
   isAuthenticated: false,
@@ -48,6 +50,12 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         email: action.text,
+      };
+
+    case RESET_EMAIL_CHANGE:
+      return {
+        ...state,
+        resetEmail: action.text,
       };
 
     case PASSWORD_CHANGE:

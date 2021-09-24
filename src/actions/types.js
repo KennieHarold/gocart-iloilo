@@ -9,6 +9,7 @@ export const HAS_USER_DOCUMENT_CHANGE = 'has_user_document_change';
 export const SETTINGS_PASS_CHANGE = 'settings_pass_change';
 export const SETTINGS_CONFIRM_PASS_CHANGE = 'settings_confirm_pass_change';
 export const SETTINGS_NEW_PASS_CHANGE = 'settings_new_pass_change';
+export const RESET_EMAIL_CHANGE = 'reset_email';
 
 //  ModalAlert
 export const SHOW_LOADING_MODAL = 'show_modal_loading';

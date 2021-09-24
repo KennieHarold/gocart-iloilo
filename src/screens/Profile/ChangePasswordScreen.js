@@ -38,17 +38,19 @@ class ChangePasswordScreen extends React.Component {
         <ScreenHeader
           title="Change Password"
           rightKey={
-            <TouchableOpacity
-              onPress={() =>
-                changePassword(
-                  settingsPass,
-                  settingsNewPass,
-                  settingsConfirmPass,
-                )
-              }
-              activeOpacity={0.6}>
-              <Text style={styles.editMyProfileSave}>Save</Text>
-            </TouchableOpacity>
+            provider === 'password' ? (
+              <TouchableOpacity
+                onPress={() =>
+                  changePassword(
+                    settingsPass,
+                    settingsNewPass,
+                    settingsConfirmPass,
+                  )
+                }
+                activeOpacity={0.6}>
+                <Text style={styles.editMyProfileSave}>Save</Text>
+              </TouchableOpacity>
+            ) : null
           }
         />
         <Content>

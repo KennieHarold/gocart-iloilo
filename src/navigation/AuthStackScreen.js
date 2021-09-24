@@ -7,6 +7,7 @@ import {
   OnboardingScreen,
   //LoginScreen,
   SignUpScreen,
+  ForgetPasswordScreen,
 } from '../screens/Onboarding';
 
 const screenOptions = {
@@ -25,6 +26,10 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
       {/* <AuthStack.Screen name="Login" component={LoginScreen} /> */}
       <AuthStack.Screen name="Signup" component={SignUpScreen} />
+      <AuthStack.Screen
+        name="ForgetPassword"
+        component={ForgetPasswordScreen}
+      />
     </AuthStack.Navigator>
   );
 };

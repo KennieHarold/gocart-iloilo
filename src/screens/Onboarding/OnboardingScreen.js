@@ -112,7 +112,9 @@ class OnboardingScreen extends React.Component {
                 <Text style={styles.link}>Sign Up</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ForgetPassword')}
+              activeOpacity={0.7}>
               <Text style={styles.link}>Forget Password?</Text>
             </TouchableOpacity>
           </View>

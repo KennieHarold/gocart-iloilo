@@ -88,6 +88,26 @@ const errorHandler = (dispatch, errorCode) => {
       );
       return;
 
+    case 'auth/invalid-email':
+      dispatch(
+        showAlert({
+          isDisplayed: true,
+          text: 'You email is badly formatted',
+          status: 'error',
+        }),
+      );
+      return;
+
+    case 'auth/reset-password-not-allow':
+      dispatch(
+        showAlert({
+          isDisplayed: true,
+          text: 'It seems you are using a third part login provider. Please contact your provider to reset your password',
+          status: 'error',
+        }),
+      );
+      return;
+
     case 'auth/cancelled':
       Snackbar.show({
         text: 'User cancelled the signing process',
