@@ -406,23 +406,27 @@ export const resetPassword = email => {
     dispatch(showSimpleLoadingModal(true));
 
     try {
-      const provider = await auth().fetchSignInMethodsForEmail(email.trim());
+      if (email !== '') {
+        const provider = await auth().fetchSignInMethodsForEmail(email.trim());
 
-      if (provider[0] === 'password') {
-        await auth().sendPasswordResetEmail(email.trim());
+        if (provider[0] === 'password') {
+          await auth().sendPasswordResetEmail(email.trim());
 
-        //  Success sent reset email
-        dispatch(
-          showAlert({
-            isDisplayed: true,
-            text: 'We successfully sent a reset email to your email address. Please check your inbox',
-            actionText: 'LOGIN NOW',
-            action: () => RootNavigation.navigate('Onboarding'),
-            status: 'success',
-          }),
-        );
+          //  Success sent reset email
+          dispatch(
+            showAlert({
+              isDisplayed: true,
+              text: 'We successfully sent a reset email to your email address. Please check your inbox',
+              actionText: 'LOGIN NOW',
+              action: () => RootNavigation.navigate('Onboarding'),
+              status: 'success',
+            }),
+          );
+        } else {
+          errorHandler(dispatch, 'auth/reset-password-not-allow');
+        }
       } else {
-        errorHandler(dispatch, 'auth/reset-password-not-allow');
+        errorHandler(dispatch, 'gen/missing-fields');
       }
     } catch (error) {
       console.log(error);
