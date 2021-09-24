@@ -12,6 +12,7 @@ const PrimaryTextBox = ({
   value,
   onChangeText,
   isPassword,
+  disabled,
 }) => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -22,9 +23,13 @@ const PrimaryTextBox = ({
         <Input
           value={value}
           placeholder={placeholder}
-          style={styles.input}
+          style={{
+            ...styles.input,
+            color: disabled ? 'gray' : 'black',
+          }}
           onChangeText={onChangeText}
           secureTextEntry={isPassword && !isShowPassword}
+          disabled={disabled}
         />
         {isPassword ? (
           <TouchableOpacity

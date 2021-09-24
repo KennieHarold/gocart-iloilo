@@ -103,7 +103,7 @@ class EditProfileScreen extends React.Component {
           }
         />
         <Content>
-          <ScrollView>
+          <ScrollView style={{paddingBottom: RFValue(75)}}>
             <View
               style={{...Layout.flexCenterContainer, marginTop: RFValue(25)}}>
               <View style={{marginBottom: 10}}>
@@ -130,6 +130,13 @@ class EditProfileScreen extends React.Component {
               </Text>
             </View>
             <View style={{width: '100%', padding: Layout.defaultPaddingNum}}>
+              <PrimaryTextBox
+                value={currentUser.email}
+                title="Email"
+                customItemStyles={{marginBottom: RFValue(15), color: 'red'}}
+                onChangeText={e => tempUsernameChange(e)}
+                disabled
+              />
               <PrimaryTextBox
                 value={tempUsername}
                 title="Username"
