@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>489368801542-2bfjt9bvuq91mlqjmeilphrhq4frni69.apps.googleusercontent.com</string>
+	<string>489368801542-ffakehobae884aduuf1nq5u2nj0mjfcq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.489368801542-2bfjt9bvuq91mlqjmeilphrhq4frni69</string>
+	<string>com.googleusercontent.apps.489368801542-ffakehobae884aduuf1nq5u2nj0mjfcq</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>489368801542-ctrmdslj03lt7rg851kogc2flttf8trj.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.gocartiloilo</string>
+	<string>com.gocartiloilo</string>
 	<key>PROJECT_ID</key>
 	<string>gocartiloilo</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:489368801542:ios:ccea2ee0638ad5a9cbce87</string>
+	<string>1:489368801542:ios:816c304f384f6c33cbce87</string>
 </dict>
 </plist>

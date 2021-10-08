@@ -3,6 +3,7 @@ import LoadingScreen from './LoadingScreen';
 import BannerCarousel from './BannerCarousel';
 import ArrowLeft from './ArrowLeft';
 import GhostProductCard from './GhostProductCard';
+import StatusBarPlaceHolder from './StatusBarPlaceHolder';
 
 export {
   ProductCard,
@@ -10,4 +11,5 @@ export {
   LoadingScreen,
   ArrowLeft,
   GhostProductCard,
+  StatusBarPlaceHolder,
 };

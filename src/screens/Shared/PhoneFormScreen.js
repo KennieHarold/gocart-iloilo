@@ -1,12 +1,18 @@
 import React from 'react';
 import {Text, Icon, Item, Input} from 'native-base';
 import {connect} from 'react-redux';
-import {StatusBar, SafeAreaView, View, TouchableOpacity} from 'react-native';
+import {
+  StatusBar,
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import {Layout, Fonts} from '../../styles';
 import {SharedAction, AuthAction} from '../../actions';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {PrimaryBigButton} from '../../components/Buttons';
-import {ArrowLeft} from '../../components/UIComponents';
+import {ArrowLeft, StatusBarPlaceHolder} from '../../components/UIComponents';
 import styles from './styles';
 
 class PhoneFormScreen extends React.Component {
@@ -25,14 +31,18 @@ class PhoneFormScreen extends React.Component {
 
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-        <StatusBar barStyle="dark-content" backgroundColor="white" />
+        <StatusBarPlaceHolder />
         {hasUserDocument ? (
           <ArrowLeft />
         ) : (
           <TouchableOpacity
             onPress={() => signOut()}
             activeOpacity={0.7}
-            style={{position: 'absolute', top: 15, right: 15}}>
+            style={{
+              position: 'absolute',
+              top: Platform.OS === 'ios' ? 50 : 15,
+              right: 15,
+            }}>
             <Icon type="AntDesign" name="close" />
           </TouchableOpacity>
         )}

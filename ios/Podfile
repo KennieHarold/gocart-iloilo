@@ -6,6 +6,8 @@ platform :ios, '10.0'
 target 'gocartiloilo' do
   pod 'Firebase/Analytics'
 
+  pod 'Firebase/Auth'
+
   permissions_path = '../node_modules/react-native-permissions/ios'
 
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
