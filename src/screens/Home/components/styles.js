@@ -1,10 +1,11 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Layout, Colors, Fonts} from '../../../styles';
 
 const styles = StyleSheet.create({
   homeHeaderLayout: {
     ...Layout.defaultPadding,
+    paddingTop: Platform.OS === 'ios' ? RFValue(50) : 0,
     justifyContent: 'space-between',
     flexDirection: 'row',
     backgroundColor: 'white',

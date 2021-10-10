@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStackScreen from './HomeStackScreen';
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   tabBarOptions: {
     position: 'absolute',
     backgroundColor: 'white',
-    height: RFValue(50),
+    height: Platform.OS === 'ios' ? RFValue(75) : RFValue(50),
   },
   tabBarButton: {
     alignItems: 'center',

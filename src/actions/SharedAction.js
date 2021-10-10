@@ -25,6 +25,8 @@ import {showSimpleLoadingModal, showAlert} from './ModalAlertAction';
 import {userCollection} from '../firebase/collections';
 
 Geocoder.init(GOOGLE_CLOUD_API_KEY);
+console.log(GOOGLE_CLOUD_API_KEY);
+console.log(CLOUD_FUNCTIONS_API_URL);
 
 /*********************** Private or helper functions *********************************/
 

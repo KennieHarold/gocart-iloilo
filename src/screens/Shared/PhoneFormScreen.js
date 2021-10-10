@@ -53,7 +53,10 @@ class PhoneFormScreen extends React.Component {
           </Text>
           <Item style={styles.phoneFormTextItem}>
             <View
-              style={{paddingHorizontal: RFValue(5), marginTop: RFValue(-2)}}>
+              style={{
+                paddingHorizontal: RFValue(5),
+                marginTop: Platform.OS === 'ios' ? RFValue(2) : RFValue(-2),
+              }}>
               <Text style={{fontSize: Fonts.size.mini, fontWeight: '700'}}>
                 +63
               </Text>

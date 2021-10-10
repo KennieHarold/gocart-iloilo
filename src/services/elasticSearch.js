@@ -9,8 +9,12 @@ import {
 const appEnv = APP_ENV;
 
 //console.log('Env: ', appEnv);
+console.log(ELASTIC_SEARCH_API_KEY);
+console.log(ELASTIC_SEARCH_API_URL);
+console.log(ELASTIC_SEARCH_DEV_API_URL);
 
 const apiKey = ELASTIC_SEARCH_API_KEY;
+
 const apiUrl =
   appEnv === 'production' ? ELASTIC_SEARCH_API_URL : ELASTIC_SEARCH_DEV_API_URL;
 

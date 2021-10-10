@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Colors, Fonts} from '../../styles';
 
@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     backgroundColor: 'white',
     height: RFValue(50),
+    marginBottom: Platform.OS === 'ios' ? RFValue(25) : 0,
     justifyContent: 'flex-end',
     flexDirection: 'row',
   },

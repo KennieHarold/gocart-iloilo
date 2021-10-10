@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StatusBar, Linking} from 'react-native';
+import {View, StatusBar, Linking, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import {
   Text,
@@ -20,6 +20,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {APP_VERSION} from '@env';
 
 const appVersion = APP_VERSION;
+console.log(appVersion);
 
 class ProfileScreen extends React.Component {
   render() {
@@ -132,7 +133,11 @@ class ProfileScreen extends React.Component {
     return (
       <Container>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
-        <View style={{...Layout.defaultPadding}}>
+        <View
+          style={{
+            ...Layout.defaultPadding,
+            paddingTop: Platform.OS === 'ios' ? RFValue(50) : 0,
+          }}>
           <View style={{width: '100%', flexDirection: 'row'}}>
             <View style={{marginRight: RFValue(10)}}>
               <FastImage source={{uri: photoUrl}} style={styles.myProfileDp} />

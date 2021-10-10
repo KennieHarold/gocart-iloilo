@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {GOOGLE_CLOUD_API_KEY} from '@env';
-import {Icon} from 'native-base';
+import {Col, Icon} from 'native-base';
 import {useDispatch} from 'react-redux';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {SharedAction} from '../../../actions';
@@ -45,6 +45,7 @@ const MapHeader = ({cb}) => {
         flexDirection: 'row',
         alignItems: 'flex-start',
         marginTop: RFValue(10),
+        zIndex: 99,
       }}>
       <TouchableOpacity
         onPress={() => {
@@ -56,7 +57,11 @@ const MapHeader = ({cb}) => {
           zIndex: 99,
           margin: 10,
         }}>
-        <Icon type="AntDesign" name="arrowleft" />
+        {Platform.OS === 'ios' ? (
+          <Icon type="AntDesign" name="left" style={{color: Colors.primary}} />
+        ) : (
+          <Icon type="AntDesign" name="arrowleft" />
+        )}
       </TouchableOpacity>
       <GooglePlacesAutocomplete
         styles={{

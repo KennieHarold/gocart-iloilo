@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, Platform, View} from 'react-native';
 import {
   Container,
   Content,
@@ -275,7 +275,11 @@ class CheckoutScreen extends React.PureComponent {
             </View>
           </View>
         </Content>
-        <View style={{padding: RFValue(20)}}>
+        <View
+          style={{
+            padding: RFValue(20),
+            paddingBottom: Platform.OS === 'ios' ? RFValue(50) : 0,
+          }}>
           <PrimaryBigButton
             disabled={
               isShoppingFeeError ||
