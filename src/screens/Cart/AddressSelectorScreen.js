@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+import {Platform, View} from 'react-native';
 import {Container, Content} from 'native-base';
 import {ScreenHeader} from '../../components/Headers';
 import {PrimaryBigButton} from '../../components/Buttons';
 import {AddressSelectorItem} from './components';
 import {Layout} from '../../styles';
 import {SharedAction, CartAction} from '../../actions';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 class AddressSelectorScreen extends React.Component {
   handleNavigateMap = () => {
@@ -36,6 +37,7 @@ class AddressSelectorScreen extends React.Component {
         <View
           style={{
             ...Layout.flexCenterContainerWithPadding,
+            paddingBottom: Platform.OS === 'ios' ? RFValue(50) : 0,
             position: 'absolute',
             bottom: 0,
           }}>

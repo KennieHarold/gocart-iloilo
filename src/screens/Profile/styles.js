@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Colors, Layout, Fonts} from '../../styles';
 
@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: Layout.defaultPaddingNum,
     paddingTop: Layout.defaultPaddingNum,
-    paddingTop: RFValue(20),
+    paddingTop: Platform.OS === 'ios' ? RFValue(50) : RFValue(20),
     paddingBottom: RFValue(20),
     backgroundColor: 'white',
     elevation: 2,
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     ...Layout.defaultPadding,
+    paddingBottom: Platform.OS === 'ios' ? RFValue(25) : 0,
     position: 'absolute',
     bottom: 0,
     width: '100%',

@@ -3,7 +3,7 @@ import {APP_ENV} from '@env';
 
 const appEnv = APP_ENV;
 
-//console.log('Env: ', appEnv);
+console.log(APP_ENV);
 
 export const userCollection =
   appEnv === 'production'

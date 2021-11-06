@@ -1,7 +1,13 @@
 import React from 'react';
 import MapView from 'react-native-maps';
 import {connect} from 'react-redux';
-import {View, TouchableOpacity, SafeAreaView, Image} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Image,
+  Platform,
+} from 'react-native';
 import {Text, Card, CardItem, Body, Icon} from 'native-base';
 import {PrimaryTextBox} from '../../components/TextBoxes';
 import {PrimaryBigButton} from '../../components/Buttons';
@@ -114,6 +120,7 @@ class MapScreen extends React.PureComponent {
             text="Save Address"
             customContainerStyles={{
               backgroundColor: Colors.primary,
+              marginBottom: Platform.OS === 'ios' ? RFValue(5) : 0,
             }}
             customTextStyles={{color: 'white'}}
           />
